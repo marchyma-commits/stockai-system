@@ -1,0 +1,32 @@
+# StockAI Deployment Requirements
+Flask==2.3.3
+Flask-CORS==4.0.0
+gunicorn==23.0.0
+yfinance==0.2.54
+requests==2.32.3
+cachetools==5.5.2
+
+# Data processing
+numpy==2.2.4
+pandas==2.2.3
+openpyxl==3.1.5
+xlsxwriter==3.2.2
+
+# Reports
+reportlab==4.2.5
+matplotlib==3.10.1
+seaborn==0.13.2
+
+# Environment
+python-dotenv==1.1.0
+
+# JWT & Auth
+PyJWT==2.10.1
+bcrypt==4.2.1
+
+# Database
+psycopg2-binary==2.9.10
+SQLAlchemy==2.0.36
+alembic==1.14.1
+Flask-SQLAlchemy==3.1.1
+Flask-Migrate==4.0.7

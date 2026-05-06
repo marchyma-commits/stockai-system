@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockAI 综合投资分析系统 v1.7 | 长线 + 短线</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #16213e;
+            --accent: #e94560;
+            --success: #00d9a5;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gold: #ffd700;
+            --silver: #c0c0c0;
+            --bronze: #cd7f32;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .card-custom {
+            background: rgba(22, 33, 62, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .stat-card {
+            background: linear-gradient(145deg, #1e2a4a 0%, #16213e 100%);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent) 0%, #ff6b6b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* 评级颜色 */
+        .grade-A { color: var(--gold); font-weight: bold; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .grade-B { color: var(--success); font-weight: bold; }
+        .grade-C { color: var(--warning); font-weight: bold; }
+        .grade-D { color: var(--danger); font-weight: bold; }
+        .grade-N { color: #888; }
+        
+        /* 信号颜色 */
+        .signal-bullish { color: var(--success); }
+        .signal-bearish { color: var(--danger); }
+        .signal-neutral { color: var(--warning); }
+        
+        /* 表格样式 */
+        .table-dark-custom {
+            background: rgba(22, 33, 62, 0.95);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .table-dark-custom thead {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+        
+        .table-dark-custom th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .table-dark-custom th:hover {
+            background: rgba(233, 69, 96, 0.2);
+        }
+        
+        .table-dark-custom td {
+            vertical-align: middle;
+            font-size: 0.9rem;
+        }
+        
+        .stock-code {
+            font-weight: 600;
+            color: var(--accent);
+        }
+        
+        .stock-name {
+            color: #fff;
+            font-weight: 500;
+        }
+        
+        /* 排序指示器 */
+        .sort-icon {
+            margin-left: 5px;
+            opacity: 0.3;
+        }
+        
+        th.sort-asc .sort-icon::after { content: '▲'; opacity: 1; }
+        th.sort-desc .sort-icon::after { content: '▼'; opacity: 1; }
+        
+        /* 筛选面板 */
+        .filter-panel {
+            background: rgba(30, 42, 74, 0.8);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .filter-btn {
+            border-radius: 20px;
+            padding: 8px 16px;
+            margin: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: #fff;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        /* 技术信号标签 */
+        .tech-signal {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .signal-strong-buy { background: linear-gradient(135deg, #00d9a5, #00b894); }
+        .signal-buy { background: linear-gradient(135deg, #55efc4, #00b894); }
+        .signal-hold { background: linear-gradient(135deg, #fdcb6e, #f39c12); color: #333; }
+        .signal-sell { background: linear-gradient(135deg, #fab1a0, #e17055); }
+        .signal-strong-sell { background: linear-gradient(135deg, #ff7675, #d63031); }
+        
+        /* 指标分数条 */
+        .score-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .score-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+        
+        .score-high { background: linear-gradient(90deg, #00d9a5, #00b894); }
+        .score-mid { background: linear-gradient(90deg, #fdcb6e, #f39c12); }
+        .score-low { background: linear-gradient(90deg, #ff7675, #d63031); }
+        
+        /* 指数标签 */
+        .index-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            margin: 2px;
+        }
+        
+        .badge-hsi { background: #e74c3c; }
+        .badge-hstech { background: #3498db; }
+        .badge-hscei { background: #f39c12; }
+        .badge-hscc { background: #9b59b6; }
+        .badge-manual { background: #34495e; }
+        
+        /* 模态框 */
+        .modal-content {
+            background: rgba(22, 33, 62, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 进度指示 */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(233, 69, 96, 0.3);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* 分类标签页 */
+        .nav-tabs-custom {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-tabs-custom .nav-link {
+            color: #a0a0a0;
+            border: none;
+            padding: 12px 24px;
+            font-weight: 500;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s;
+        }
+        
+        .nav-tabs-custom .nav-link:hover {
+            color: #fff;
+            background: rgba(233, 69, 96, 0.1);
+        }
+        
+        .nav-tabs-custom .nav-link.active {
+            color: var(--accent);
+            background: rgba(233, 69, 96, 0.2);
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        /* 评分环形图 */
+        .rating-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+        
+        /* 工具提示 */
+        .tooltip-inner {
+            background: rgba(22, 33, 62, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .stat-value { font-size: 1.8rem; }
+            .table-dark-custom th, .table-dark-custom td { padding: 8px 4px; font-size: 0.8rem; }
+        }
+        
+        /* 股票代码悬停效果 */
+        .stock-link {
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .stock-link:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- 加载指示器 -->
+    <div id="loadingOverlay" class="loading-overlay" style="display: none;">
+        <div class="text-center">
+            <div class="spinner mb-3"></div>
+            <div id="loadingText">正在加载数据...</div>
+            <div id="loadingProgress" class="mt-2" style="color: #888;"></div>
+        </div>
+    </div>
+
+    <!-- 头部 -->
+    <div class="header-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="mb-2">
+                        <i class="bi bi-graph-up-arrow" style="color: var(--accent);"></i>
+                        StockAI 综合投资分析系统
+                    </h1>
+                    <p class="text-muted mb-0">
+                        长线基本面分析 + 短线技术信号 | 智能排序筛选 | 投资决策辅助
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="d-inline-flex align-items-center gap-3">
+                        <div>
+                            <span class="text-muted small">最后更新</span>
+                            <div id="lastUpdate" class="fw-bold">--</div>
+                        </div>
+                        <button class="btn btn-outline-light btn-lg" onclick="refreshData()">
+                            <i class="bi bi-arrow-clockwise"></i> 刷新
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 统计卡片 -->
+            <div class="row mt-4">
+                <div class="col-6 col-md-2">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalStocks">0</div>
+                        <div class="stat-label">股票总数</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgScore">0</div>
+                        <div class="stat-label">平均评分</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="stat-card">
+                        <div class="stat-value" id="gradeACount" style="color: var(--gold);">0</div>
+                        <div class="stat-label">A级评级</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="stat-card">
+                        <div class="stat-value" id="gradeBCount" style="color: var(--success);">0</div>
+                        <div class="stat-label">B级评级</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="stat-card">
+                        <div class="stat-value" id="strongBuyCount" style="color: var(--success);">0</div>
+                        <div class="stat-label">强烈买入</div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-2">
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgDividend">0%</div>
+                        <div class="stat-label">平均股息率</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid px-4">
+        <!-- 筛选面板 -->
+        <div class="filter-panel">
+            <div class="row">
+                <div class="col-md-3">
+                    <label class="form-label text-muted small">指数筛选</label>
+                    <div id="indexFilters">
+                        <button class="filter-btn active" data-index="all">全部</button>
+                        <button class="filter-btn" data-index="hsi_top50">恒生指数</button>
+                        <button class="filter-btn" data-index="hstech_top30">恒生科技</button>
+                        <button class="filter-btn" data-index="hscei">国企指数</button>
+                        <button class="filter-btn" data-index="hscc">红筹指数</button>
+                        <button class="filter-btn" data-index="manual">自选股</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label text-muted small">评级筛选</label>
+                    <div id="gradeFilters">
+                        <button class="filter-btn active" data-grade="all">全部</button>
+                        <button class="filter-btn" data-grade="A">A级</button>
+                        <button class="filter-btn" data-grade="B">B级</button>
+                        <button class="filter-btn" data-grade="C">C级</button>
+                        <button class="filter-btn" data-grade="D">D级</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label text-muted small">技术信号筛选</label>
+                    <div id="signalFilters">
+                        <button class="filter-btn active" data-signal="all">全部</button>
+                        <button class="filter-btn" data-signal="STRONG_BUY">强烈买入</button>
+                        <button class="filter-btn" data-signal="BUY">买入</button>
+                        <button class="filter-btn" data-signal="HOLD">持有</button>
+                        <button class="filter-btn" data-signal="SELL">卖出</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label text-muted small">快速搜索</label>
+                    <div class="input-group">
+                        <input type="text" id="searchInput" class="form-control bg-dark border-0 text-white" placeholder="搜索股票代码或名称...">
+                        <button class="btn btn-outline-secondary" type="button" onclick="exportFilteredData()">
+                            <i class="bi bi-download"></i> 导出
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 标签页 -->
+        <ul class="nav nav-tabs nav-tabs-custom mb-3" id="analysisTabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-bs-toggle="tab" href="#overviewTab">
+                    <i class="bi bi-grid-3x3-gap"></i> 综合概览
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#fundamentalTab">
+                    <i class="bi bi-building"></i> 基本面分析
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#technicalTab">
+                    <i class="bi bi-activity"></i> 技术信号
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#valuationTab">
+                    <i class="bi bi-currency-dollar"></i> 估值对比
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#dividendTab">
+                    <i class="bi bi-cash-coin"></i> 股息分析
+                </a>
+            </li>
+        </ul>
+
+        <!-- 标签内容 -->
+        <div class="tab-content">
+            <!-- 综合概览 -->
+            <div class="tab-pane fade show active" id="overviewTab">
+                <div class="card-custom p-3">
+                    <div class="table-responsive">
+                        <table class="table table-dark-custom table-hover mb-0" id="overviewTable">
+                            <thead>
+                                <tr>
+                                    <th data-sort="code">代码 <span class="sort-icon"></span></th>
+                                    <th data-sort="name">名称 <span class="sort-icon"></span></th>
+                                    <th data-sort="index">指数 <span class="sort-icon"></span></th>
+                                    <th data-sort="overallScore">综合评分 <span class="sort-icon"></span></th>
+                                    <th data-sort="grade">评级 <span class="sort-icon"></span></th>
+                                    <th data-sort="techSignal">技术信号 <span class="sort-icon"></span></th>
+                                    <th data-sort="roe">ROE <span class="sort-icon"></span></th>
+                                    <th data-sort="pe">PE <span class="sort-icon"></span></th>
+                                    <th data-sort="pb">PB <span class="sort-icon"></span></th>
+                                    <th data-sort="dividend">股息率 <span class="sort-icon"></span></th>
+                                    <th data-sort="price">现价 <span class="sort-icon"></span></th>
+                                    <th>详情</th>
+                                </tr>
+                            </thead>
+                            <tbody id="overviewTableBody">
+                                <!-- 数据将通过JavaScript填充 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 基本面分析 -->
+            <div class="tab-pane fade" id="fundamentalTab">
+                <div class="card-custom p-3">
+                    <div class="table-responsive">
+                        <table class="table table-dark-custom table-hover mb-0" id="fundamentalTable">
+                            <thead>
+                                <tr>
+                                    <th>代码</th>
+                                    <th>名称</th>
+                                    <th data-sort="growthScore">成长性 <span class="sort-icon"></span></th>
+                                    <th data-sort="profitScore">盈利能力 <span class="sort-icon"></span></th>
+                                    <th data-sort="healthScore">财务健康 <span class="sort-icon"></span></th>
+                                    <th data-sort="divScore">股息质量 <span class="sort-icon"></span></th>
+                                    <th data-sort="roe">ROE <span class="sort-icon"></span></th>
+                                    <th data-sort="roa">ROA <span class="sort-icon"></span></th>
+                                    <th data-sort="grossMargin">毛利率 <span class="sort-icon"></span></th>
+                                    <th data-sort="netMargin">净利率 <span class="sort-icon"></span></th>
+                                    <th data-sort="debtRatio">负债率 <span class="sort-icon"></span></th>
+                                    <th>趋势</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fundamentalTableBody">
+                                <!-- 数据将通过JavaScript填充 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 技术信号 -->
+            <div class="tab-pane fade" id="technicalTab">
+                <div class="card-custom p-3">
+                    <div class="table-responsive">
+                        <table class="table table-dark-custom table-hover mb-0" id="technicalTable">
+                            <thead>
+                                <tr>
+                                    <th>代码</th>
+                                    <th>名称</th>
+                                    <th data-sort="techSignal">信号 <span class="sort-icon"></span></th>
+                                    <th data-sort="bullishCount">多头信号 <span class="sort-icon"></span></th>
+                                    <th data-sort="bearishCount">空头信号 <span class="sort-icon"></span></th>
+                                    <th data-sort="rsi">RSI <span class="sort-icon"></span></th>
+                                    <th data-sort="macd">MACD <span class="sort-icon"></span></th>
+                                    <th data-sort="maTrend">均线趋势 <span class="sort-icon"></span></th>
+                                    <th data-sort="volumeRatio">量比 <span class="sort-icon"></span></th>
+                                    <th>信号详情</th>
+                                </tr>
+                            </thead>
+                            <tbody id="technicalTableBody">
+                                <!-- 数据将通过JavaScript填充 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 估值对比 -->
+            <div class="tab-pane fade" id="valuationTab">
+                <div class="card-custom p-3">
+                    <div class="table-responsive">
+                        <table class="table table-dark-custom table-hover mb-0" id="valuationTable">
+                            <thead>
+                                <tr>
+                                    <th>代码</th>
+                                    <th>名称</th>
+                                    <th data-sort="valuationScore">估值评分 <span class="sort-icon"></span></th>
+                                    <th data-sort="pe">PE <span class="sort-icon"></span></th>
+                                    <th data-sort="pb">PB <span class="sort-icon"></span></th>
+                                    <th data-sort="ps">PS <span class="sort-icon"></span></th>
+                                    <th data-sort="roe">ROE <span class="sort-icon"></span></th>
+                                    <th data-sort="peHist">PE历史分位 <span class="sort-icon"></span></th>
+                                    <th data-sort="peIndustry">PE行业对比 <span class="sort-icon"></span></th>
+                                    <th>估值结论</th>
+                                </tr>
+                            </thead>
+                            <tbody id="valuationTableBody">
+                                <!-- 数据将通过JavaScript填充 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 股息分析 -->
+            <div class="tab-pane fade" id="dividendTab">
+                <div class="card-custom p-3">
+                    <div class="table-responsive">
+                        <table class="table table-dark-custom table-hover mb-0" id="dividendTable">
+                            <thead>
+                                <tr>
+                                    <th>代码</th>
+                                    <th>名称</th>
+                                    <th data-sort="dividendYield">股息率 <span class="sort-icon"></span></th>
+                                    <th data-sort="payoutRatio">派息率 <span class="sort-icon"></span></th>
+                                    <th data-sort="divScore">股息评分 <span class="sort-icon"></span></th>
+                                    <th data-sort="eps">EPS <span class="sort-icon"></span></th>
+                                    <th data-sort="bps">每股净资产 <span class="sort-icon"></span></th>
+                                    <th data-sort="dividendGrowth">股息增长 <span class="sort-icon"></span></th>
+                                    <th data-sort="divConsistency">派息稳定性 <span class="sort-icon"></span></th>
+                                    <th>股息建议</th>
+                                </tr>
+                            </thead>
+                            <tbody id="dividendTableBody">
+                                <!-- 数据将通过JavaScript填充 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 详情模态框 -->
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalTitle">
+                        <i class="bi bi-info-circle"></i> 股票详情
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="detailModalBody">
+                    <!-- 内容将通过JavaScript填充 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+    
+    <script>
+        // 全局变量
+        let allStocksData = [];
+        let filteredData = [];
+        let currentFilters = {
+            index: 'all',
+            grade: 'all',
+            signal: 'all',
+            search: ''
+        };
+        let sortColumn = 'overallScore';
+        let sortDirection = 'desc';
+        
+        // 股票代码到名称的映射
+        const stockNameMap = {};
+        
+        // StockAI API 基础URL
+        const API_BASE = 'http://localhost:5000/api';
+        
+        // 初始化
+        $(document).ready(async function() {
+            showLoading('正在加载股票列表...');
+            await initializeApp();
+            hideLoading();
+        });
+        
+        async function initializeApp() {
+            try {
+                // 1. 加载watchlist
+                await loadWatchlist();
+                
+                // 2. 批量获取基本面数据
+                await loadAllFundamentalData();
+                
+                // 3. 批量获取技术信号
+                await loadAllTechnicalData();
+                
+                // 4. 加载实时价格
+                await loadAllPrices();
+                
+                // 5. 渲染所有表格
+                renderAllTables();
+                
+                // 6. 更新统计
+                updateStats();
+                
+                // 7. 设置筛选事件
+                setupFilters();
+                
+                // 8. 设置排序事件
+                setupSorters();
+                
+                $('#lastUpdate').text(new Date().toLocaleString('zh-CN'));
+                
+            } catch (error) {
+                console.error('初始化失败:', error);
+                alert('数据加载失败，请确保StockAI Flask服务正在运行！\n错误: ' + error.message);
+            }
+        }
+        
+        async function loadWatchlist() {
+            const response = await fetch('C:/Users/MarcoMa/stockai_data/watchlist.json');
+            const data = await response.json();
+            
+            // 收集所有股票代码和名称
+            const allStocks = [
+                ...data.stocks.map(code => ({ code, name: code.replace('.HK', ''), index: 'manual' })),
+                ...(data.hsi_top50?.components || []).map(c => ({ ...c, index: 'hsi_top50' })),
+                ...(data.hstech_top30?.components || []).map(c => ({ ...c, index: 'hstech_top30' })),
+                ...(data.hscei?.components || []).map(c => ({ ...c, index: 'hscei' })),
+                ...(data.hscc?.components || []).map(c => ({ ...c, index: 'hscc' })),
+                ...(data.manual?.components || []).map(c => ({ ...c, index: 'manual' }))
+            ];
+            
+            // 去重并映射
+            const uniqueStocks = {};
+            allStocks.forEach(s => {
+                if (!uniqueStocks[s.code]) {
+                    uniqueStocks[s.code] = {
+                        code: s.code,
+                        name: s.name || s.code.replace('.HK', ''),
+                        indices: [s.index]
+                    };
+                    stockNameMap[s.code] = s.name || s.code.replace('.HK', '');
+                } else if (!uniqueStocks[s.code].indices.includes(s.index)) {
+                    uniqueStocks[s.code].indices.push(s.index);
+                }
+            });
+            
+            allStocksData = Object.values(uniqueStocks);
+            filteredData = [...allStocksData];
+            
+            console.log(`已加载 ${allStocksData.length} 只股票`);
+        }
+        
+        async function loadAllFundamentalData() {
+            const batchSize = 5;
+            let loaded = 0;
+            
+            for (let i = 0; i < allStocksData.length; i += batchSize) {
+                const batch = allStocksData.slice(i, i + batchSize);
+                
+                await Promise.all(batch.map(async (stock) => {
+                    try {
+                        const response = await fetch(`${API_BASE}/fundamental/${stock.code}`);
+                        if (response.ok) {
+                            const result = await response.json();
+                            // 后端返回格式: {success: true, stock_code: "...", data: {...}}
+                            if (result.success && result.data) {
+                                const data = result.data;
+                                stock.fundamental = {
+                                    overallScore: data.overall?.score || 0,
+                                    overallGrade: data.overall?.grade || 'N',
+                                    growthScore: data.growth?.score || 0,
+                                    profitScore: data.profitability?.score || 0,
+                                    healthScore: data.financial_health?.score || 0,
+                                    valuationScore: data.valuation?.score || 0,
+                                    dividendScore: data.dividend?.score || 0,
+                                    roe: parseFloat(data.profitability?.details?.ROE) || 0,
+                                    roa: parseFloat(data.profitability?.details?.ROA) || 0,
+                                    grossMargin: parseFloat(data.profitability?.details?.毛利率) || 0,
+                                    netMargin: parseFloat(data.profitability?.details?.净利率) || 0,
+                                    debtRatio: parseFloat(data.financial_health?.details?.资产负债率) || 0,
+                                    pe: parseFloat(data.valuation?.details?.PE) || data.valuation?.futu_pe || 0,
+                                    pb: parseFloat(data.valuation?.details?.PB) || data.valuation?.futu_pb || 0,
+                                    dividendYield: parseFloat(data.dividend?.details?.dividend_yield) || 0,
+                                    payoutRatio: parseFloat(data.dividend?.details?.payout_ratio) || 0,
+                                    eps: data.dividend?.details?.eps || 0,
+                                    bps: data.dividend?.details?.bps || 0,
+                                    signals: data.overall?.signals || []
+                                };
+                            }
+                        }
+                    } catch (e) {
+                        console.warn(`获取 ${stock.code} 基本面数据失败`);
+                    }
+                }));
+                
+                loaded += batch.length;
+                updateLoadingProgress(`加载基本面数据: ${loaded}/${allStocksData.length}`);
+            }
+        }
+        
+        async function loadAllTechnicalData() {
+            const batchSize = 5;
+            let loaded = 0;
+            
+            for (let i = 0; i < allStocksData.length; i += batchSize) {
+                const batch = allStocksData.slice(i, i + batchSize);
+                
+                await Promise.all(batch.map(async (stock) => {
+                    try {
+                        // /api/indicators/<code> 返回格式:
+                        // {success: true, stock_code: "...", data: {success: true, indicators: {...}, signals: {...}}}
+                        const response = await fetch(`${API_BASE}/indicators/${stock.code}`);
+                        if (response.ok) {
+                            const result = await response.json();
+                            if (result.success && result.data && result.data.success) {
+                                const data = result.data;
+                                const signals = data.signals || {};
+                                const recommendations = signals.recommendations || [];
+                                
+                                stock.technical = {
+                                    action: signals.overall || 'HOLD',
+                                    bullishCount: recommendations.filter(s => s.type === 'bullish').length,
+                                    bearishCount: recommendations.filter(s => s.type === 'bearish').length,
+                                    scoreDiff: recommendations.filter(s => s.type === 'bullish').length - 
+                                               recommendations.filter(s => s.type === 'bearish').length,
+                                    rsi: data.indicators?.rsi_14 || 0,
+                                    macd: data.indicators?.macd || 0,
+                                    macdSignal: data.indicators?.macd_signal || 0,
+                                    macdHistogram: data.indicators?.macd_histogram || 0,
+                                    maTrend: getMATrend(data.indicators),
+                                    volumeRatio: 1,
+                                    signalDetails: recommendations.slice(0, 5)
+                                };
+                            }
+                        }
+                    } catch (e) {
+                        console.warn(`获取 ${stock.code} 技术数据失败`);
+                    }
+                }));
+                
+                loaded += batch.length;
+                updateLoadingProgress(`加载技术信号: ${loaded}/${allStocksData.length}`);
+            }
+        }
+        
+        async function loadAllPrices() {
+            const batchSize = 10;
+            
+            for (let i = 0; i < allStocksData.length; i += batchSize) {
+                const batch = allStocksData.slice(i, i + batchSize);
+                
+                await Promise.all(batch.map(async (stock) => {
+                    // 如果已经从 analysis API 获取了价格，就跳过
+                    if (stock.price) return;
+                    
+                    try {
+                        const response = await fetch(`${API_BASE}/tradingview/price/${stock.code}`);
+                        if (response.ok) {
+                            const result = await response.json();
+                            // 后端返回格式: {success: true, data: {...}} 或 {price: ..., ...}
+                            const data = result.data || result;
+                            stock.price = data.price || data.last_price || 0;
+                            stock.change = data.change || 0;
+                            stock.changePercent = data.change_percent || 0;
+                        }
+                    } catch (e) {
+                        stock.price = stock.price || '--';
+                        stock.change = '--';
+                        stock.changePercent = '--';
+                    }
+                }));
+            }
+        }
+        
+        function getMATrend(indicators) {
+            if (!indicators) return 'N/A';
+            // indicators 格式: {ma_5: 500.5, ma_10: 495.0, ma_20: 490.0, ...}
+            const ma5 = indicators.ma_5 || indicators.ma?.ma_5 || 0;
+            const ma20 = indicators.ma_20 || indicators.ma?.ma_20 || 0;
+            const ma60 = indicators.ma_60 || indicators.ma?.ma_60 || 0;
+            
+            if (ma5 > ma20 && ma20 > ma60 && ma5 > 0) return '多头';
+            if (ma5 < ma20 && ma20 < ma60 && ma5 > 0) return '空头';
+            return '震荡';
+        }
+        
+        function renderAllTables() {
+            applyFilters();
+            renderOverviewTable();
+            renderFundamentalTable();
+            renderTechnicalTable();
+            renderValuationTable();
+            renderDividendTable();
+        }
+        
+        function applyFilters() {
+            filteredData = allStocksData.filter(stock => {
+                // 指数筛选
+                if (currentFilters.index !== 'all') {
+                    if (!stock.indices || !stock.indices.includes(currentFilters.index)) {
+                        return false;
+                    }
+                }
+                
+                // 评级筛选
+                if (currentFilters.grade !== 'all') {
+                    if (stock.fundamental?.overallGrade !== currentFilters.grade) {
+                        return false;
+                    }
+                }
+                
+                // 技术信号筛选
+                if (currentFilters.signal !== 'all') {
+                    if (stock.technical?.action !== currentFilters.signal) {
+                        return false;
+                    }
+                }
+                
+                // 搜索筛选
+                if (currentFilters.search) {
+                    const search = currentFilters.search.toLowerCase();
+                    if (!stock.code.toLowerCase().includes(search) && 
+                        !stock.name.toLowerCase().includes(search)) {
+                        return false;
+                    }
+                }
+                
+                return true;
+            });
+            
+            // 排序
+            sortData();
+        }
+        
+        function sortData() {
+            filteredData.sort((a, b) => {
+                let valA, valB;
+                
+                switch (sortColumn) {
+                    case 'code': valA = a.code; valB = b.code; break;
+                    case 'name': valA = a.name; valB = b.name; break;
+                    case 'index': valA = a.indices?.[0] || ''; valB = b.indices?.[0] || ''; break;
+                    case 'overallScore': valA = a.fundamental?.overallScore || 0; valB = b.fundamental?.overallScore || 0; break;
+                    case 'grade': valA = gradeToNum(a.fundamental?.overallGrade); valB = gradeToNum(b.fundamental?.overallGrade); break;
+                    case 'techSignal': valA = signalToNum(a.technical?.action); valB = signalToNum(b.technical?.action); break;
+                    case 'roe': valA = a.fundamental?.roe || 0; valB = b.fundamental?.roe || 0; break;
+                    case 'pe': valA = a.fundamental?.pe || 999; valB = b.fundamental?.pe || 999; break;
+                    case 'pb': valA = a.fundamental?.pb || 999; valB = b.fundamental?.pb || 999; break;
+                    case 'dividend': valA = a.fundamental?.dividendYield || 0; valB = b.fundamental?.dividendYield || 0; break;
+                    case 'price': valA = a.price || 0; valB = b.price || 0; break;
+                    case 'growthScore': valA = a.fundamental?.growthScore || 0; valB = b.fundamental?.growthScore || 0; break;
+                    case 'profitScore': valA = a.fundamental?.profitScore || 0; valB = b.fundamental?.profitScore || 0; break;
+                    case 'healthScore': valA = a.fundamental?.healthScore || 0; valB = b.fundamental?.healthScore || 0; break;
+                    case 'divScore': valA = a.fundamental?.dividendScore || 0; valB = b.fundamental?.dividendScore || 0; break;
+                    case 'roa': valA = a.fundamental?.roa || 0; valB = b.fundamental?.roa || 0; break;
+                    case 'grossMargin': valA = a.fundamental?.grossMargin || 0; valB = b.fundamental?.grossMargin || 0; break;
+                    case 'netMargin': valA = a.fundamental?.netMargin || 0; valB = b.fundamental?.netMargin || 0; break;
+                    case 'debtRatio': valA = a.fundamental?.debtRatio || 999; valB = b.fundamental?.debtRatio || 999; break;
+                    case 'bullishCount': valA = a.technical?.bullishCount || 0; valB = b.technical?.bullishCount || 0; break;
+                    case 'bearishCount': valA = a.technical?.bearishCount || 0; valB = b.technical?.bearishCount || 0; break;
+                    case 'rsi': valA = a.technical?.rsi || 50; valB = b.technical?.rsi || 50; break;
+                    case 'macd': valA = a.technical?.macd || 0; valB = b.technical?.macd || 0; break;
+                    case 'maTrend': valA = a.technical?.maTrend || ''; valB = b.technical?.maTrend || ''; break;
+                    case 'volumeRatio': valA = a.technical?.volumeRatio || 1; valB = b.technical?.volumeRatio || 1; break;
+                    case 'valuationScore': valA = a.fundamental?.valuationScore || 0; valB = b.fundamental?.valuationScore || 0; break;
+                    case 'ps': valA = 0; valB = 0; break;
+                    case 'peHist': valA = 50; valB = 50; break;
+                    case 'peIndustry': valA = 1; valB = 1; break;
+                    case 'dividendYield': valA = a.fundamental?.dividendYield || 0; valB = b.fundamental?.dividendYield || 0; break;
+                    case 'payoutRatio': valA = a.fundamental?.payoutRatio || 999; valB = b.fundamental?.payoutRatio || 999; break;
+                    case 'eps': valA = a.fundamental?.eps || 0; valB = b.fundamental?.eps || 0; break;
+                    case 'bps': valA = a.fundamental?.bps || 0; valB = b.fundamental?.bps || 0; break;
+                    case 'dividendGrowth': valA = 0; valB = 0; break;
+                    case 'divConsistency': valA = a.fundamental?.divConsistency || 0; valB = b.fundamental?.divConsistency || 0; break;
+                    default: valA = 0; valB = 0;
+                }
+                
+                if (typeof valA === 'string') {
+                    return sortDirection === 'asc' ? valA.localeCompare(valB) : valB.localeCompare(valA);
+                }
+                return sortDirection === 'asc' ? valA - valB : valB - valA;
+            });
+        }
+        
+        function gradeToNum(grade) {
+            const grades = { 'A': 4, 'B': 3, 'C': 2, 'D': 1, 'N': 0 };
+            return grades[grade] || 0;
+        }
+        
+        function signalToNum(signal) {
+            const signals = { 'STRONG_BUY': 5, 'BUY': 4, 'HOLD': 3, 'SELL': 2, 'STRONG_SELL': 1 };
+            return signals[signal] || 3;
+        }
+        
+        function getGradeClass(grade) {
+            return `grade-${grade || 'N'}`;
+        }
+        
+        function getSignalClass(signal) {
+            const classes = {
+                'STRONG_BUY': 'signal-strong-buy',
+                'BUY': 'signal-buy',
+                'HOLD': 'signal-hold',
+                'SELL': 'signal-sell',
+                'STRONG_SELL': 'signal-strong-sell'
+            };
+            return classes[signal] || 'signal-hold';
+        }
+        
+        function getScoreClass(score) {
+            if (score >= 70) return 'score-high';
+            if (score >= 40) return 'score-mid';
+            return 'score-low';
+        }
+        
+        function getIndexBadges(indices) {
+            if (!indices) return '';
+            const badges = {
+                'hsi_top50': '<span class="index-badge badge-hsi">恒指</span>',
+                'hstech_top30': '<span class="index-badge badge-hstech">恒科</span>',
+                'hscei': '<span class="index-badge badge-hscei">国企</span>',
+                'hscc': '<span class="index-badge badge-hscc">红筹</span>',
+                'manual': '<span class="index-badge badge-manual">自选</span>'
+            };
+            return indices.map(i => badges[i] || '').join(' ');
+        }
+        
+        function renderOverviewTable() {
+            const tbody = $('#overviewTableBody');
+            tbody.empty();
+            
+            filteredData.forEach(stock => {
+                const fundamental = stock.fundamental || {};
+                const technical = stock.technical || {};
+                const score = fundamental.overallScore || 0;
+                
+                const row = `
+                    <tr>
+                        <td class="stock-code stock-link" onclick="showDetail('${stock.code}')">${stock.code}</td>
+                        <td class="stock-name">${stock.name}</td>
+                        <td>${getIndexBadges(stock.indices)}</td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="fw-bold">${score.toFixed(0)}</span>
+                                <div class="score-bar" style="width: 60px;">
+                                    <div class="score-bar-fill ${getScoreClass(score)}" style="width: ${score}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="${getGradeClass(fundamental.overallGrade)}">${fundamental.overallGrade || 'N'}</span></td>
+                        <td><span class="tech-signal ${getSignalClass(technical.action)}">${technical.action || 'N/A'}</span></td>
+                        <td>${fundamental.roe ? fundamental.roe.toFixed(1) + '%' : '--'}</td>
+                        <td>${fundamental.pe ? fundamental.pe.toFixed(1) : '--'}</td>
+                        <td>${fundamental.pb ? fundamental.pb.toFixed(2) : '--'}</td>
+                        <td class="signal-bullish">${fundamental.dividendYield ? fundamental.dividendYield.toFixed(2) + '%' : '--'}</td>
+                        <td>${stock.price ? 'HK$' + stock.price.toFixed(2) : '--'}</td>
+                        <td><button class="btn btn-sm btn-outline-light" onclick="showDetail('${stock.code}')"><i class="bi bi-eye"></i></button></td>
+                    </tr>
+                `;
+                tbody.append(row);
+            });
+        }
+        
+        function renderFundamentalTable() {
+            const tbody = $('#fundamentalTableBody');
+            tbody.empty();
+            
+            filteredData.forEach(stock => {
+                const fundamental = stock.fundamental || {};
+                
+                const row = `
+                    <tr>
+                        <td class="stock-code">${stock.code}</td>
+                        <td class="stock-name">${stock.name}</td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span>${(fundamental.growthScore || 0).toFixed(0)}</span>
+                                <div class="score-bar" style="width: 50px;">
+                                    <div class="score-bar-fill ${getScoreClass(fundamental.growthScore)}" style="width: ${fundamental.growthScore || 0}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span>${(fundamental.profitScore || 0).toFixed(0)}</span>
+                                <div class="score-bar" style="width: 50px;">
+                                    <div class="score-bar-fill ${getScoreClass(fundamental.profitScore)}" style="width: ${fundamental.profitScore || 0}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span>${(fundamental.healthScore || 0).toFixed(0)}</span>
+                                <div class="score-bar" style="width: 50px;">
+                                    <div class="score-bar-fill ${getScoreClass(fundamental.healthScore)}" style="width: ${fundamental.healthScore || 0}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span>${(fundamental.dividendScore || 0).toFixed(0)}</span>
+                                <div class="score-bar" style="width: 50px;">
+                                    <div class="score-bar-fill ${getScoreClass(fundamental.dividendScore)}" style="width: ${fundamental.dividendScore || 0}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${fundamental.roe ? '<span class="signal-bullish">' + fundamental.roe.toFixed(1) + '%</span>' : '--'}</td>
+                        <td>${fundamental.roa ? fundamental.roa.toFixed(1) + '%' : '--'}</td>
+                        <td>${fundamental.grossMargin ? fundamental.grossMargin.toFixed(1) + '%' : '--'}</td>
+                        <td>${fundamental.netMargin ? fundamental.netMargin.toFixed(1) + '%' : '--'}</td>
+                        <td class="${fundamental.debtRatio > 70 ? 'text-danger' : ''}">${fundamental.debtRatio ? fundamental.debtRatio.toFixed(1) + '%' : '--'}</td>
+                        <td>${getTrendBadge(fundamental)}</td>
+                    </tr>
+                `;
+                tbody.append(row);
+            });
+        }
+        
+        function renderTechnicalTable() {
+            const tbody = $('#technicalTableBody');
+            tbody.empty();
+            
+            filteredData.forEach(stock => {
+                const technical = stock.technical || {};
+                
+                const row = `
+                    <tr>
+                        <td class="stock-code">${stock.code}</td>
+                        <td class="stock-name">${stock.name}</td>
+                        <td><span class="tech-signal ${getSignalClass(technical.action)}">${technical.action || 'N/A'}</span></td>
+                        <td><span class="signal-bullish">${technical.bullishCount || 0}</span></td>
+                        <td><span class="signal-bearish">${technical.bearishCount || 0}</span></td>
+                        <td>${getRSIColor(technical.rsi)}</td>
+                        <td class="${technical.macd > 0 ? 'signal-bullish' : 'signal-bearish'}">${technical.macd ? technical.macd.toFixed(2) : '--'}</td>
+                        <td class="${technical.maTrend === '多头' ? 'signal-bullish' : (technical.maTrend === '空头' ? 'signal-bearish' : 'signal-neutral')}">${technical.maTrend || '--'}</td>
+                        <td>${technical.volumeRatio ? technical.volumeRatio.toFixed(2) + 'x' : '--'}</td>
+                        <td><small>${technical.signalDetails?.map(s => s.name).join(', ') || '--'}</small></td>
+                    </tr>
+                `;
+                tbody.append(row);
+            });
+        }
+        
+        function renderValuationTable() {
+            const tbody = $('#valuationTableBody');
+            tbody.empty();
+            
+            filteredData.forEach(stock => {
+                const fundamental = stock.fundamental || {};
+                
+                const row = `
+                    <tr>
+                        <td class="stock-code">${stock.code}</td>
+                        <td class="stock-name">${stock.name}</td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span>${(fundamental.valuationScore || 0).toFixed(0)}</span>
+                                <div class="score-bar" style="width: 50px;">
+                                    <div class="score-bar-fill ${getScoreClass(fundamental.valuationScore)}" style="width: ${fundamental.valuationScore || 0}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="${fundamental.pe > 40 ? 'text-danger' : (fundamental.pe < 15 ? 'signal-bullish' : '')}">${fundamental.pe ? fundamental.pe.toFixed(1) : '--'}</td>
+                        <td class="${fundamental.pb > 5 ? 'text-danger' : (fundamental.pb < 1.5 ? 'signal-bullish' : '')}">${fundamental.pb ? fundamental.pb.toFixed(2) : '--'}</td>
+                        <td>--</td>
+                        <td class="signal-bullish">${fundamental.roe ? fundamental.roe.toFixed(1) + '%' : '--'}</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>${getValuationConclusion(fundamental)}</td>
+                    </tr>
+                `;
+                tbody.append(row);
+            });
+        }
+        
+        function renderDividendTable() {
+            const tbody = $('#dividendTableBody');
+            tbody.empty();
+            
+            filteredData.forEach(stock => {
+                const fundamental = stock.fundamental || {};
+                
+                const row = `
+                    <tr>
+                        <td class="stock-code">${stock.code}</td>
+                        <td class="stock-name">${stock.name}</td>
+                        <td class="signal-bullish fw-bold">${fundamental.dividendYield ? fundamental.dividendYield.toFixed(2) + '%' : '--'}</td>
+                        <td class="${fundamental.payoutRatio > 80 ? 'text-warning' : ''}">${fundamental.payoutRatio ? fundamental.payoutRatio.toFixed(1) + '%' : '--'}</td>
+                        <td>
+                            <div class="d-flex align-items-center gap-2">
+                                <span>${(fundamental.dividendScore || 0).toFixed(0)}</span>
+                                <div class="score-bar" style="width: 50px;">
+                                    <div class="score-bar-fill ${getScoreClass(fundamental.dividendScore)}" style="width: ${fundamental.dividendScore || 0}%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${fundamental.eps ? 'HK$' + fundamental.eps.toFixed(2) : '--'}</td>
+                        <td>${fundamental.bps ? 'HK$' + fundamental.bps.toFixed(2) : '--'}</td>
+                        <td>--</td>
+                        <td>--</td>
+                        <td>${getDividendAdvice(fundamental)}</td>
+                    </tr>
+                `;
+                tbody.append(row);
+            });
+        }
+        
+        function getRSIColor(rsi) {
+            if (!rsi) return '--';
+            if (rsi > 70) return `<span class="signal-bearish">${rsi.toFixed(1)} (超买)</span>`;
+            if (rsi < 30) return `<span class="signal-bullish">${rsi.toFixed(1)} (超卖)</span>`;
+            return `${rsi.toFixed(1)}`;
+        }
+        
+        function getTrendBadge(fundamental) {
+            if (!fundamental) return '--';
+            const avgScore = (fundamental.growthScore + fundamental.profitScore + fundamental.healthScore + fundamental.dividendScore) / 4;
+            if (avgScore >= 70) return '<span class="badge bg-success">上升</span>';
+            if (avgScore >= 50) return '<span class="badge bg-warning text-dark">稳定</span>';
+            if (avgScore >= 30) return '<span class="badge bg-secondary">下降</span>';
+            return '<span class="badge bg-danger">弱势</span>';
+        }
+        
+        function getValuationConclusion(fundamental) {
+            if (!fundamental.pe || !fundamental.pb) return '--';
+            if (fundamental.pe < 15 && fundamental.pb < 1.5) return '🟢 显著低估';
+            if (fundamental.pe < 25 && fundamental.pb < 3) return '🟡 相对低估';
+            if (fundamental.pe > 40 || fundamental.pb > 5) return '🔴 估值偏高';
+            return '⚪ 合理估值';
+        }
+        
+        function getDividendAdvice(fundamental) {
+            if (!fundamental.dividendYield) return '--';
+            if (fundamental.dividendYield > 5 && fundamental.payoutRatio < 60) return '🟢 优质高息';
+            if (fundamental.dividendYield > 3 && fundamental.payoutRatio < 80) return '🟡 可关注';
+            if (fundamental.dividendYield > 0 && fundamental.payoutRatio > 100) return '🔴 派息风险';
+            return '⚪ 正常';
+        }
+        
+        function updateStats() {
+            const validScores = filteredData.filter(s => s.fundamental?.overallScore > 0);
+            const avgScore = validScores.length > 0 
+                ? validScores.reduce((sum, s) => sum + s.fundamental.overallScore, 0) / validScores.length 
+                : 0;
+            
+            const gradeA = filteredData.filter(s => s.fundamental?.overallGrade === 'A').length;
+            const gradeB = filteredData.filter(s => s.fundamental?.overallGrade === 'B').length;
+            const strongBuy = filteredData.filter(s => s.technical?.action === 'STRONG_BUY').length;
+            
+            const validDividends = filteredData.filter(s => s.fundamental?.dividendYield > 0);
+            const avgDividend = validDividends.length > 0
+                ? validDividends.reduce((sum, s) => sum + s.fundamental.dividendYield, 0) / validDividends.length
+                : 0;
+            
+            $('#totalStocks').text(filteredData.length);
+            $('#avgScore').text(avgScore.toFixed(0));
+            $('#gradeACount').text(gradeA);
+            $('#gradeBCount').text(gradeB);
+            $('#strongBuyCount').text(strongBuy);
+            $('#avgDividend').text(avgDividend.toFixed(2) + '%');
+        }
+        
+        function setupFilters() {
+            // 指数筛选
+            $('#indexFilters .filter-btn').click(function() {
+                $('#indexFilters .filter-btn').removeClass('active');
+                $(this).addClass('active');
+                currentFilters.index = $(this).data('index');
+                applyFilters();
+                renderAllTables();
+                updateStats();
+            });
+            
+            // 评级筛选
+            $('#gradeFilters .filter-btn').click(function() {
+                $('#gradeFilters .filter-btn').removeClass('active');
+                $(this).addClass('active');
+                currentFilters.grade = $(this).data('grade');
+                applyFilters();
+                renderAllTables();
+                updateStats();
+            });
+            
+            // 技术信号筛选
+            $('#signalFilters .filter-btn').click(function() {
+                $('#signalFilters .filter-btn').removeClass('active');
+                $(this).addClass('active');
+                currentFilters.signal = $(this).data('signal');
+                applyFilters();
+                renderAllTables();
+                updateStats();
+            });
+            
+            // 搜索
+            $('#searchInput').on('input', function() {
+                currentFilters.search = $(this).val();
+                applyFilters();
+                renderAllTables();
+                updateStats();
+            });
+        }
+        
+        function setupSorters() {
+            $('th[data-sort]').click(function() {
+                const column = $(this).data('sort');
+                
+                // 移除其他列的排序状态
+                $('th[data-sort]').removeClass('sort-asc sort-desc');
+                
+                // 切换排序方向
+                if (sortColumn === column) {
+                    sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+                } else {
+                    sortColumn = column;
+                    sortDirection = 'desc';
+                }
+                
+                $(this).addClass(sortDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+                
+                sortData();
+                renderAllTables();
+            });
+        }
+        
+        function showDetail(code) {
+            const stock = allStocksData.find(s => s.code === code);
+            if (!stock) return;
+            
+            const fundamental = stock.fundamental || {};
+            const technical = stock.technical || {};
+            
+            $('#detailModalTitle').html(`<i class="bi bi-info-circle"></i> ${stock.name} (${stock.code})`);
+            
+            const body = `
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5 class="text-primary mb-3">📊 基本面数据</h5>
+                        <table class="table table-sm table-dark">
+                            <tr><td>综合评分</td><td class="fw-bold">${fundamental.overallScore?.toFixed(0) || '--'} <span class="${getGradeClass(fundamental.overallGrade)}">${fundamental.overallGrade || 'N'}</span></td></tr>
+                            <tr><td>成长性</td><td>${fundamental.growthScore?.toFixed(0) || '--'}</td></tr>
+                            <tr><td>盈利能力</td><td>${fundamental.profitScore?.toFixed(0) || '--'}</td></tr>
+                            <tr><td>财务健康</td><td>${fundamental.healthScore?.toFixed(0) || '--'}</td></tr>
+                            <tr><td>估值评分</td><td>${fundamental.valuationScore?.toFixed(0) || '--'}</td></tr>
+                            <tr><td>股息评分</td><td>${fundamental.dividendScore?.toFixed(0) || '--'}</td></tr>
+                        </table>
+                        
+                        <h5 class="text-primary mb-3 mt-4">💰 估值指标</h5>
+                        <table class="table table-sm table-dark">
+                            <tr><td>PE (市盈率)</td><td class="fw-bold">${fundamental.pe?.toFixed(2) || '--'}</td></tr>
+                            <tr><td>PB (市净率)</td><td class="fw-bold">${fundamental.pb?.toFixed(2) || '--'}</td></tr>
+                            <tr><td>ROE</td><td class="signal-bullish fw-bold">${fundamental.roe?.toFixed(2) + '%' || '--'}</td></tr>
+                            <tr><td>ROA</td><td>${fundamental.roa?.toFixed(2) + '%' || '--'}</td></tr>
+                            <tr><td>毛利率</td><td>${fundamental.grossMargin?.toFixed(2) + '%' || '--'}</td></tr>
+                            <tr><td>净利率</td><td>${fundamental.netMargin?.toFixed(2) + '%' || '--'}</td></tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="text-success mb-3">⚡ 技术信号</h5>
+                        <div class="p-3 bg-dark rounded mb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>综合信号</span>
+                                <span class="tech-signal ${getSignalClass(technical.action)}" style="font-size: 1.2rem;">${technical.action || 'N/A'}</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <span>多头信号</span>
+                                <span class="signal-bullish fw-bold">${technical.bullishCount || 0} 个</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <span>空头信号</span>
+                                <span class="signal-bearish fw-bold">${technical.bearishCount || 0} 个</span>
+                            </div>
+                        </div>
+                        
+                        <h5 class="text-warning mb-3">📈 技术指标</h5>
+                        <table class="table table-sm table-dark">
+                            <tr><td>RSI(14)</td><td>${getRSIColor(technical.rsi)}</td></tr>
+                            <tr><td>MACD</td><td class="${technical.macd > 0 ? 'signal-bullish' : 'signal-bearish'}">${technical.macd?.toFixed(2) || '--'}</td></tr>
+                            <tr><td>均线趋势</td><td>${technical.maTrend || '--'}</td></tr>
+                            <tr><td>量比</td><td>${technical.volumeRatio?.toFixed(2) + 'x' || '--'}</td></tr>
+                        </table>
+                        
+                        <h5 class="text-info mb-3 mt-4">💵 股息数据</h5>
+                        <table class="table table-sm table-dark">
+                            <tr><td>股息率</td><td class="signal-bullish fw-bold">${fundamental.dividendYield?.toFixed(2) + '%' || '--'}</td></tr>
+                            <tr><td>派息率</td><td>${fundamental.payoutRatio?.toFixed(1) + '%' || '--'}</td></tr>
+                            <tr><td>EPS</td><td>${fundamental.eps ? 'HK$' + fundamental.eps.toFixed(2) : '--'}</td></tr>
+                            <tr><td>每股净资产</td><td>${fundamental.bps ? 'HK$' + fundamental.bps.toFixed(2) : '--'}</td></tr>
+                        </table>
+                        
+                        <div class="p-3 bg-dark rounded mt-4">
+                            <h6 class="text-primary">📋 关键信号</h6>
+                            <ul class="mb-0 small">
+                                ${(fundamental.signals || technical.signalDetails || []).map(s => `<li>${typeof s === 'string' ? s : s.name}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 p-3 bg-dark rounded">
+                    <h5 class="text-warning">🎯 投资建议</h5>
+                    <p class="mb-0">${getInvestmentAdvice(stock)}</p>
+                </div>
+            `;
+            
+            $('#detailModalBody').html(body);
+            $('#detailModal').modal('show');
+        }
+        
+        function getInvestmentAdvice(stock) {
+            const fundamental = stock.fundamental || {};
+            const technical = stock.technical || {};
+            
+            const fundScore = fundamental.overallScore || 0;
+            const techAction = technical.action || 'HOLD';
+            const dividendYield = fundamental.dividendYield || 0;
+            
+            if (fundScore >= 70 && (techAction === 'STRONG_BUY' || techAction === 'BUY')) {
+                return '✅ 强烈推荐：基本面优秀 + 技术面看涨，建议买入或持有。';
+            } else if (fundScore >= 60 && techAction === 'HOLD') {
+                return '👍 建议关注：基本面良好，适合长线持有。';
+            } else if (fundScore < 40) {
+                return '⚠️ 建议谨慎：基本面较弱，需等待基本面改善。';
+            } else if (techAction === 'SELL' || techAction === 'STRONG_SELL') {
+                return '⚠️ 技术面偏弱：短期可能继续调整，建议观望。';
+            } else if (dividendYield > 4) {
+                return '💰 高股息股：适合稳健型投资者收息。';
+            }
+            return '➡️ 建议观望：等待更多信息确认。';
+        }
+        
+        function exportFilteredData() {
+            const dataToExport = filteredData.map(stock => ({
+                代码: stock.code,
+                名称: stock.name,
+                指数: stock.indices?.join(', ') || '',
+                综合评分: stock.fundamental?.overallScore?.toFixed(0) || '',
+                评级: stock.fundamental?.overallGrade || '',
+                技术信号: stock.technical?.action || '',
+                ROE: stock.fundamental?.roe?.toFixed(2) || '',
+                PE: stock.fundamental?.pe?.toFixed(2) || '',
+                PB: stock.fundamental?.pb?.toFixed(2) || '',
+                股息率: stock.fundamental?.dividendYield?.toFixed(2) || '',
+                派息率: stock.fundamental?.payoutRatio?.toFixed(1) || '',
+                多头信号: stock.technical?.bullishCount || '',
+                空头信号: stock.technical?.bearishCount || '',
+                RSI: stock.technical?.rsi?.toFixed(1) || '',
+                现价: stock.price || ''
+            }));
+            
+            const csv = convertToCSV(dataToExport);
+            downloadCSV(csv, `stock_analysis_${new Date().toISOString().split('T')[0]}.csv`);
+        }
+        
+        function convertToCSV(data) {
+            const headers = Object.keys(data[0]);
+            const rows = data.map(row => headers.map(h => `"${row[h] || ''}"`).join(','));
+            return [headers.join(','), ...rows].join('\n');
+        }
+        
+        function downloadCSV(csv, filename) {
+            const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = filename;
+            link.click();
+        }
+        
+        async function refreshData() {
+            showLoading('正在刷新数据...');
+            allStocksData.forEach(stock => {
+                delete stock.fundamental;
+                delete stock.technical;
+                delete stock.price;
+                delete stock.change;
+                delete stock.changePercent;
+            });
+            await loadAllFundamentalData();
+            await loadAllTechnicalData();
+            await loadAllPrices();
+            renderAllTables();
+            updateStats();
+            $('#lastUpdate').text(new Date().toLocaleString('zh-CN'));
+            hideLoading();
+        }
+        
+        function showLoading(text) {
+            $('#loadingText').text(text);
+            $('#loadingProgress').text('');
+            $('#loadingOverlay').show();
+        }
+        
+        function updateLoadingProgress(text) {
+            $('#loadingProgress').text(text);
+        }
+        
+        function hideLoading() {
+            $('#loadingOverlay').hide();
+        }
+    </script>
+</body>
+</html>

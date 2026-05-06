@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockAI 智能分析 v1.7</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ==================== 原有样式保持不变 ==================== */
+        /* Tab 切換樣式 */
+        .mode-tabs {
+            display: flex;
+            gap: 10px;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 5px;
+            border-radius: 40px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(8px);
+        }
+
+        .mode-tab {
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+
+        .mode-tab:hover {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+        }
+
+        .mode-tab.active {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        /* 日內交易卡片樣式 */
+        .price-level-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 16px;
+            text-align: center;
+            border: 1px solid #334155;
+        }
+
+        .price-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+
+        .price-distance {
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .price-status {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .status-waiting {
+            background: rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+        }
+
+        .status-triggered {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+
+        .status-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        /* 價位分析圖 */
+        .price-level-chart {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .level-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .level-label {
+            width: 80px;
+            font-size: 13px;
+            color: #94a3b8;
+        }
+
+        .level-bar {
+            flex: 1;
+            height: 6px;
+            background: #334155;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .level-marker {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            top: -3px;
+            transform: translateX(-50%);
+        }
+
+        .level-price {
+            width: 70px;
+            text-align: right;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* 日內指標網格 */
+        .intraday-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .intraday-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .intraday-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 5px;
+        }
+
+        .intraday-value {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .intraday-signal {
+            font-size: 11px;
+            margin-top: 5px;
+        }
+
+        /* 隱藏類別 */
+        .mode-content {
+            display: none;
+        }
+
+        .mode-content.active {
+            display: block;
+        }
+
+        /* 長線分析 8 張卡片網格 */
+        .indicators-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .indicator-card {
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid #334155;
+        }
+
+        .indicator-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .indicator-title {
+            font-size: 16px;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .indicator-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-buy {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+            border: 1px solid #10b981;
+        }
+
+        .badge-sell {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+            border: 1px solid #ef4444;
+        }
+
+        .badge-neutral {
+            background: rgba(148, 163, 184, 0.2);
+            color: #94a3b8;
+            border: 1px solid #94a3b8;
+        }
+
+        .indicator-value {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .indicator-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .detail-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 10px;
+        }
+
+        .detail-label {
+            color: #94a3b8;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .ma-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 15px;
+        }
+
+        .ma-item {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .ma-period {
+            color: #94a3b8;
+            font-size: 11px;
+        }
+
+        .ma-value {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .rsi-scale {
+            margin: 15px 0;
+            height: 6px;
+            background: linear-gradient(90deg, #10b981 0%, #fbbf24 30%, #fbbf24 70%, #ef4444 100%);
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .rsi-marker {
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            background: white;
+            border: 3px solid #3b82f6;
+            border-radius: 50%;
+            top: -5px;
+            transform: translateX(-50%);
+        }
+
+        .positive {
+            color: #10b981;
+        }
+
+        .negative {
+            color: #ef4444;
+        }
+
+        /* 日內指標卡片樣式增強 */
+        .intraday-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 16px 12px;
+            text-align: center;
+            border: 1px solid #334155;
+            transition: all 0.3s ease;
+        }
+
+        .intraday-card:hover {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .intraday-label {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .intraday-value {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 8px 0;
+        }
+
+        .intraday-signal {
+            font-size: 11px;
+            margin-top: 5px;
+            padding: 4px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        /* 日內指標容器 */
+        .intraday-indicators-container {
+            margin: 20px 0;
+        }
+
+        /* ==================== AI 助手样式（新增） ==================== */
+        .ai-assistant {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        /* 最小化按钮 */
+        .ai-minimized {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .ai-minimized:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 28px rgba(59, 130, 246, 0.4);
+        }
+
+        .ai-badge {
+            position: relative;
+        }
+
+        .ai-badge i {
+            font-size: 28px;
+            color: white;
+        }
+
+        .ai-pulse {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            width: 12px;
+            height: 12px;
+            background: #10b981;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .ai-tooltip {
+            position: absolute;
+            right: 70px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+
+        .ai-minimized:hover .ai-tooltip {
+            opacity: 1;
+        }
+
+        /* 展开面板 */
+        .ai-expanded {
+            width: 380px;
+            height: 580px;
+            background: rgba(15, 23, 42, 0.98);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            animation: slideIn 0.3s ease;
+        }
+
+        .ai-header {
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ai-title {
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .ai-version {
+            font-size: 10px;
+            background: rgba(139, 92, 246, 0.3);
+            padding: 2px 6px;
+            border-radius: 20px;
+            color: #a78bfa;
+        }
+
+        .ai-actions i {
+            font-size: 18px;
+            color: #94a3b8;
+            cursor: pointer;
+            margin-left: 12px;
+            transition: color 0.2s;
+        }
+
+        .ai-actions i:hover {
+            color: white;
+        }
+
+        .ai-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+        }
+
+        /* 消息气泡 */
+        .ai-message {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .ai-message-bot .ai-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .ai-message-user {
+            flex-direction: row-reverse;
+        }
+
+        .ai-message-user .ai-avatar {
+            background: #334155;
+        }
+
+        .ai-content {
+            max-width: 80%;
+        }
+
+        .ai-name {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-bottom: 4px;
+        }
+
+        .ai-text {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            line-height: 1.5;
+            color: #e2e8f0;
+        }
+
+        .ai-message-user .ai-text {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+        }
+
+        /* 快捷策略卡片 */
+        .ai-quick-strategy {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .strategy-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .strategy-card:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: #8b5cf6;
+            transform: translateY(-2px);
+        }
+
+        .strategy-card i {
+            font-size: 18px;
+            color: #8b5cf6;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .strategy-card span {
+            font-size: 11px;
+            color: #cbd5e1;
+        }
+
+        /* 加载动画 */
+        .ai-loading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .ai-typing {
+            display: flex;
+            gap: 4px;
+        }
+
+        .ai-typing span {
+            width: 6px;
+            height: 6px;
+            background: #8b5cf6;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .ai-typing span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .ai-typing span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        /* 输入区域 */
+        .ai-footer {
+            padding: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-link-custom:hover {
+            color: #fff !important;
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .nav-link-custom.active {
+            color: #fff !important;
+            background: rgba(59, 130, 246, 0.2);
+        }
+
+        .ai-input-wrapper {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .ai-input-wrapper input {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #334155;
+            border-radius: 24px;
+            padding: 12px 16px;
+            color: white;
+            font-size: 13px;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .ai-input-wrapper input:focus {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .ai-send-btn {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .ai-send-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .ai-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .suggestion-tag {
+            font-size: 11px;
+            background: rgba(139, 92, 246, 0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            color: #a78bfa;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .suggestion-tag:hover {
+            background: rgba(139, 92, 246, 0.4);
+        }
+
+        /* 动画 */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+
+            70% {
+                transform: scale(1.2);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: scale(0.8);
+                opacity: 1;
+            }
+        }
+
+        @keyframes typing {
+
+            0%,
+            60%,
+            100% {
+                transform: translateY(0);
+            }
+
+            30% {
+                transform: translateY(-6px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class="bi bi-graph-up-arrow"></i>
+            Stock<span style="color: #fbbf24;">AI</span> 智能分析
+            <span
+                style="font-size: 12px; background: rgba(139, 92, 246, 0.3); padding: 2px 8px; border-radius: 20px; margin-left: 12px;">v1.7</span>
+        </div>
+        <div class="nav-links" style="display: flex; gap: 6px;">
+            <a href="index.html" class="nav-link-custom active"
+                style="color:var(--text-muted);text-decoration:none;padding:7px 16px;border-radius:10px;transition:all 0.2s;font-size:13px;font-weight:500;"><i
+                    class="bi bi-bar-chart-line"></i> 行情</a>
+            <a href="paper_trading.html" target="_blank" class="nav-link-custom"
+                style="color:var(--text-muted);text-decoration:none;padding:7px 16px;border-radius:10px;transition:all 0.2s;font-size:13px;font-weight:500;"><i
+                    class="bi bi-cash-stack"></i> 模拟交易</a>
+            <a href="tradingview_demo.html" target="_blank" class="nav-link-custom"
+                style="color:var(--text-muted);text-decoration:none;padding:7px 16px;border-radius:10px;transition:all 0.2s;font-size:13px;font-weight:500;"><i
+                    class="bi bi-graph-up"></i> TradingView</a>
+            <a href="invest_strategy_analyzer_v3.html" target="_blank" class="nav-link-custom"
+                style="color:var(--text-muted);text-decoration:none;padding:7px 16px;border-radius:10px;transition:all 0.2s;font-size:13px;font-weight:500;"><i
+                    class="bi bi-clipboard-data"></i> 策略分析</a>
+            <a href="#" class="nav-link-custom" onclick="switchMode('daily'); return false;"
+                style="color:#fbbf24;text-decoration:none;padding:7px 16px;border-radius:10px;transition:all 0.2s;font-size:13px;font-weight:500;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);"><i
+                    class="bi bi-journal-text"></i> 每日報告</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Tab 切換 -->
+        <div class="mode-tabs">
+            <div class="mode-tab active" data-mode="swing" onclick="switchMode('swing')" style="font-size: 14px;">
+                <i class="bi bi-calendar-week"></i> 長線分析
+            </div>
+            <div class="mode-tab" data-mode="intraday" onclick="switchMode('intraday')" style="font-size: 14px;">
+                <i class="bi bi-lightning-charge"></i> 日內交易
+            </div>
+            <div class="mode-tab" data-mode="news" onclick="switchMode('news')" style="font-size: 14px;">
+                <i class="bi bi-newspaper"></i> 新聞輿情
+            </div>
+            <div class="mode-tab" data-mode="daily" onclick="switchMode('daily')" style="font-size: 14px;">
+                <i class="bi bi-journal-text"></i> 每日報告
+            </div>
+        </div>
+
+        <!-- ==================== 長線分析模式 ==================== -->
+        <div id="swing-mode" class="mode-content active">
+            <!-- 搜索區域 -->
+            <div class="search-section">
+                <div class="search-box">
+                    <input type="text" class="stock-input" placeholder="輸入股票代碼 (例如: 0700.HK, 9988.HK, 0005.HK)"
+                        id="stockInput" value="0700.HK">
+                    <button class="btn-analyze" onclick="analyzeStock()" id="analyzeBtn">
+                        <i class="bi bi-search"></i> 智能分析
+                    </button>
+                </div>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <!-- 股票頭部信息 + 4張報價卡片 -->
+            <div class="stock-header" id="stockHeader" style="display: none;">
+                <div class="stock-title">
+                    <div class="stock-code-badge" id="stockCode">0700.HK</div>
+                    <div class="stock-name" id="stockName">騰訊控股有限公司</div>
+                    <div class="update-time" id="updateTime">
+                        <i class="bi bi-clock"></i>
+                        <span>載入中...</span>
+                    </div>
+                </div>
+                <div class="price-grid">
+                    <div class="price-card">
+                        <div class="price-label">現價</div>
+                        <div class="price-main" id="currentPrice">--</div>
+                        <div class="price-sub" id="priceChange">--</div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-label">開盤</div>
+                        <div class="price-main" id="openPrice">--</div>
+                        <div class="price-sub" id="prevClose">前收: --</div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-label">今日高低</div>
+                        <div class="price-main" id="dayRange">--</div>
+                        <div class="price-sub" id="volume">成交量: --</div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-label">52週高低</div>
+                        <div class="price-main" id="weekRange">--</div>
+                        <div class="price-sub" id="marketCap">市值: --</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- K線圖區域 -->
+            <div class="chart-section" id="chartSection" style="display: none;">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <i class="bi bi-graph-up" style="color: #3b82f6;"></i>
+                        <span id="chartTitle">K線圖</span>
+                    </div>
+                    <div class="timeframe-buttons">
+                        <button class="timeframe-btn" onclick="changeTimeframe('1d')">1日</button>
+                        <button class="timeframe-btn" onclick="changeTimeframe('5d')">5日</button>
+                        <button class="timeframe-btn active" onclick="changeTimeframe('1mo')">1月</button>
+                        <button class="timeframe-btn" onclick="changeTimeframe('3mo')">3月</button>
+                        <button class="timeframe-btn" onclick="changeTimeframe('1y')">1年</button>
+                    </div>
+                </div>
+                <div class="chart-container" id="candlestickChart"></div>
+            </div>
+
+            <!-- 8 張技術指標網格 - 上下兩排，每排4個 -->
+            <div class="indicators-grid" id="indicatorsGrid" style="display: none;">
+                <!-- 第一排：4個卡片 -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 20px;">
+                    <!-- 卡片1: 趨勢指標 -->
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <div class="indicator-title"><i class="bi bi-arrow-up-short" style="color: #3b82f6;"></i>
+                                趨勢指標</div>
+                            <span class="indicator-badge" id="trendSignal">--</span>
+                        </div>
+                        <div class="ma-list" id="maList"></div>
+                    </div>
+                    <!-- 卡片2: RSI指標 -->
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <div class="indicator-title"><i class="bi bi-speedometer2" style="color: #8b5cf6;"></i>
+                                RSI(14)</div>
+                            <span class="indicator-badge" id="rsiSignal">--</span>
+                        </div>
+                        <div class="indicator-value" id="rsiValue">--</div>
+                        <div class="rsi-scale">
+                            <div class="rsi-marker" id="rsiMarker"></div>
+                        </div>
+                        <div class="indicator-details">
+                            <div class="detail-item">
+                                <div class="detail-label">RSI(7)</div>
+                                <div class="detail-value" id="rsi7">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">RSI(21)</div>
+                                <div class="detail-value" id="rsi21">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 卡片3: MACD指標 -->
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <div class="indicator-title"><i class="bi bi-bar-chart" style="color: #10b981;"></i> MACD
+                            </div>
+                            <span class="indicator-badge" id="macdSignal">--</span>
+                        </div>
+                        <div class="indicator-details">
+                            <div class="detail-item">
+                                <div class="detail-label">DIF</div>
+                                <div class="detail-value" id="macdDif">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">DEA</div>
+                                <div class="detail-value" id="macdDea">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">MACD柱</div>
+                                <div class="detail-value" id="macdHist">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">交叉</div>
+                                <div class="detail-value" id="macdCross">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 卡片4: 成交量指標 -->
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <div class="indicator-title"><i class="bi bi-bar-chart-steps" style="color: #f59e0b;"></i>
+                                成交量</div>
+                            <span class="indicator-badge" id="volumeSignal">--</span>
+                        </div>
+                        <div class="indicator-details">
+                            <div class="detail-item">
+                                <div class="detail-label">今日</div>
+                                <div class="detail-value" id="volumeToday">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">5日均量</div>
+                                <div class="detail-value" id="volumeAvg5">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">量比</div>
+                                <div class="detail-value" id="volumeRatio">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">換手率</div>
+                                <div class="detail-value" id="turnover">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第二排：4個卡片 -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                    <!-- 卡片5: 保力加通道 -->
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <div class="indicator-title"><i class="bi bi-bounding-box" style="color: #f59e0b;"></i>
+                                保力加通道</div>
+                            <span class="indicator-badge" id="bbSignal">--</span>
+                        </div>
+                        <div class="indicator-details">
+                            <div class="detail-item">
+                                <div class="detail-label">上軌線 (阻力)</div>
+                                <div class="detail-value positive" id="bbUpper">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">中軌線 (MA20)</div>
+                                <div class="detail-value" id="bbMiddle">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">下軌線 (支撐)</div>
+                                <div class="detail-value negative" id="bbLower">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">通道寬度</div>
+                                <div class="detail-value" id="bbWidth">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 卡片6: ATR + ADX -->
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <div class="indicator-title"><i class="bi bi-activity" style="color: #10b981;"></i> 波動 & 趨勢
+                            </div>
+                            <span class="indicator-badge" id="atrAdxSignal">--</span>
+                        </div>
+                        <div class="indicator-details">
+                            <div class="detail-item">
+                                <div class="detail-label">ATR (平均真實波幅)</div>
+                                <div class="detail-value" id="atrValue">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">ADX (趨勢強度)</div>
+                                <div class="detail-value" id="adxValue">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">+DI (上升動量)</div>
+                                <div class="detail-value positive" id="diPlus">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">-DI (下降動量)</div>
+                                <div class="detail-value negative" id="diMinus">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 卡片7: KDJ -->
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <div class="indicator-title"><i class="bi bi-arrow-repeat" style="color: #8b5cf6;"></i> 隨機指標
+                                (KDJ)</div>
+                            <span class="indicator-badge" id="kdjSignal">--</span>
+                        </div>
+                        <div class="indicator-details">
+                            <div class="detail-item">
+                                <div class="detail-label">K值</div>
+                                <div class="detail-value" id="kdjK">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">D值</div>
+                                <div class="detail-value" id="kdjD">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">J值</div>
+                                <div class="detail-value" id="kdjJ">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">信號</div>
+                                <div class="detail-value" id="kdjAction">--</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 卡片8: OBV -->
+                    <div class="indicator-card">
+                        <div class="indicator-header">
+                            <div class="indicator-title"><i class="bi bi-bar-chart-steps" style="color: #f59e0b;"></i>
+                                能量潮 (OBV)</div>
+                            <span class="indicator-badge" id="obvSignal">--</span>
+                        </div>
+                        <div class="indicator-details">
+                            <div class="detail-item">
+                                <div class="detail-label">OBV 值</div>
+                                <div class="detail-value" id="obvValue">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">趨勢</div>
+                                <div class="detail-value" id="obvTrend">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">量價關係</div>
+                                <div class="detail-value" id="obvPriceRelation">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <div class="detail-label">背離</div>
+                                <div class="detail-value" id="obvDivergence">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 投資建議區域 -->
+            <div class="recommendation-box" id="recommendationBox" style="display: none;">
+                <div class="recommendation-header">
+                    <div style="font-size: 20px; font-weight: 600;"><i class="bi bi-stars" style="color: #fbbf24;"></i>
+                        AI智能投資建議</div>
+                    <div class="score-badge">
+                        <span class="score-item"><i class="bi bi-trophy"></i> 綜合評分: <span
+                                id="totalScore">--</span>/100</span>
+                        <span class="score-item"><i class="bi bi-arrow-up"></i> 目標價: <span
+                                id="targetPrice">--</span></span>
+                        <span class="score-item"><i class="bi bi-graph-up"></i> 潛在升幅: <span
+                                id="potentialGain">--</span></span>
+                    </div>
+                </div>
+                <div class="signal-grid">
+                    <div class="signal-item">
+                        <div class="signal-label">趨勢信號</div>
+                        <div class="signal-value" id="signalTrend">--</div>
+                    </div>
+                    <div class="signal-item">
+                        <div class="signal-label">RSI信號</div>
+                        <div class="signal-value" id="signalRsi">--</div>
+                    </div>
+                    <div class="signal-item">
+                        <div class="signal-label">MACD信號</div>
+                        <div class="signal-value" id="signalMacd">--</div>
+                    </div>
+                    <div class="signal-item">
+                        <div class="signal-label">成交量信號</div>
+                        <div class="signal-value" id="signalVolume">--</div>
+                    </div>
+                </div>
+                <div id="recommendationText"
+                    style="line-height: 1.8; color: var(--text-secondary); margin-bottom: 20px;">載入中...</div>
+                <div id="aiPredictionContainer"></div>
+                <div class="recommendation-details">
+                    <div class="rec-item">
+                        <div class="rec-label">📊 支撐位分析</div>
+                        <div class="rec-value" id="supportLevels">--</div>
+                    </div>
+                    <div class="rec-item">
+                        <div class="rec-label">📈 阻力位分析</div>
+                        <div class="rec-value" id="resistanceLevels">--</div>
+                    </div>
+                    <div class="rec-item">
+                        <div class="rec-label">💰 估值分析</div>
+                        <div class="rec-value" id="valuation">
+                            <div style="margin-bottom: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                                    <span style="font-size: 20px; font-weight: 700;" id="peValue">PE --倍</span>
+                                    <span class="badge badge-neutral" id="peLevelBadge" style="font-size: 12px;">📊
+                                        估值分析中</span>
+                                </div>
+                            </div>
+                            <div style="margin: 15px 0 10px 0;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                                    <span style="font-size: 11px; color: #10b981;">便宜</span>
+                                    <span style="font-size: 11px; color: #fbbf24;">合理</span>
+                                    <span style="font-size: 11px; color: #ef4444;">貴</span>
+                                </div>
+                                <div
+                                    style="height: 8px; background: linear-gradient(90deg, #10b981 0%, #fbbf24 30%, #fbbf24 70%, #ef4444 100%); border-radius: 4px; position: relative;">
+                                    <div id="peMarker"
+                                        style="position: absolute; width: 16px; height: 16px; background: white; border: 3px solid #f59e0b; border-radius: 50%; top: -4px; left: 50%; transform: translateX(-50%);">
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; margin-top: 8px;">
+                                    <span id="peLevelText" style="font-size: 12px;">📊 估值合理區</span>
+                                    <span id="pePercentile" style="font-size: 12px; font-weight: 600;">歷史百分位: --%</span>
+                                </div>
+                                <div id="peDescription"
+                                    style="margin-top: 10px; padding: 8px 10px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                                    <span style="font-size: 12px; color: #94a3b8;">估值數據分析中...</span>
+                                </div>
+                                <div id="peAdvice" style="margin-top: 10px;">
+                                    <span class="badge badge-neutral" style="font-size: 12px; display: inline-block;">🔍
+                                        估值分析中</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rec-item">
+                        <div class="rec-label">📋 投資建議</div>
+                        <div class="rec-value" id="investmentAdvice">--</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <span class="risk-tag">⚠️ 行業監管風險</span>
+                    <span class="risk-tag">⚠️ 競爭加劇風險</span>
+                    <span class="risk-tag">⚠️ 宏觀經濟風險</span>
+                    <span class="risk-tag">⚠️ 建議設定止損</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 新聞輿情模式 v1.7 ==================== -->
+        <div id="news-mode" class="mode-content news-mode">
+            <!-- 搜索區域 -->
+            <div class="search-section">
+                <div class="news-header">
+                    <input type="text" class="news-stock-input" id="newsStockInput"
+                        placeholder="輸入股票代碼 (例如: 600519, 0700.HK, AAPL)" value="">
+                    <button class="btn-fetch-news" onclick="fetchNews()" id="newsFetchBtn">
+                        <i class="bi bi-search"></i> 查詢新聞
+                    </button>
+                </div>
+            </div>
+
+            <div id="newsErrorMessage" class="error-message" style="display: none;"></div>
+
+            <!-- 情緒儀表盤 + 新聞列表 -->
+            <div class="news-content-grid" id="newsContentGrid" style="display: none;">
+
+                <!-- 左欄：情緒儀表盤 -->
+                <div class="sentiment-dashboard">
+                    <div class="sentiment-dashboard-title">
+                        <i class="bi bi-person-hearts"></i> AI 情緒評分
+                    </div>
+
+                    <!-- 儀表盤環形圖 -->
+                    <div class="sentiment-score-ring">
+                        <svg class="sentiment-ring-svg" width="160" height="160" viewBox="0 0 160 160">
+                            <circle class="sentiment-ring-bg" cx="80" cy="80" r="66" />
+                            <circle class="sentiment-ring-fill" id="sentimentRing" cx="80" cy="80" r="66"
+                                stroke="#94a3b8" stroke-dasharray="414.69" stroke-dashoffset="414.69" />
+                        </svg>
+                        <div class="sentiment-score-text">
+                            <div class="sentiment-score-number" id="sentimentScore">--</div>
+                            <div class="sentiment-score-label" id="sentimentLabel">等待分析</div>
+                        </div>
+                    </div>
+
+                    <!-- 情緒標籤 -->
+                    <div class="sentiment-label-bar">
+                        <div class="sentiment-bar-track">
+                            <div class="sentiment-bar-marker" id="sentimentBarMarker" style="left: 50%;"></div>
+                        </div>
+                        <div class="sentiment-bar-labels">
+                            <span>利空</span>
+                            <span>利好</span>
+                        </div>
+                    </div>
+
+                    <!-- AI 分析摘要 -->
+                    <div class="sentiment-summary-text" id="sentimentSummary">
+                        載入新聞後將自動分析情緒...
+                    </div>
+
+                    <!-- 新聞情緒分組 -->
+                    <div class="sentiment-summary-grid">
+                        <div class="sentiment-summary-item">
+                            <div class="sentiment-summary-count" id="positiveCount" style="color: #10b981;">--</div>
+                            <div class="sentiment-summary-label">利好</div>
+                        </div>
+                        <div class="sentiment-summary-item">
+                            <div class="sentiment-summary-count" id="neutralCount" style="color: #94a3b8;">--</div>
+                            <div class="sentiment-summary-label">中性</div>
+                        </div>
+                        <div class="sentiment-summary-item">
+                            <div class="sentiment-summary-count" id="negativeCount" style="color: #ef4444;">--</div>
+                            <div class="sentiment-summary-label">利空</div>
+                        </div>
+                    </div>
+
+                    <!-- 元數據卡片 -->
+                    <div class="sentiment-meta">
+                        <div class="sentiment-meta-card">
+                            <div class="sentiment-meta-label">綜合評分</div>
+                            <div class="sentiment-meta-value" id="sentimentScoreMeta">--</div>
+                        </div>
+                        <div class="sentiment-meta-card">
+                            <div class="sentiment-meta-label">新聞數量</div>
+                            <div class="sentiment-meta-value" id="newsCountMeta" style="color: #3b82f6;">--</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右欄：新聞列表 -->
+                <div class="news-list-panel">
+                    <div class="news-list-header">
+                        <div class="news-list-title">
+                            <i class="bi bi-newspaper"></i> 最新新聞
+                            <span class="news-count-badge" id="newsCountBadge">0 條</span>
+                        </div>
+                        <div style="font-size: 12px; color: var(--text-secondary);" id="newsStockLabel"></div>
+                    </div>
+
+                    <!-- 加載中 -->
+                    <div class="news-loading" id="newsLoading" style="display: none;">
+                        <i class="bi bi-arrow-repeat"></i>
+                        <div style="font-size: 14px;">AI 正在分析新聞情緒...</div>
+                    </div>
+
+                    <!-- 空狀態 -->
+                    <div class="news-empty" id="newsEmpty">
+                        <i class="bi bi-newspaper"></i>
+                        <div class="news-empty-title" style="font-size: 14px;">暫無新聞數據</div>
+                        <div class="news-empty-text" style="font-size: 12px; margin-top: 8px; opacity: 0.6;">
+                            請輸入股票代碼後點擊「查詢新聞」</div>
+                    </div>
+
+                    <!-- 新聞列表 -->
+                    <div id="newsListContainer"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== 日內交易模式 ==================== -->
+        <div id="intraday-mode" class="mode-content">
+            <!-- 搜索區域 -->
+            <div class="search-section">
+                <div class="search-box">
+                    <input type="text" class="stock-input" placeholder="輸入股票代碼 (例如: 0700.HK)" id="intradayStockInput"
+                        value="0700.HK">
+                    <button class="btn-analyze" onclick="analyzeIntraday()" id="intradayAnalyzeBtn">
+                        <i class="bi bi-search"></i> 分析
+                    </button>
+                </div>
+            </div>
+
+            <div id="intradayErrorMessage" class="error-message" style="display: none;"></div>
+
+            <!-- 即時報價 + 關鍵價位 + 成交量（3 張卡片） -->
+            <div class="stock-header" id="intradayHeader" style="display: none;">
+                <div class="stock-title">
+                    <div class="stock-code-badge" id="intradayStockCode">0700.HK</div>
+                    <div class="stock-name" id="intradayStockName">騰訊控股有限公司</div>
+                    <div class="update-time" id="intradayUpdateTime">
+                        <i class="bi bi-clock"></i>
+                        <span>載入中...</span>
+                    </div>
+                </div>
+                <div class="price-grid">
+                    <div class="price-card">
+                        <div class="price-label">現價</div>
+                        <div class="price-main" id="intradayPrice">--</div>
+                        <div class="price-sub" id="intradayPriceChange">--</div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-label">買盤</div>
+                        <div class="price-main" id="bidPrice">--</div>
+                        <div class="price-sub">賣盤: <span id="askPrice">--</span></div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-label">今日高低</div>
+                        <div class="price-main" id="intradayDayRange">--</div>
+                        <div class="price-sub">價差: <span id="spread">--</span></div>
+                    </div>
+                    <div class="price-card">
+                        <div class="price-label">成交量</div>
+                        <div class="price-main" id="intradayVolume">--</div>
+                        <div class="price-sub">量比: <span id="intradayVolumeRatio">--</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 買賣價位監控卡片 -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 15px;">
+                <div class="price-level-card">
+                    <div style="font-size: 14px; color: #94a3b8;">📈 目標買入價</div>
+                    <div class="price-value" id="targetBuyPrice">$0.00</div>
+                    <div class="price-distance" id="buyDistance">距離: --</div>
+                    <div class="price-status status-waiting" id="buyStatus">⏳ 等待觸發</div>
+                    <div style="display: flex; gap: 8px; margin-top: 10px;">
+                        <input type="number" id="buyPriceInput" class="form-control"
+                            style="flex: 2; background: rgba(255,255,255,0.1); border: 1px solid #334155; color: white; padding: 5px; border-radius: 6px;"
+                            placeholder="自訂買入價">
+                        <button class="btn btn-sm btn-outline" style="flex: 1; background: #3b82f6; border: none;"
+                            onclick="setBuyPrice()">設定</button>
+                        <button class="btn btn-sm btn-outline" style="flex: 1; background: #334155; border: none;"
+                            onclick="resetBuyPrice()">重置</button>
+                    </div>
+                </div>
+                <div class="price-level-card">
+                    <div style="font-size: 14px; color: #94a3b8;">🎯 目標賣出價</div>
+                    <div class="price-value" id="targetSellPrice">$0.00</div>
+                    <div class="price-distance" id="sellDistance">距離: --</div>
+                    <div class="price-status status-waiting" id="sellStatus">⏳ 等待觸發</div>
+                    <div style="display: flex; gap: 8px; margin-top: 10px;">
+                        <input type="number" id="sellPriceInput" class="form-control"
+                            style="flex: 2; background: rgba(255,255,255,0.1); border: 1px solid #334155; color: white; padding: 5px; border-radius: 6px;"
+                            placeholder="自訂賣出價">
+                        <button class="btn btn-sm btn-outline" style="flex: 1; background: #3b82f6; border: none;"
+                            onclick="setSellPrice()">設定</button>
+                        <button class="btn btn-sm btn-outline" style="flex: 1; background: #334155; border: none;"
+                            onclick="resetSellPrice()">重置</button>
+                    </div>
+                </div>
+                <div class="price-level-card">
+                    <div style="font-size: 14px; color: #94a3b8;">🛡️ 止損價</div>
+                    <div class="price-value" id="targetStopPrice">$0.00</div>
+                    <div class="price-distance" id="stopDistance">距離: --</div>
+                    <div class="price-status status-waiting" id="stopStatus">🟢 安全距離</div>
+                    <div style="display: flex; gap: 8px; margin-top: 10px;">
+                        <input type="number" id="stopPriceInput" class="form-control"
+                            style="flex: 2; background: rgba(255,255,255,0.1); border: 1px solid #334155; color: white; padding: 5px; border-radius: 6px;"
+                            placeholder="自訂止損價">
+                        <button class="btn btn-sm btn-outline" style="flex: 1; background: #3b82f6; border: none;"
+                            onclick="setStopPrice()">設定</button>
+                        <button class="btn btn-sm btn-outline" style="flex: 1; background: #334155; border: none;"
+                            onclick="resetStopPrice()">重置</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 價位分析圖 -->
+            <div class="price-level-chart" id="priceLevelChart">
+                <div style="font-size: 14px; font-weight: 600; margin-bottom: 15px;">📊 價位分析</div>
+                <div class="level-line">
+                    <div class="level-label">賣出目標</div>
+                    <div class="level-bar">
+                        <div class="level-marker" style="background: #ef4444; left: 100%;"></div>
+                    </div>
+                    <div class="level-price" id="chartSellPrice">--</div>
+                </div>
+                <div class="level-line">
+                    <div class="level-label">現價</div>
+                    <div class="level-bar">
+                        <div class="level-marker" style="background: #3b82f6; left: 50%;"></div>
+                    </div>
+                    <div class="level-price" id="chartCurrentPrice">--</div>
+                </div>
+                <div class="level-line">
+                    <div class="level-label">買入目標</div>
+                    <div class="level-bar">
+                        <div class="level-marker" style="background: #10b981; left: 0%;"></div>
+                    </div>
+                    <div class="level-price" id="chartBuyPrice">--</div>
+                </div>
+                <div class="level-line">
+                    <div class="level-label">止損</div>
+                    <div class="level-bar">
+                        <div class="level-marker" style="background: #f59e0b; left: 0%;"></div>
+                    </div>
+                    <div class="level-price" id="chartStopPrice">--</div>
+                </div>
+            </div>
+
+            <!-- 日內K線圖 -->
+            <div class="chart-section" id="intradayChartSection" style="display: none;">
+                <div class="chart-header">
+                    <div class="chart-title">
+                        <i class="bi bi-graph-up" style="color: #3b82f6;"></i>
+                        <span id="intradayChartTitle">日內K線圖</span>
+                    </div>
+                    <div class="timeframe-buttons">
+                        <button class="timeframe-btn" onclick="changeIntradayTimeframe('1m')">1分</button>
+                        <button class="timeframe-btn" onclick="changeIntradayTimeframe('5m')">5分</button>
+                        <button class="timeframe-btn active" onclick="changeIntradayTimeframe('15m')">15分</button>
+                        <button class="timeframe-btn" onclick="changeIntradayTimeframe('30m')">30分</button>
+                        <button class="timeframe-btn" onclick="changeIntradayTimeframe('60m')">60分</button>
+                    </div>
+                </div>
+                <div class="chart-container" id="intradayCandlestickChart"></div>
+            </div>
+
+            <!-- 日內技術指標網格 - 上下兩排，每排4個 -->
+            <div id="intradayIndicators" style="display: none; margin: 20px 0;">
+                <!-- 第一排：4個卡片 -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 15px;">
+                    <div class="intraday-card">
+                        <div class="intraday-label">📈 VWAP</div>
+                        <div class="intraday-value" id="vwapValue">--</div>
+                        <div class="intraday-signal" id="vwapSignal">--</div>
+                    </div>
+                    <div class="intraday-card">
+                        <div class="intraday-label">📊 RSI(7)</div>
+                        <div class="intraday-value" id="intradayRsi">--</div>
+                        <div class="intraday-signal" id="intradayRsiSignal">--</div>
+                    </div>
+                    <div class="intraday-card">
+                        <div class="intraday-label">🌊 布林帶</div>
+                        <div class="intraday-value" id="bbPosition">--</div>
+                        <div class="intraday-signal" id="bbSignal">--</div>
+                    </div>
+                    <div class="intraday-card">
+                        <div class="intraday-label">💰 累積Delta</div>
+                        <div class="intraday-value" id="cumulativeDelta">--</div>
+                        <div class="intraday-signal" id="deltaSignal">--</div>
+                    </div>
+                </div>
+                <!-- 第二排：4個卡片 -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                    <div class="intraday-card">
+                        <div class="intraday-label">📉 ATR(5)</div>
+                        <div class="intraday-value" id="atr5">--</div>
+                        <div class="intraday-signal" id="atrSignal">--</div>
+                    </div>
+                    <div class="intraday-card">
+                        <div class="intraday-label">🔥 動量</div>
+                        <div class="intraday-value" id="momentum">--</div>
+                        <div class="intraday-signal" id="momentumSignal">--</div>
+                    </div>
+                    <div class="intraday-card">
+                        <div class="intraday-label">📊 成交量</div>
+                        <div class="intraday-value" id="intradayVolumeShort">--</div>
+                        <div class="intraday-signal" id="volumeSignalShort">--</div>
+                    </div>
+                    <div class="intraday-card">
+                        <div class="intraday-label">💵 資金流向</div>
+                        <div class="intraday-value" id="moneyFlow">--</div>
+                        <div class="intraday-signal" id="moneyFlowSignal">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 交易計劃卡片 -->
+            <div class="trade-plan-card" id="tradePlanCard"
+                style="display: none; background: linear-gradient(135deg, #1e293b, #0f172a); border-radius: 16px; padding: 20px; margin-top: 20px; border: 1px solid #334155;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <div style="font-size: 16px; font-weight: 600;"><i class="bi bi-clipboard-check"></i> 📋 交易計劃
+                    </div>
+                    <div><span class="risk-tag" id="riskRewardRatio">風險回報比: --</span></div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                    <div>
+                        <div style="font-size: 12px; color: #94a3b8;">建議操作</div>
+                        <div style="font-size: 18px; font-weight: 600;" id="tradeAction">--</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #94a3b8;">建議倉位</div>
+                        <div style="font-size: 18px; font-weight: 600;" id="positionSize">--</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #94a3b8;">持倉時間</div>
+                        <div style="font-size: 18px; font-weight: 600;" id="holdingTime">--</div>
+                    </div>
+                    <div>
+                        <div style="font-size: 12px; color: #94a3b8;">信心度</div>
+                        <div style="font-size: 18px; font-weight: 600;" id="tradeConfidence">--</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI 日內交易信號 -->
+            <div class="recommendation-box" id="intradaySignalBox" style="display: none; margin-top: 20px;">
+                <div class="recommendation-header">
+                    <div style="font-size: 18px; font-weight: 600;"><i class="bi bi-robot"></i> AI 日內交易信號</div>
+                </div>
+                <div class="signal-grid" style="margin-bottom: 15px;">
+                    <div class="signal-item">
+                        <div class="signal-label">趨勢</div>
+                        <div class="signal-value" id="intradayTrend">--</div>
+                    </div>
+                    <div class="signal-item">
+                        <div class="signal-label">RSI</div>
+                        <div class="signal-value" id="intradayRsiSignal2">--</div>
+                    </div>
+                    <div class="signal-item">
+                        <div class="signal-label">VWAP</div>
+                        <div class="signal-value" id="intradayVwapSignal2">--</div>
+                    </div>
+                    <div class="signal-item">
+                        <div class="signal-label">Delta</div>
+                        <div class="signal-value" id="intradayDeltaSignal2">--</div>
+                    </div>
+                </div>
+                <div id="intradayRecommendationText" style="line-height: 1.6; color: var(--text-secondary);">
+                    等待數據載入...
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 每日報告模式 ==================== -->
+        <div id="daily-mode" class="mode-content">
+            <!-- 報告控制面板 -->
+            <div class="search-section">
+                <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <div class="search-box" style="flex: 1; min-width: 250px;">
+                        <input type="text" class="stock-input" placeholder="輸入股票代碼 (例如: 00700, 9988, 0005)"
+                            id="dailyStockInput" value="">
+                        <button class="btn-analyze" onclick="generateSingleReport()" id="dailySingleBtn">
+                            <i class="bi bi-search"></i> 個股分析
+                        </button>
+                    </div>
+                    <button class="btn-analyze" onclick="generateScanReport()" id="dailyScanBtn"
+                        style="background: linear-gradient(135deg, #f59e0b, #d97706); white-space: nowrap;">
+                        <i class="bi bi-bar-chart-steps"></i> Top 200 掃描
+                    </button>
+                    <button class="btn-analyze" onclick="generatePortfolioReport()" id="dailyPortfolioBtn"
+                        style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); white-space: nowrap;">
+                        <i class="bi bi-wallet2"></i> 持倉報告
+                    </button>
+                    <button class="btn-analyze" onclick="window.open('http://localhost:5000/observer', '_blank')" id="observerBtn"
+                        style="background: linear-gradient(135deg, #10b981, #059669); white-space: nowrap;">
+                        <i class="bi bi-eye"></i> Observer
+                    </button>
+                </div>
+            </div>
+
+            <!-- 加載中 -->
+            <div id="dailyLoading" style="display: none; text-align: center; padding: 60px 20px;">
+                <div style="display: inline-flex; align-items: center; gap: 12px; padding: 20px 30px; background: rgba(0,0,0,0.3); border-radius: 16px; border: 1px solid #334155;">
+                    <div class="ai-loading" style="margin: 0; padding: 0;">
+                        <div class="ai-typing"><span></span><span></span><span></span></div>
+                    </div>
+                    <span id="dailyLoadingText" style="font-size: 15px; color: #94a3b8;">正在生成報告...</span>
+                </div>
+            </div>
+
+            <!-- 錯誤 -->
+            <div id="dailyError" class="error-message" style="display: none;"></div>
+
+            <!-- 報告容器 -->
+            <div id="dailyReportContainer" style="display: none;">
+                <iframe id="dailyReportFrame" style="width: 100%; border: none; min-height: 800px; border-radius: 12px;"
+                    sandbox="allow-same-origin"></iframe>
+            </div>
+
+            <!-- 空狀態 -->
+            <div id="dailyEmpty" style="text-align: center; padding: 80px 20px;">
+                <div style="font-size: 48px; margin-bottom: 16px;">📊</div>
+                <div style="font-size: 18px; font-weight: 600; color: #e2e8f0; margin-bottom: 8px;">每日交易建議</div>
+                <div style="font-size: 14px; color: #94a3b8; max-width: 500px; margin: 0 auto; line-height: 1.6;">
+                    輸入股票代碼進行個股完整分析，或點擊「Top 200 掃描」查看體檢分最高的股票資金流向。<br>
+                    也可生成「持倉報告」查看當前持倉的交易建議。
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== 底部免責聲明（兩個模式共用） ==================== -->
+        <div
+            style="margin-top: 30px; padding: 20px 24px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); border-radius: 16px; border-left: 4px solid #fbbf24; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+            <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px;">
+                <i class="bi bi-exclamation-triangle-fill"
+                    style="color: #fbbf24; font-size: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+                <div style="flex: 1;">
+                    <span style="font-weight: 700; color: #fbbf24; font-size: 13px;">免責聲明</span>
+                    <span style="font-size: 12px; line-height: 1.5; color: #cbd5e1; margin-left: 8px;">
+                        此 StockAI 智能分析平台僅供參考，不構成任何投資建議。所有數據來源於第三方，投資涉及風險。
+                    </span>
+                </div>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 16px;">
+                <i class="bi bi-shield-exclamation"
+                    style="color: #f97316; font-size: 20px; flex-shrink: 0; margin-top: 2px;"></i>
+                <div style="flex: 1;">
+                    <span style="font-weight: 700; color: #f97316; font-size: 13px;">風險提示</span>
+                    <span style="font-size: 12px; line-height: 1.5; color: #cbd5e1; margin-left: 8px;">
+                        價格可升可跌。如需作出投資決定，請諮詢你的證券經紀或專業財務顧問。過往表現不代表未來回報。
+                    </span>
+                </div>
+            </div>
+            <div
+                style="margin-top: 8px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                <div style="font-size: 11px; color: #dadcdf;"><i class="bi bi-c-circle"></i> 2026 StockAI 智能分析系統 |
+                    版權所有
+                </div>
+                <div style="font-size: 11px; color: #dadcdf;"><i class="bi bi-tag"></i> Version 1.7</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== AI 助手（侧边浮动面板 v1.5） ==================== -->
+    <div id="aiAssistant" class="ai-assistant" style="position: fixed; right: 24px; bottom: 24px; z-index: 1000;">
+        <!-- 最小化状态 -->
+        <div id="aiMinimized" class="ai-minimized" onclick="toggleAIAssistant()">
+            <div class="ai-badge">
+                <i class="bi bi-robot"></i>
+                <span class="ai-pulse"></span>
+            </div>
+            <div class="ai-tooltip">AI 多模型分析师</div>
+        </div>
+
+        <!-- 展开状态 -->
+        <div id="aiExpanded" class="ai-expanded" style="display: none;">
+            <div class="ai-header">
+                <div class="ai-title">
+                    <i class="bi bi-stars" style="color: #fbbf24;"></i>
+                    AI 多模型分析师
+                    <span class="ai-version">v1.7</span>
+                </div>
+                <div class="ai-actions">
+                    <i class="bi bi-arrows-angle-contract" onclick="toggleAIAssistant()"></i>
+                    <i class="bi bi-x-lg" onclick="closeAIAssistant()"></i>
+                </div>
+            </div>
+
+            <div class="ai-body">
+                <!-- 欢迎消息 -->
+                <div class="ai-message ai-message-bot">
+                    <div class="ai-avatar">🤖</div>
+                    <div class="ai-content">
+                        <div class="ai-name">AI 分析师</div>
+                        <div class="ai-text">
+                            你好！我是你的 AI 股票分析师。<br>
+                            可以问我关于 <strong id="aiCurrentStock">当前股票</strong> 的任何问题。
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 快捷策略卡片 -->
+                <div class="ai-quick-strategy">
+                    <div class="strategy-card" onclick="quickAsk('操作建议')">
+                        <i class="bi bi-graph-up"></i>
+                        <span>操作建议</span>
+                    </div>
+                    <div class="strategy-card" onclick="quickAsk('支撑位')">
+                        <i class="bi bi-arrow-down-short"></i>
+                        <span>支撑位</span>
+                    </div>
+                    <div class="strategy-card" onclick="quickAsk('目标价')">
+                        <i class="bi bi-arrow-up-short"></i>
+                        <span>目标价</span>
+                    </div>
+                    <div class="strategy-card" onclick="quickAsk('风险提示')">
+                        <i class="bi bi-shield-exclamation"></i>
+                        <span>风险提示</span>
+                    </div>
+                </div>
+
+                <!-- 财务报告快捷按钮 -->
+                <div class="ai-quick-strategy"
+                    style="margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;">
+                    <div class="strategy-card" onclick="fetchFinancialReport()"
+                        style="grid-template-columns: repeat(2, 1fr);">
+                        <i class="bi bi-file-earmark-text"></i>
+                        <span>财务报告</span>
+                    </div>
+                    <div class="strategy-card" onclick="fetchFinancialRatios()"
+                        style="grid-template-columns: repeat(2, 1fr);">
+                        <i class="bi bi-pie-chart"></i>
+                        <span>财务比率</span>
+                    </div>
+                </div>
+
+                <!-- 财务报告展示区域 -->
+                <div id="financialReportArea" class="financial-report-area"
+                    style="display: none; margin-top: 15px; max-height: 320px; overflow-y: auto;">
+                    <div class="financial-report-header"
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div style="font-size: 13px; font-weight: 600; color: #a78bfa;">
+                            <i class="bi bi-file-earmark-text"></i> 财务报表
+                        </div>
+                        <div style="font-size: 11px;">
+                            <span class="suggestion-tag" onclick="fetchFinancialReport('annual')">年度</span>
+                            <span class="suggestion-tag" onclick="fetchFinancialReport('quarterly')">季度</span>
+                        </div>
+                    </div>
+                    <div id="financialReportContent" class="financial-report-content"
+                        style="font-size: 12px; color: #cbd5e1;">
+                        <!-- 动态财务数据会显示在这里 -->
+                    </div>
+                </div>
+
+                <!-- 对话区域 -->
+                <div id="aiChatMessages" class="ai-chat-messages" style="max-height: 280px; overflow-y: auto;">
+                    <!-- 动态消息会显示在这里 -->
+                </div>
+
+                <!-- 加载状态 -->
+                <div id="aiLoading" class="ai-loading" style="display: none;">
+                    <div class="ai-typing">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <span>AI 正在思考...</span>
+                </div>
+            </div>
+
+            <div class="ai-footer">
+                <div class="ai-input-wrapper">
+                    <input type="text" id="aiQuestion" placeholder="输入你的问题..." onkeypress="handleAIKeyPress(event)">
+                    <button onclick="askAI()" class="ai-send-btn">
+                        <i class="bi bi-send-fill"></i>
+                    </button>
+                </div>
+                <div class="ai-suggestions">
+                    <span class="suggestion-tag" onclick="quickAsk('RSI指标怎么看？')">📊 RSI指标</span>
+                    <span class="suggestion-tag" onclick="quickAsk('MACD信号')">📈 MACD信号</span>
+                    <span class="suggestion-tag" onclick="quickAsk('布林带解读')">🌊 布林带</span>
+                    <span class="suggestion-tag" onclick="quickAsk('KDJ分析')">🔀 KDJ分析</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/intraday.js"></script>
+    <script src="js/daily_report.js"></script>
+
+    <!-- 底部免责声明 -->
+    <div
+        style="background:rgba(15,23,42,0.95);border-top:1px solid rgba(255,255,255,0.1);padding:20px 0;margin-top:30px;text-align:center;">
+        <div style="max-width:800px;margin:0 auto;padding:0 20px;">
+            <p style="color:rgba(148,163,184,0.6);font-size:11px;line-height:1.6;margin:0;">
+                ⚠️ 免责声明：本系统所有分析结果仅供学习研究参考，不构成任何投资建议。股市有风险，投资需谨慎。历史表现不代表未来收益。
+                数据来源：富途 OpenD · 港交所披露易 · akshare。StockAI 智能分析 <span
+                    style="background:rgba(139,92,246,0.3);padding:1px 6px;border-radius:10px;">v1.7</span>
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

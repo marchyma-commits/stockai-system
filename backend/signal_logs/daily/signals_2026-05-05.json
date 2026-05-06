@@ -1,0 +1,5928 @@
+{
+  "scan_date": "2026-05-05",
+  "scan_time": "17:09:31",
+  "total_stocks": 191,
+  "stocks": [
+    {
+      "code": "00001",
+      "date": "2026-05-05",
+      "price": 68.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "SELL",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00002",
+      "date": "2026-05-05",
+      "price": 75.3,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00003",
+      "date": "2026-05-05",
+      "price": 7.24,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00004",
+      "date": "2026-05-05",
+      "price": 25.34,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00005",
+      "date": "2026-05-05",
+      "price": 136.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00006",
+      "date": "2026-05-05",
+      "price": 65.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00012",
+      "date": "2026-05-05",
+      "price": 32.58,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00016",
+      "date": "2026-05-05",
+      "price": 138.6,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "BUY",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00017",
+      "date": "2026-05-05",
+      "price": 8.8,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00019",
+      "date": "2026-05-05",
+      "price": 85.65,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00020",
+      "date": "2026-05-05",
+      "price": 2.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00023",
+      "date": "2026-05-05",
+      "price": 13.53,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00027",
+      "date": "2026-05-05",
+      "price": 32.4,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00066",
+      "date": "2026-05-05",
+      "price": 33.88,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00083",
+      "date": "2026-05-05",
+      "price": 12.97,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "SELL",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00101",
+      "date": "2026-05-05",
+      "price": 9.29,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00107",
+      "date": "2026-05-05",
+      "price": 5.51,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00127",
+      "date": "2026-05-05",
+      "price": 1.25,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "SELL",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00135",
+      "date": "2026-05-05",
+      "price": 7.51,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00144",
+      "date": "2026-05-05",
+      "price": 15.65,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00151",
+      "date": "2026-05-05",
+      "price": 4.47,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "BUY",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00175",
+      "date": "2026-05-05",
+      "price": 23.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00241",
+      "date": "2026-05-05",
+      "price": 4.42,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00267",
+      "date": "2026-05-05",
+      "price": 12.94,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "SELL",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00268",
+      "date": "2026-05-05",
+      "price": 8.58,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00270",
+      "date": "2026-05-05",
+      "price": 8.13,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00285",
+      "date": "2026-05-05",
+      "price": 27.1,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "BUY",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00288",
+      "date": "2026-05-05",
+      "price": 9.57,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00291",
+      "date": "2026-05-05",
+      "price": 26.64,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00293",
+      "date": "2026-05-05",
+      "price": 11.73,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00297",
+      "date": "2026-05-05",
+      "price": 1.61,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00300",
+      "date": "2026-05-05",
+      "price": 86.65,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "SELL",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00322",
+      "date": "2026-05-05",
+      "price": 12.15,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00358",
+      "date": "2026-05-05",
+      "price": 36.62,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00386",
+      "date": "2026-05-05",
+      "price": 4.6,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00388",
+      "date": "2026-05-05",
+      "price": 418.2,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00390",
+      "date": "2026-05-05",
+      "price": 3.78,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00470",
+      "date": "2026-05-05",
+      "price": 52.25,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "SELL",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00512",
+      "date": "2026-05-05",
+      "price": 6.19,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00525",
+      "date": "2026-05-05",
+      "price": 2.39,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "SELL",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00598",
+      "date": "2026-05-05",
+      "price": 4.99,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "SELL",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00611",
+      "date": "2026-05-05",
+      "price": 0.51,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00631",
+      "date": "2026-05-05",
+      "price": 11.58,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00656",
+      "date": "2026-05-05",
+      "price": 4.14,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00669",
+      "date": "2026-05-05",
+      "price": 110.7,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00688",
+      "date": "2026-05-05",
+      "price": 13.99,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00700",
+      "date": "2026-05-05",
+      "price": 472.2,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00708",
+      "date": "2026-05-05",
+      "price": 0.17,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00725",
+      "date": "2026-05-05",
+      "price": 1.22,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "SELL",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "BUY",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00728",
+      "date": "2026-05-05",
+      "price": 5.13,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00762",
+      "date": "2026-05-05",
+      "price": 7.32,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00763",
+      "date": "2026-05-05",
+      "price": 26.08,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00772",
+      "date": "2026-05-05",
+      "price": 25.46,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00778",
+      "date": "2026-05-05",
+      "price": 4.99,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "SELL",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00780",
+      "date": "2026-05-05",
+      "price": 17.38,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00813",
+      "date": "2026-05-05",
+      "price": 0.161,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00817",
+      "date": "2026-05-05",
+      "price": 1.68,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "SELL",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00823",
+      "date": "2026-05-05",
+      "price": 39.98,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00836",
+      "date": "2026-05-05",
+      "price": 19.58,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00853",
+      "date": "2026-05-05",
+      "price": 8.61,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00857",
+      "date": "2026-05-05",
+      "price": 11.68,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00883",
+      "date": "2026-05-05",
+      "price": 28.56,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00902",
+      "date": "2026-05-05",
+      "price": 6.26,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "SELL",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00910",
+      "date": "2026-05-05",
+      "price": 0.014,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00916",
+      "date": "2026-05-05",
+      "price": 6.83,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00921",
+      "date": "2026-05-05",
+      "price": 22.9,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00924",
+      "date": "2026-05-05",
+      "price": 0.136,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00934",
+      "date": "2026-05-05",
+      "price": 4.04,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00939",
+      "date": "2026-05-05",
+      "price": 8.78,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00941",
+      "date": "2026-05-05",
+      "price": 83.85,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "SELL",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00951",
+      "date": "2026-05-05",
+      "price": 2.17,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "SELL",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00981",
+      "date": "2026-05-05",
+      "price": 70.8,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "SELL",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00992",
+      "date": "2026-05-05",
+      "price": 11.64,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "00998",
+      "date": "2026-05-05",
+      "price": 8.07,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01024",
+      "date": "2026-05-05",
+      "price": 44.18,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01038",
+      "date": "2026-05-05",
+      "price": 65.95,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "SELL",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01055",
+      "date": "2026-05-05",
+      "price": 4.07,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01088",
+      "date": "2026-05-05",
+      "price": 47.84,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01093",
+      "date": "2026-05-05",
+      "price": 8.4,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01109",
+      "date": "2026-05-05",
+      "price": 33.12,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01113",
+      "date": "2026-05-05",
+      "price": 49.8,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01160",
+      "date": "2026-05-05",
+      "price": 0.58,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01171",
+      "date": "2026-05-05",
+      "price": 16.11,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01177",
+      "date": "2026-05-05",
+      "price": 5.44,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01179",
+      "date": "2026-05-05",
+      "price": 38.02,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01186",
+      "date": "2026-05-05",
+      "price": 5.26,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01203",
+      "date": "2026-05-05",
+      "price": 0.7,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01211",
+      "date": "2026-05-05",
+      "price": 101.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "SELL",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01288",
+      "date": "2026-05-05",
+      "price": 5.87,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01299",
+      "date": "2026-05-05",
+      "price": 85.9,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01313",
+      "date": "2026-05-05",
+      "price": 1.32,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01317",
+      "date": "2026-05-05",
+      "price": 0.255,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01336",
+      "date": "2026-05-05",
+      "price": 51.05,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01339",
+      "date": "2026-05-05",
+      "price": 5.29,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "BUY",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01359",
+      "date": "2026-05-05",
+      "price": 1.13,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01375",
+      "date": "2026-05-05",
+      "price": 1.92,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01378",
+      "date": "2026-05-05",
+      "price": 33.12,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01398",
+      "date": "2026-05-05",
+      "price": 6.9,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01519",
+      "date": "2026-05-05",
+      "price": 9.86,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01618",
+      "date": "2026-05-05",
+      "price": 1.62,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01628",
+      "date": "2026-05-05",
+      "price": 0.156,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01658",
+      "date": "2026-05-05",
+      "price": 5.12,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01697",
+      "date": "2026-05-05",
+      "price": 0.315,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "BUY",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01766",
+      "date": "2026-05-05",
+      "price": 5.07,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01772",
+      "date": "2026-05-05",
+      "price": 86.5,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01797",
+      "date": "2026-05-05",
+      "price": 25.5,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01799",
+      "date": "2026-05-05",
+      "price": 6.34,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01800",
+      "date": "2026-05-05",
+      "price": 4.4,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01801",
+      "date": "2026-05-05",
+      "price": 92.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01810",
+      "date": "2026-05-05",
+      "price": 30.46,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01857",
+      "date": "2026-05-05",
+      "price": 1.42,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01876",
+      "date": "2026-05-05",
+      "price": 8.13,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01883",
+      "date": "2026-05-05",
+      "price": 2.81,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01888",
+      "date": "2026-05-05",
+      "price": 36.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "SELL",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01918",
+      "date": "2026-05-05",
+      "price": 1.16,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01919",
+      "date": "2026-05-05",
+      "price": 14.95,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01928",
+      "date": "2026-05-05",
+      "price": 15.92,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01972",
+      "date": "2026-05-05",
+      "price": 24.98,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "01997",
+      "date": "2026-05-05",
+      "price": 24.46,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02007",
+      "date": "2026-05-05",
+      "price": 0.27,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02008",
+      "date": "2026-05-05",
+      "price": 1.63,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "BUY",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02009",
+      "date": "2026-05-05",
+      "price": 0.75,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02013",
+      "date": "2026-05-05",
+      "price": 1.49,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02015",
+      "date": "2026-05-05",
+      "price": 69.65,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02018",
+      "date": "2026-05-05",
+      "price": 39.3,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "BUY",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02020",
+      "date": "2026-05-05",
+      "price": 78.2,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "BUY",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02057",
+      "date": "2026-05-05",
+      "price": 196.7,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02175",
+      "date": "2026-05-05",
+      "price": 3.29,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02196",
+      "date": "2026-05-05",
+      "price": 18.82,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02269",
+      "date": "2026-05-05",
+      "price": 33.84,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02313",
+      "date": "2026-05-05",
+      "price": 45.8,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "BUY",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02318",
+      "date": "2026-05-05",
+      "price": 63.5,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02319",
+      "date": "2026-05-05",
+      "price": 17.31,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02323",
+      "date": "2026-05-05",
+      "price": 0.019,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02328",
+      "date": "2026-05-05",
+      "price": 13.97,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02331",
+      "date": "2026-05-05",
+      "price": 19.5,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02333",
+      "date": "2026-05-05",
+      "price": 11.76,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02359",
+      "date": "2026-05-05",
+      "price": 137.3,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "BUY",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02382",
+      "date": "2026-05-05",
+      "price": 66.6,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "BUY",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02386",
+      "date": "2026-05-05",
+      "price": 6.31,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02388",
+      "date": "2026-05-05",
+      "price": 44.64,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02393",
+      "date": "2026-05-05",
+      "price": 0.085,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "SELL",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02588",
+      "date": "2026-05-05",
+      "price": 80.45,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02596",
+      "date": "2026-05-05",
+      "price": 2.64,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02601",
+      "date": "2026-05-05",
+      "price": 34.46,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02607",
+      "date": "2026-05-05",
+      "price": 12.19,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "SELL",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02618",
+      "date": "2026-05-05",
+      "price": 15.24,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02628",
+      "date": "2026-05-05",
+      "price": 29.12,
+      "signals": {
+        "ema_cross": {
+          "signal": "BUY",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02669",
+      "date": "2026-05-05",
+      "price": 3.97,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02678",
+      "date": "2026-05-05",
+      "price": 7.47,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "SELL",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02688",
+      "date": "2026-05-05",
+      "price": 61.15,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02693",
+      "date": "2026-05-05",
+      "price": 4.0,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02768",
+      "date": "2026-05-05",
+      "price": 47.58,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02798",
+      "date": "2026-05-05",
+      "price": 1.04,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02800",
+      "date": "2026-05-05",
+      "price": 26.02,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "SELL",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02828",
+      "date": "2026-05-05",
+      "price": 89.54,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02883",
+      "date": "2026-05-05",
+      "price": 9.46,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02898",
+      "date": "2026-05-05",
+      "price": 6.39,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "02899",
+      "date": "2026-05-05",
+      "price": 35.5,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03033",
+      "date": "2026-05-05",
+      "price": 4.818,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03319",
+      "date": "2026-05-05",
+      "price": 2.19,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03328",
+      "date": "2026-05-05",
+      "price": 7.18,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03339",
+      "date": "2026-05-05",
+      "price": 3.3,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03393",
+      "date": "2026-05-05",
+      "price": 27.14,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03606",
+      "date": "2026-05-05",
+      "price": 60.75,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03690",
+      "date": "2026-05-05",
+      "price": 83.55,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03692",
+      "date": "2026-05-05",
+      "price": 36.84,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03800",
+      "date": "2026-05-05",
+      "price": 0.89,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "BUY",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03883",
+      "date": "2026-05-05",
+      "price": 0.06,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03888",
+      "date": "2026-05-05",
+      "price": 22.72,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03968",
+      "date": "2026-05-05",
+      "price": 47.1,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03988",
+      "date": "2026-05-05",
+      "price": 5.05,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "03993",
+      "date": "2026-05-05",
+      "price": 18.24,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06055",
+      "date": "2026-05-05",
+      "price": 29.04,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06098",
+      "date": "2026-05-05",
+      "price": 6.28,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06108",
+      "date": "2026-05-05",
+      "price": 0.23,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "BUY",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "SELL",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "BUY",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06110",
+      "date": "2026-05-05",
+      "price": 2.86,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06160",
+      "date": "2026-05-05",
+      "price": 176.8,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06169",
+      "date": "2026-05-05",
+      "price": 0.425,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "SELL",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "SELL",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06178",
+      "date": "2026-05-05",
+      "price": 8.19,
+      "signals": {
+        "ema_cross": {
+          "signal": "BUY",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06186",
+      "date": "2026-05-05",
+      "price": 3.45,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06198",
+      "date": "2026-05-05",
+      "price": 7.7,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "SELL",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06199",
+      "date": "2026-05-05",
+      "price": 1.12,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06618",
+      "date": "2026-05-05",
+      "price": 45.68,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "BUY",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06639",
+      "date": "2026-05-05",
+      "price": 1.83,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06655",
+      "date": "2026-05-05",
+      "price": 16.21,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06680",
+      "date": "2026-05-05",
+      "price": 19.34,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06690",
+      "date": "2026-05-05",
+      "price": 21.4,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06698",
+      "date": "2026-05-05",
+      "price": 0.96,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06888",
+      "date": "2026-05-05",
+      "price": 0.129,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "BUY",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    },
+    {
+      "code": "06889",
+      "date": "2026-05-05",
+      "price": 3.31,
+      "signals": {
+        "ema_cross": {
+          "signal": "HOLD",
+          "strategy_name": "EMA Cross"
+        },
+        "macd": {
+          "signal": "HOLD",
+          "strategy_name": "MACD"
+        },
+        "rsi": {
+          "signal": "HOLD",
+          "strategy_name": "RSI"
+        },
+        "bollinger": {
+          "signal": "HOLD",
+          "strategy_name": "Bollinger Bands"
+        },
+        "volume_breakout": {
+          "signal": "HOLD",
+          "strategy_name": "Volume Breakout"
+        },
+        "composite": {
+          "signal": "HOLD",
+          "strategy_name": "Composite Score"
+        }
+      }
+    }
+  ]
+}
