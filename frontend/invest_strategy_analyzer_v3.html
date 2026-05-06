@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockAI 极速筛选系统 v3.0 - 去重 + 完整财务指标</title>
+    <style>
+        /* ==================== 内联样式 ==================== */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            padding: 10px 20px 20px;
+        }
+        
+        .container { max-width: 1600px; margin: 0 auto; }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .header h1 { font-size: 20px; color: #60a5fa; }
+        .header p { color: #9ca3af; font-size: 12px; margin-top: 2px; }
+        
+        .btn {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-blue { background: #3b82f6; color: white; }
+        .btn-blue:hover { background: #2563eb; }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        
+        /* 进度条 */
+        .progress-section { margin-bottom: 8px; display: none; }
+        .progress-bar-bg { background: #374151; border-radius: 999px; height: 8px; overflow: hidden; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, #3b82f6, #60a5fa); transition: width 0.3s; border-radius: 999px; }
+        .progress-text { text-align: center; color: #9ca3af; font-size: 12px; margin-top: 4px; }
+        
+        /* 筛选栏 */
+        .filters {
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 8px 12px;
+            margin-bottom: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: flex-end;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .filter-group { flex: 1; min-width: 120px; }
+        .filter-group label { display: block; font-size: 11px; color: #9ca3af; margin-bottom: 2px; }
+        
+        select, input {
+            width: 100%;
+            background: #374151;
+            border: 1px solid #4b5563;
+            border-radius: 6px;
+            padding: 5px 10px;
+            color: white;
+            font-size: 13px;
+        }
+        select:focus, input:focus { outline: none; border-color: #60a5fa; }
+        
+        /* 统计卡片 */
+        .stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 8px; }
+        .stat-card { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 8px 12px; text-align: center; border: 1px solid rgba(255,255,255,0.1); }
+        .stat-value { font-size: 22px; font-weight: bold; }
+        .stat-label { font-size: 11px; color: #9ca3af; margin-top: 2px; }
+        
+        /* 表格 */
+        .table-container { background: rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .table-scroll { max-height: calc(100vh - 210px); overflow-y: auto; }
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        
+        thead { background: #374151; position: sticky; top: 0; z-index: 10; }
+        th { padding: 8px 8px; text-align: left; font-size: 12px; font-weight: 600; color: #d1d5db; border-bottom: 1px solid #4b5563; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        th.sortable { cursor: pointer; }
+        th.sortable:hover { color: #60a5fa; }
+        th.right { text-align: right; }
+        th.center { text-align: center; }
+        
+        tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
+        tbody tr:hover { background: rgba(59, 130, 246, 0.1); }
+        tbody td { padding: 7px 8px; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        td.right { text-align: right; }
+        td.center { text-align: center; }
+        
+        .font-mono { font-family: 'Consolas', 'Monaco', monospace; }
+        .font-bold { font-weight: bold; }
+        .up { color: #f87171; }
+        .down { color: #34d399; }
+        .flat { color: #9ca3af; }
+        
+        /* 评级徽章 */
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .badge-a { background: #059669; color: white; }
+        .badge-a-sub { background: #10b981; color: white; }
+        .badge-b { background: #3b82f6; color: white; }
+        .badge-b-sub { background: #60a5fa; color: white; }
+        .badge-c { background: #d97706; color: white; }
+        .badge-d { background: #dc2626; color: white; }
+        .badge-n { background: #6b7280; color: #d1d5db; }
+        
+        .signal-badge { padding: 3px 8px; border-radius: 4px; font-size: 11px; }
+        .signal-buy { background: #059669; color: white; }
+        .signal-sell { background: #dc2626; color: white; }
+        .signal-hold { background: #6b7280; color: white; }
+        
+        .footer { text-align: center; margin-top: 8px; color: #6b7280; font-size: 12px; }
+
+        /* 导航栏 */
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(20px);
+            padding: 8px 0;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .navbar .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
+        .navbar-brand { font-size: 20px; font-weight: 700; color: #fff !important; text-decoration: none; }
+        .nav-links { display: flex; gap: 6px; }
+        .nav-link-custom {
+            color: rgba(148,163,184,0.8); text-decoration: none; padding: 7px 16px;
+            border-radius: 10px; transition: all 0.2s; font-size: 13px; font-weight: 500;
+        }
+        .nav-link-custom:hover { color: #fff; background: rgba(59,130,246,0.15); }
+        .nav-link-custom.active { color: #fff; background: rgba(59,130,246,0.2); }
+        
+        /* 弹窗 */
+        .modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 1000; }
+        .modal.show { display: flex; align-items: center; justify-content: center; }
+        .modal-content { background: #1e293b; border-radius: 16px; width: 90%; max-width: 800px; max-height: 90vh; overflow-y: auto; }
+        .modal-header { display: flex; justify-content: space-between; padding: 20px; border-bottom: 1px solid #374151; }
+        .modal-header h2 { color: #60a5fa; font-size: 20px; }
+        .modal-subtitle { color: #9ca3af; font-size: 14px; margin-top: 4px; }
+        .modal-close { background: none; border: none; color: #9ca3af; font-size: 28px; cursor: pointer; }
+        .modal-body { padding: 20px; }
+        .detail-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+        .detail-card { background: rgba(255,255,255,0.05); border-radius: 12px; padding: 16px; text-align: center; }
+        .detail-section { margin-bottom: 20px; }
+        .detail-section h3 { color: #60a5fa; font-size: 16px; margin-bottom: 12px; }
+        .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .detail-links { display: flex; gap: 12px; margin-top: 16px; }
+        .detail-links a { padding: 10px 20px; border-radius: 8px; text-decoration: none; color: white; font-weight: 500; }
+        .link-chart { background: #3b82f6; }
+        .link-fund { background: #10b981; }
+        
+        .empty-state { text-align: center; color: #9ca3af; padding: 40px; }
+        
+        /* 小数位标注 */
+        .decimals { font-size: 10px; color: #6b7280; }
+        
+        /* 体检清单样式 */
+        .health-badge { display: inline-flex; align-items: center; gap: 3px; padding: 3px 8px; border-radius: 12px; font-size: 12px; font-weight: bold; cursor: pointer; }
+        .health-pass { background: rgba(16,185,129,0.2); color: #34d399; }
+        .health-warn { background: rgba(251,191,36,0.2); color: #fbbf24; }
+        .health-fail { background: rgba(248,113,113,0.2); color: #f87171; }
+        .health-na { background: rgba(107,114,128,0.2); color: #9ca3af; }
+        .health-cell { text-align: center !important; }
+        .health-stat-card { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.2); }
+        .health-check-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .health-check-icon { font-size: 20px; width: 32px; text-align: center; flex-shrink: 0; }
+        .health-check-info { flex: 1; }
+        .health-check-name { font-size: 14px; color: #e0e0e0; }
+        .health-check-detail { font-size: 12px; color: #9ca3af; margin-top: 2px; }
+        .health-check-value { font-size: 16px; font-weight: bold; min-width: 80px; text-align: right; }
+        .health-check-status { font-size: 12px; padding: 2px 8px; border-radius: 4px; min-width: 48px; text-align: center; }
+        .health-status-pass { background: #059669; color: white; }
+        .health-status-warn { background: #d97706; color: white; }
+        .health-status-fail { background: #dc2626; color: white; }
+        .health-status-na { background: #4b5563; color: #9ca3af; }
+        .health-summary-bar { display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: rgba(255,255,255,0.05); border-radius: 8px; margin-bottom: 16px; }
+        .health-summary-score { font-size: 28px; font-weight: bold; }
+        .health-summary-grade { font-size: 18px; padding: 4px 12px; border-radius: 6px; }
+        
+        /* 指数标签 */
+        .index-tag { font-size: 10px; padding: 2px 4px; border-radius: 3px; margin-right: 2px; }
+        .index-hsi { background: #3b82f6; }
+        .index-hstech { background: #8b5cf6; }
+        .index-hscei { background: #f59e0b; }
+        .index-hscc { background: #10b981; }
+        .index-custom { background: #6b7280; }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-brand">
+                <i class="bi bi-graph-up-arrow" style="color: #fbbf24;"></i>
+                Stock<span style="color: #fbbf24;">AI</span> 智能分析
+                <span style="font-size:11px; background:rgba(139,92,246,0.3); padding:2px 8px; border-radius:20px; margin-left:8px;">v1.7</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link-custom" target="_blank"><i class="bi bi-bar-chart-line"></i> 行情</a>
+                <a href="paper_trading.html" class="nav-link-custom" target="_blank"><i class="bi bi-cash-stack"></i> 模拟交易</a>
+                <a href="tradingview.html" class="nav-link-custom" target="_blank"><i class="bi bi-graph-up"></i> TradingView</a>
+                <a href="invest_strategy_analyzer_v3.html" class="nav-link-custom active"><i class="bi bi-clipboard-data"></i> 策略分析</a>
+                <a href="index.html" class="nav-link-custom" target="_blank" style="color:#fbbf24;background:rgba(251,191,36,0.15);border:1px solid rgba(251,191,36,0.3);"><i class="bi bi-journal-text"></i> 每日報告</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header">
+            <div>
+                <h1>📊 StockAI 智能分析 <span style="font-size:14px;background:rgba(139,92,246,0.3);padding:2px 8px;border-radius:10px;vertical-align:middle;">v1.7</span> — 极速筛选系统</h1>
+                <p>港股综合评分 | 去重优化 | 完整财务指标</p>
+            </div>
+            <div style="display:flex;gap:10px">
+                <button class="btn btn-blue" id="btn-refresh" onclick="refreshData(false)">🔄 刷新数据</button>
+                <button class="btn" style="background:#7c3aed;color:white" id="btn-force-refresh" onclick="refreshData(true)">⚡ 强制全量刷新</button>
+                <button class="btn btn-blue" onclick="exportCSV()">📥 导出CSV</button>
+            </div>
+        </div>
+
+        <div class="progress-section" id="progress-section">
+            <div class="progress-bar-bg"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+            <div class="progress-text" id="progress-text">准备中...</div>
+        </div>
+
+        <!-- 筛选栏 -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>指数/板块</label>
+                <select id="filter-index" onchange="applyFilters()">
+                    <option value="all">全部 (去重后)</option>
+                    <option value="恒生指数">恒生指数</option>
+                    <option value="恒生科技">恒生科技</option>
+                    <option value="恒生国企">恒生国企</option>
+                    <option value="红筹指数">红筹指数</option>
+                    <option value="自选股">自选股</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>评级筛选</label>
+                <select id="filter-grade" onchange="applyFilters()">
+                    <option value="all">全部评级</option>
+                    <option value="A">A级 (80-100分)</option>
+                    <option value="B">B级 (60-80分)</option>
+                    <option value="C">C级 (40-60分)</option>
+                    <option value="D">D级 (0-40分)</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>排序方式</label>
+                <select id="sort-by" onchange="sortAndDisplay()">
+                    <option value="overallScore">综合评分</option>
+                    <option value="growthScore">成长性</option>
+                    <option value="profitScore">盈利能力</option>
+                    <option value="valuationScore">估值</option>
+                    <option value="dividendScore">股息</option>
+                    <option value="roe">ROE</option>
+                    <option value="pe">PE</option>
+                    <option value="dividendYield">股息率</option>
+                    <option value="totalShareholderReturn">股东总回报率</option>
+                    <option value="healthScore">🏥 体检评分</option>
+                    <option value="price">价格</option>
+                    <option value="code">代码</option>
+                </select>
+            </div>
+            <div class="filter-group" style="max-width:200px">
+                <label>显示数量</label>
+                <select id="display-count" onchange="sortAndDisplay()">
+                    <option value="50">Top 50</option>
+                    <option value="100">Top 100</option>
+                    <option value="200">Top 200</option>
+                    <option value="500">全部</option>
+                </select>
+            </div>
+            <div class="filter-group" style="max-width:200px">
+                <label>搜索</label>
+                <input type="text" id="search-input" placeholder="代码或名称" oninput="applyFilters()">
+            </div>
+            <div class="filter-group" style="max-width:180px">
+                <label>🏥 体检通过数</label>
+                <select id="filter-health" onchange="applyFilters()">
+                    <option value="all">全部</option>
+                    <option value="7">≥ 7 项通过</option>
+                    <option value="6">≥ 6 项通过</option>
+                    <option value="5">≥ 5 项通过</option>
+                    <option value="0">有不达标项</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- 统计卡片 -->
+        <div class="stats" style="grid-template-columns: repeat(6, 1fr);">
+            <div class="stat-card">
+                <div class="stat-value text-blue" id="stat-total">0</div>
+                <div class="stat-label">已加载</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color:#10b981" id="stat-a">0</div>
+                <div class="stat-label">A级</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color:#3b82f6" id="stat-b">0</div>
+                <div class="stat-label">B级</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value text-yellow" id="stat-avg">0</div>
+                <div class="stat-label">平均评分</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value text-green" id="stat-buy">0</div>
+                <div class="stat-label">强势买入</div>
+            </div>
+            <div class="stat-card health-stat-card">
+                <div class="stat-value" style="color:#34d399" id="stat-health">0</div>
+                <div class="stat-label">🏥 体检全通过</div>
+            </div>
+        </div>
+
+        <!-- 表格 -->
+        <div class="table-container">
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:40px">#</th>
+                            <th style="width:95px" class="sortable" onclick="toggleSort('code')">代码 ↕</th>
+                            <th style="width:100px">名称</th>
+                            <th style="width:85px" class="right">指数</th>
+                            <th style="width:75px" class="right sortable" onclick="toggleSort('price')">价格 ↕</th>
+                            <th style="width:70px" class="right sortable" onclick="toggleSort('overallScore')">总分 ↕</th>
+                            <th style="width:45px" class="center">评级</th>
+                            <th style="width:50px" class="center">信号</th>
+                            <th style="width:55px" class="right">ROE</th>
+                            <th style="width:50px" class="right">ROA</th>
+                            <th style="width:50px" class="right">PE</th>
+                            <th style="width:50px" class="right">PB</th>
+                            <th style="width:60px" class="right" title="实时股息率 = 每股派息 / 当前股价">股息率</th>
+                            <th style="width:70px" class="right" title="股息率 + 估算回购率">总回报率</th>
+                            <th style="width:55px" class="right">毛利率</th>
+                            <th style="width:55px" class="right">净利率</th>
+                            <th style="width:60px" class="right">资产负债率</th>
+                            <th style="width:80px" class="center sortable" onclick="toggleSort('healthScore')" title="长线投资体检清单 9 项核心指标">🏥 体检 ↕</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stock-tbody">
+                        <tr><td colspan="17" class="empty-state">点击「🔄 刷新数据」开始加载</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            数据来源: 富途 OpenD + 港交所披露易 | 缓存: localStorage (30分钟) | 去重后: <span id="stat-unique">0</span> 只
+            | StockAI 智能分析 <span style="background:rgba(139,92,246,0.3);padding:1px 6px;border-radius:10px;">v1.7</span>
+        </div>
+        <div style="text-align:center;margin-top:8px;color:#6b7280;font-size:11px;line-height:1.5;">
+            ⚠️ 免责声明：本系统所有分析结果仅供学习研究参考，不构成任何投资建议。股市有风险，投资需谨慎。历史表现不代表未来收益。
+        </div>
+    </div>
+
+    <!-- 股票详情弹窗 -->
+    <div id="stock-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+                    <h2 id="modal-title">股票详情</h2>
+                    <p id="modal-subtitle" class="modal-subtitle"></p>
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-content"></div>
+        </div>
+    </div>
+
+    <script>
+    // =============================================
+    // StockAI 极速筛选系统 v3.0
+    // 修复: 去重 + 财务指标 + 名称匹配 + K线图链接
+    // =============================================
+
+    const API_BASE = 'http://localhost:5000/api';
+    const CACHE_KEY = 'stockai_cache_v3';
+    const CACHE_EXPIRY = 30 * 60 * 1000;
+
+    // 解析百分比字符串（如 "1.04%" → 1.04）
+    function parsePercent(v) { if (!v) return 0; return parseFloat(String(v).replace('%', '')) || 0; }
+
+    let allStocksData = [];
+    let filteredData = [];
+    let sortField = 'overallScore';
+    let sortAsc = false;
+
+    // 指数名称映射 (匹配 watchlist.json 的 key)
+    const INDEX_NAMES = {
+        'hsi_top50': '恒生指数',      // 恒生指数前50只
+        'hscei': '恒生国企',          // 恒生中国企业指数
+        'hscc': '红筹指数',           // 恒生中资企业指数
+        'hstech_top30': '恒生科技',   // 恒生科技指数30只
+        'manual': '自选股'            // 用户手动添加
+    };
+
+    // 指数样式
+    const INDEX_CLASSES = {
+        'HSCC': 'index-hscc',
+        'HSI': 'index-hsi',
+        'HSTECH': 'index-hstech',
+        'HSCEI': 'index-hscei',
+        '自选': 'index-custom'
+    };
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadWatchlist();
+        initCache();  // 必须在 loadWatchlist 完成后执行，否则 allStocksData 为空
+    });
+
+    // =============================================
+    // 工具函数
+    // =============================================
+    function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+    async function fetchWithRetry(url, retries = 3, timeout = 12000) {
+        for (let i = 0; i <= retries; i++) {
+            try {
+                const resp = await fetch(url, { signal: AbortSignal.timeout(timeout) });
+                if (resp.ok) return await resp.json();
+                // 429/5xx 重试，指数退避 + jitter（借鉴 Claude Code SDK）
+                if (resp.status === 429 || resp.status >= 500) {
+                    const backoff = Math.min(500 * Math.pow(2, i), 8000);
+                    const jitter = 1 - Math.random() * 0.25; // 0.75~1.0
+                    await sleep(backoff * jitter);
+                    continue;
+                }
+                return null;
+            } catch (e) {
+                if (i === retries) { console.warn(`fetch failed after ${retries} retries: ${url}`); return null; }
+                const backoff = Math.min(500 * Math.pow(2, i), 8000);
+                const jitter = 1 - Math.random() * 0.25;
+                await sleep(backoff * jitter);
+            }
+        }
+        return null;
+    }
+
+    // =============================================
+    // 缓存管理
+    // =============================================
+    function initCache() {
+        try {
+            const cached = localStorage.getItem(CACHE_KEY);
+            if (cached) {
+                const { timestamp, data } = JSON.parse(cached);
+                const isExpired = Date.now() - timestamp >= CACHE_EXPIRY;
+                
+                if (data && data.length > 0) {
+                    data.forEach(cs => {
+                        const s = allStocksData.find(x => x.code === cs.code);
+                        if (s) Object.assign(s, cs);
+                    });
+                    applyFilters();
+                    
+                    const age = Math.round((Date.now() - timestamp) / 60000);
+                    if (isExpired) {
+                        console.log(`[Cache] 恢复了 ${data.length} 条过期缓存 (${age}分钟前)，显示为参考数据`);
+                    } else {
+                        console.log(`[Cache] 恢复了 ${data.length} 条有效缓存 (${age}分钟前)`);
+                    }
+                }
+            }
+        } catch (e) { console.warn('缓存加载失败:', e); }
+    }
+
+    function saveCache() {
+        try {
+            const toCache = allStocksData.filter(s => s.fundamental?.overallScore)
+                .map(s => ({
+                    code: s.code,
+                    name: s.name,
+                    indices: s.indices,
+                    fundamental: s.fundamental,
+                    price: s.price,
+                    change: s.change,
+                    changePercent: s.changePercent,
+                    technical: s.technical
+                }));
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ timestamp: Date.now(), data: toCache }));
+        } catch (e) { console.warn('缓存保存失败'); }
+    }
+
+    // =============================================
+    // 加载股票列表
+    // watchlist.json 格式: { "stocks": [...], "hsi_top50": {...}, "hscei": {...}, ... }
+    // 优先使用指数分组数据
+    // =============================================
+    async function loadWatchlist() {
+        try {
+            // 先尝试服务端路由，再 fallback 到相对路径
+            let data = null;
+            for (const url of ['/watchlist.json', './watchlist.json']) {
+                try {
+                    const resp = await fetch(url, { cache: 'no-cache' });
+                    if (resp.ok) { data = await resp.json(); break; }
+                } catch (e) { /* try next */ }
+            }
+            if (!data) throw new Error('watchlist 加载失败');
+            
+            // 🔧 修复: 指数分组 + stocks 数组合并，确保不遗漏
+            // 指数分组的 key: hsi_top50, hscei, hscc, hstech_top30, manual
+            const indexKeys = ['hsi_top50', 'hscei', 'hscc', 'hstech_top30', 'manual'];
+            const seen = new Map();
+            
+            // 第一步：从指数分组加载（带指数标签）
+            for (const key of indexKeys) {
+                const group = data[key];
+                if (!group?.components?.length) continue;
+                
+                const indexName = INDEX_NAMES[key] || key.toUpperCase();
+                
+                group.components.forEach(item => {
+                    const rawCode = typeof item === 'string' ? item : (item.code || item.symbol || '');
+                    const code = rawCode.replace(/\.HK$/i, '');
+                    const name = typeof item === 'string' ? '' : (item.name || item.stock_name || '');
+                    if (!code) return;
+
+                    if (!seen.has(code)) {
+                        seen.set(code, {
+                            code: code,
+                            rawCode: rawCode,
+                            name: name,
+                            indices: [indexName],
+                            fundamental: null,
+                            price: null,
+                            changePercent: 0,
+                            technical: null
+                        });
+                    } else {
+                        const existing = seen.get(code);
+                        if (!existing.indices.includes(indexName)) {
+                            existing.indices.push(indexName);
+                        }
+                    }
+                });
+            }
+            
+            // 第二步：从 stocks 数组补入不在分组里的股票
+            const stocksArr = data.stocks || (Array.isArray(data) ? data : []);
+            stocksArr.forEach(item => {
+                const raw = typeof item === 'string' ? item : (item.code || item.symbol || '');
+                const code = raw.replace(/\.HK$/i, '');
+                const name = typeof item === 'string' ? '' : (item.name || item.stock_name || '');
+                if (!code || seen.has(code)) return;
+                seen.set(code, {
+                    code: code,
+                    rawCode: raw,
+                    name: name,
+                    indices: ['自选股'],
+                    fundamental: null,
+                    price: null,
+                    changePercent: 0,
+                    technical: null
+                });
+            });
+            
+            allStocksData = Array.from(seen.values());
+            console.log(`✅ 合并加载: ${allStocksData.length} 只股票（指数分组 + stocks 补充）`);
+            
+            if (allStocksData.length === 0) {
+                console.error('❌ 无法解析 watchlist.json');
+            }
+            
+            document.getElementById('stat-unique').textContent = allStocksData.length;
+            
+            // 初始化 filteredData 并显示
+            filteredData = [...allStocksData];
+            applyFilters();
+            
+        } catch (e) {
+            console.error('加载watchlist失败:', e);
+            allStocksData = [];
+            filteredData = [];
+        }
+        updateStats();
+    }
+
+    // =============================================
+    // 批量获取数据
+    // forceRefresh=false: 跳过有财务数据且有价格的股票（普通刷新）
+    // forceRefresh=true : 强制重新加载全部（全量刷新）
+    // =============================================
+    async function refreshData(forceRefresh = false) {
+        if (allStocksData.length === 0) {
+            console.warn('[refreshData] allStocksData 为空，先加载 watchlist');
+            await loadWatchlist();
+        }
+
+        const btn = document.getElementById('btn-refresh');
+        const btnForce = document.getElementById('btn-force-refresh');
+        btn.disabled = true;
+        btnForce.disabled = true;
+        btn.textContent = '⏳ 加载中...';
+        document.getElementById('progress-section').style.display = 'block';
+
+        try {
+            // 决定哪些股票需要加载
+            let needLoad;
+            if (forceRefresh) {
+                // 强制全量：清空所有 fundamental/price，重新加载全部
+                allStocksData.forEach(s => {
+                    s.fundamental = null;
+                    s.price = null;
+                    s.changePercent = 0;
+                    s.technical = null;
+                    s.healthCheck = null;
+                    s.price_available = undefined;
+                });
+                needLoad = [...allStocksData];
+                console.log(`[ForceRefresh] 强制重新加载全部 ${needLoad.length} 只股票`);
+            } else {
+                // 智能跳过：有财务评分且有有效价格才跳过
+                needLoad = allStocksData.filter(s => {
+                    if (!s.fundamental?.overallScore) return true;  // 没有财务数据
+                    if (!s.price || s.price <= 0) return true;      // 没有价格
+                    return false;
+                });
+                const skipCount = allStocksData.length - needLoad.length;
+                console.log(`[SmartRefresh] 跳过 ${skipCount} 只有缓存数据，实际加载 ${needLoad.length} 只`);
+            }
+
+            const batchSize = 4;    // 单批并发 4（富途 OpenD 上限保守估计）
+            const total = needLoad.length;
+
+            if (total === 0) {
+                updateProgress(100, '✅ 全部数据已是最新，无需更新（如需强制刷新请点「⚡ 强制全量刷新」）');
+                setTimeout(() => { document.getElementById('progress-section').style.display = 'none'; }, 4000);
+                return;
+            }
+
+            let successCount = 0;
+            let failCount = 0;
+
+            for (let i = 0; i < total; i += batchSize) {
+                const batch = needLoad.slice(i, i + batchSize);
+                const results = await Promise.allSettled(batch.map(s => loadStockData(s)));
+                results.forEach(r => {
+                    if (r.status === 'fulfilled' && r.value) successCount++;
+                    else failCount++;
+                });
+
+                const done = Math.min(i + batchSize, total);
+                updateProgress(
+                    Math.round(done / total * 100),
+                    `加载 ${done}/${total}，成功 ${successCount} 失败 ${failCount}`
+                );
+                sortAndDisplay();
+
+                // 批次间延时，避免富途 OpenD 过载（借鉴 Claude Code backoff 策略）
+                if (i + batchSize < total) {
+                    await sleep(800);
+                }
+            }
+
+            console.log(`[RefreshData] 完成: 成功=${successCount}, 失败=${failCount}, 跳过=${allStocksData.length - total}`);
+            updateProgress(100, `✅ 完成! 成功 ${successCount} / ${total}，失败 ${failCount}`);
+            saveCache();
+
+            // 延迟 2s 再加载体检（等富途负载降下来）
+            setTimeout(() => loadHealthChecks(), 2000);
+            setTimeout(() => { document.getElementById('progress-section').style.display = 'none'; }, 5000);
+
+        } catch (e) {
+            console.error('refreshData error:', e);
+            alert('加载失败，请检查 Flask 服务是否运行');
+        } finally {
+            btn.disabled = false;
+            btnForce.disabled = false;
+            btn.textContent = '🔄 刷新数据';
+        }
+    }
+
+    async function loadStockData(stock) {
+        try {
+            // 二路并行: 基本面(含价格) + 技术指标
+            // 去掉单独的 price 请求 —— fundamental API 内部已调富途 get_price，返回 realtime_price
+            const [fResult, tResult] = await Promise.allSettled([
+                fetchWithRetry(`${API_BASE}/fundamental/${stock.code}`),
+                fetchWithRetry(`${API_BASE}/indicators/${stock.code}`)
+            ]);
+
+            // ========== 修复5: 前后台数据函数匹配 ==========
+            if (fResult.status === 'fulfilled' && fResult.value?.success) {
+                const d = fResult.value.data;
+                
+                // 🔧 从API获取股票名称（优先富途简称，回退到财报全称）
+                stock.name = d.stock_name || d.company_name || stock.name;
+
+                // 提取评分 (修复: 字段路径)
+                stock.fundamental = {
+                    // 综合评分
+                    overallScore: d.overall?.score || 0,
+                    overallGrade: d.overall?.grade || 'N',
+                    
+                    // 各维度评分
+                    growthScore: d.growth?.score || 0,
+                    profitScore: d.profitability?.score || 0,
+                    valuationScore: d.valuation?.score || 0,
+                    dividendScore: d.dividend?.score || 0,
+                    healthScore: d.financial_health?.score || 0,
+                    
+                    // 🔧 修复4: 完整财务指标 (从details提取)
+                    details: d.profitability?.details || {},
+                    
+                    // 盈利能力
+                    roe: parseFloat(d.profitability?.details?.ROE) || 0,
+                    roa: parseFloat(d.profitability?.details?.ROA) || 0,
+                    grossMargin: parseFloat(d.profitability?.details?.毛利率) || 0,
+                    netMargin: parseFloat(d.profitability?.details?.净利率) || 0,
+                    
+                    // 估值
+                    pe: d.valuation?.futu_pe || parseFloat(d.valuation?.details?.PE) || 0,
+                    pb: d.valuation?.futu_pb || parseFloat(d.valuation?.details?.PB) || 0,
+                    
+                    // 股息 (中文键名匹配后端 fundamental_analyzer.py)
+                    // 优先使用实时计算的股息率，回退到财报静态值
+                    dividendYield: parsePercent(d.dividend?.details?.['股息率_实时'] || d.dividend?.details?.['股息率']) || 0,
+                    payoutRatio: parsePercent(d.dividend?.details?.['派息率']) || 0,
+                    // 股东总回报率
+                    totalShareholderReturn: parsePercent(d.dividend?.details?.['股东总回报率']) || 0,
+                    estimatedBuyback: parsePercent(d.dividend?.details?.['估算回购率']) || 0,
+                    
+                    // 财务健康
+                    debtRatio: parseFloat(d.financial_health?.details?.资产负债率) || 0,
+                    currentRatio: parseFloat(d.financial_health?.details?.流动比率) || 0,
+                    quickRatio: parseFloat(d.financial_health?.details?.速动比率) || 0,
+                    
+                    // 其他指标
+                    revenueGrowth: parseFloat(d.growth?.details?.revenue_growth) || 0,
+                    profitGrowth: parseFloat(d.growth?.details?.profit_growth) || 0,
+                };
+
+                // 从 fundamental 返回的 realtime_price 取价格（避免重复请求富途）
+                if (d.realtime_price) {
+                    if (d.realtime_price.price_available !== false && d.realtime_price.price > 0) {
+                        // 富途实时价格可用
+                        stock.price = d.realtime_price.price;
+                        stock.change = d.realtime_price.change || 0;
+                        stock.changePercent = d.realtime_price.change_percent || 0;
+                    } else {
+                        // 富途不可用 → 从 localStorage 缓存取旧价格作为 fallback
+                        stock.price = stock.price || 0; // 保留现有缓存值
+                        stock.price_available = false;
+                        console.log(`[PriceFallback] ${stock.code}: 富途不可用，使用缓存价格 ${stock.price || '(无)'}`);
+                    }
+                } else if (d.overall?.realtime_price) {
+                    // 兼容旧格式
+                    stock.price = d.overall.realtime_price || 0;
+                }
+            } else if (fResult.status === 'rejected' || (fResult.status === 'fulfilled' && !fResult.value?.success)) {
+                // 基本面数据加载失败
+                const fError = fResult.status === 'fulfilled' ? fResult.value : {};
+                if (fError.no_financial_data) {
+                    // REIT/ETF/基金类股票，无财务指标数据
+                    stock.no_financial_data = true;
+                    stock.name = fError.stock_name || stock.name;
+                    console.log(`[NoData] ${stock.code}: REIT/ETF/基金类，无财务指标数据`);
+                } else {
+                    console.warn(`基本面数据加载失败: ${stock.code}`);
+                }
+            }
+
+            // 技术信号 — 从 signal_summary 取计数（recommendations 是字符串数组，不能 .type）
+            if (tResult.status === 'fulfilled' && tResult.value?.success && tResult.value?.data?.success) {
+                const tData = tResult.value.data;
+                const sigSummary = tData.signals?.signal_summary || {};
+                const sigRecs = tData.signals?.recommendations || [];
+                stock.technical = {
+                    bullishCount: sigSummary.bullish_signals || 0,
+                    bearishCount: sigSummary.bearish_signals || 0,
+                    neutralCount: sigSummary.neutral_signals || 0,
+                    overall: tData.signals?.overall || 'HOLD',
+                    recommendations: sigRecs
+                };
+            }
+            return !!(stock.fundamental?.overallScore);
+        } catch (e) { console.warn(`加载 ${stock.code} 失败:`, e); return false; }
+    }
+
+    // =============================================
+    // 筛选和排序 (修复6: 指数筛选)
+    // =============================================
+    function applyFilters() {
+        const currentIndex = document.getElementById('filter-index').value;
+        const currentGrade = document.getElementById('filter-grade').value;
+        const searchTerm = document.getElementById('search-input').value.toLowerCase();
+        const healthFilter = document.getElementById('filter-health').value;
+
+        filteredData = allStocksData.filter(s => {
+            // 🔧 修复6: 指数筛选 (检查indices数组)
+            if (currentIndex !== 'all' && !s.indices.includes(currentIndex)) return false;
+            
+            // 评级筛选 — A 类: A+/A/A-, B 类: B+/B/B-, C 类: C+/C/C-, D 类: D+/D/D-
+            if (currentGrade !== 'all') {
+                const g = s.fundamental?.overallGrade;
+                if (currentGrade === 'A' && !['A+','A','A-'].includes(g)) return false;
+                if (currentGrade === 'B' && !['A+','A','A-','B+','B','B-'].includes(g)) return false;
+                if (currentGrade === 'C' && !['A+','A','A-','B+','B','B-','C+','C','C-'].includes(g)) return false;
+                if (currentGrade === 'D' && !['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-'].includes(g)) return false;
+            }
+            
+            // 搜索筛选
+            if (searchTerm && !s.code.toLowerCase().includes(searchTerm) && 
+                !(s.name || '').toLowerCase().includes(searchTerm)) return false;
+            
+            // 体检筛选
+            if (healthFilter !== 'all') {
+                const hc = s.healthCheck;
+                if (!hc) return false;
+                const threshold = parseInt(healthFilter);
+                if (threshold === 0) {
+                    // 有不达标项
+                    if (hc.fail_count === 0 && hc.score >= hc.effective_total) return false;
+                } else {
+                    if (hc.score < threshold) return false;
+                }
+            }
+            
+            return true;
+        });
+
+        sortAndDisplay();
+        updateStats();
+    }
+
+    function sortAndDisplay() {
+        sortField = document.getElementById('sort-by').value;
+        const limit = parseInt(document.getElementById('display-count').value);
+
+        filteredData.sort((a, b) => {
+            // 有数据的排前面
+            const aHasData = a.fundamental?.overallScore > 0;
+            const bHasData = b.fundamental?.overallScore > 0;
+            if (aHasData !== bHasData) return aHasData ? -1 : 1;
+
+            // 排序
+            let aVal, bVal;
+            const fA = a.fundamental || {};
+            const fB = b.fundamental || {};
+
+            switch (sortField) {
+                case 'overallScore': aVal = fA.overallScore || 0; bVal = fB.overallScore || 0; break;
+                case 'growthScore': aVal = fA.growthScore || 0; bVal = fB.growthScore || 0; break;
+                case 'profitScore': aVal = fA.profitScore || 0; bVal = fB.profitScore || 0; break;
+                case 'valuationScore': aVal = fA.valuationScore || 0; bVal = fB.valuationScore || 0; break;
+                case 'dividendScore': aVal = fA.dividendScore || 0; bVal = fB.dividendScore || 0; break;
+                case 'roe': aVal = fA.roe || 0; bVal = fB.roe || 0; break;
+                case 'pe': aVal = fA.pe || 0; bVal = fB.pe || 0; break;
+                case 'dividendYield': aVal = fA.dividendYield || 0; bVal = fB.dividendYield || 0; break;
+                case 'totalShareholderReturn': aVal = fA.totalShareholderReturn || 0; bVal = fB.totalShareholderReturn || 0; break;
+                case 'price': aVal = a.price || 0; bVal = b.price || 0; break;
+                case 'healthScore': aVal = a.healthCheck?.score || 0; bVal = b.healthCheck?.score || 0; break;
+                case 'code': aVal = a.code || ''; bVal = b.code || ''; return sortAsc ? aVal.localeCompare(bVal) : bVal.localeCompare(aVal);
+                default: aVal = fA.overallScore || 0; bVal = fB.overallScore || 0;
+            }
+
+            return sortAsc ? aVal - bVal : bVal - aVal;
+        });
+
+        renderTable(filteredData.slice(0, limit));
+    }
+
+    function toggleSort(field) {
+        if (sortField === field) sortAsc = !sortAsc;
+        else { sortAsc = false; }
+        sortField = field;
+        document.getElementById('sort-by').value = field;
+        sortAndDisplay();
+    }
+
+    // =============================================
+    // 渲染表格 (修复2: 4位小数)
+    // =============================================
+    function renderTable(stocks) {
+        const tbody = document.getElementById('stock-tbody');
+
+        if (!stocks.length) {
+            tbody.innerHTML = '<tr><td colspan="18" class="empty-state">暂无数据，请点击「刷新数据」</td></tr>';
+            return;
+        }
+
+        tbody.innerHTML = stocks.map((s, i) => {
+            const f = s.fundamental || {};
+            const t = s.technical || {};
+            const chg = s.changePercent || 0;
+            const chgClass = chg > 0 ? 'up' : chg < 0 ? 'down' : 'flat';
+            const isNFD = s.no_financial_data; // REIT/ETF/基金类无财务数据
+            // 评级 badge 样式：A+/A 绿色，A- 浅绿；B+ 蓝色，B 蓝灰，B- 橙灰；C 橙；D 红
+            const gradeClassMap = { 'A+': 'badge-a', 'A': 'badge-a', 'A-': 'badge-a-sub', 'B+': 'badge-b', 'B': 'badge-b', 'B-': 'badge-b-sub', 'C': 'badge-c', 'C+': 'badge-c', 'C-': 'badge-c', 'D': 'badge-d', 'D+': 'badge-d', 'D-': 'badge-d' };
+            const badgeClass = gradeClassMap[f.overallGrade] || 'badge-n';
+            
+            // 信号：优先用后端 overall 判断，否则前端兜底
+            const overallMap = { 'STRONG_BUY': ['signal-buy', '强势'], 'BUY': ['signal-buy', '买入'], 'HOLD': ['signal-hold', '观望'], 'SELL': ['signal-sell', '卖出'], 'STRONG_SELL': ['signal-sell', '弱势'] };
+            const [signalClass, signalText] = overallMap[t.overall] || (() => {
+                // 兜底：按数量比
+                if (t.bullishCount > t.bearishCount + 2) return ['signal-buy', '强势'];
+                if (t.bullishCount > t.bearishCount) return ['signal-buy', '买入'];
+                if (t.bearishCount > t.bullishCount) return ['signal-sell', '卖出'];
+                return ['signal-hold', '观望'];
+            })();
+
+            // 🔧 修复4: 指数标签
+            const indexTags = s.indices.map(idx => 
+                `<span class="index-tag ${INDEX_CLASSES[idx] || ''}">${idx}</span>`
+            ).join('');
+
+            // 🔧 修复2: 4位小数
+            const fmt4 = v => v > 0 ? v.toFixed(4) : '--';
+            const fmt2 = v => v > 0 ? v.toFixed(2) : '--';
+
+            return `<tr onclick="showDetail('${s.code}')" style="cursor:pointer">
+                <td style="color:#9ca3af">${i+1}</td>
+                <td class="font-mono">${s.code}</td>
+                <td title="${s.name}">${s.name || '--'}</td>
+                <td>${indexTags}</td>
+                <td class="right ${chgClass}">${s.price ? s.price.toFixed(2) + (s.price_available === false ? '<span style="color:#9ca3af;font-size:10px"> 旧</span>' : '') : '--'}</td>
+                <td class="right font-bold" style="color:${isNFD?'#9ca3af':f.overallScore>=80?'#34d399':f.overallScore>=60?'#60a5fa':f.overallScore>=40?'#fbbf24':'#f87171'}">${isNFD ? '<span style="font-size:11px;color:#9ca3af">N/A</span>' : fmt4(f.overallScore)}</td>
+                <td class="center">${isNFD ? '<span style="font-size:10px;color:#9ca3af">基金</span>' : `<span class="badge ${badgeClass}">${f.overallGrade || 'N'}</span>`}</td>
+                <td class="center"><span class="signal-badge ${signalClass}">${signalText}</span></td>
+                <td class="right" style="color:${f.roe>15?'#34d399':f.roe>0?'#fbbf24':'#f87171'}">${f.roe ? f.roe.toFixed(2)+'%' : '--'}</td>
+                <td class="right">${f.roa ? f.roa.toFixed(2)+'%' : '--'}</td>
+                <td class="right" style="color:${(!f.pe||f.pe<=0)?'#9ca3af':f.pe<15?'#34d399':f.pe<25?'#60a5fa':'#f87171'}">${f.pe ? f.pe.toFixed(2) : '--'}</td>
+                <td class="right">${f.pb ? f.pb.toFixed(2) : '--'}</td>
+                <td class="right" style="color:${f.dividendYield>5?'#34d399':''}">${f.dividendYield ? f.dividendYield.toFixed(2)+'%' : '--'}</td>
+                <td class="right" style="color:${f.totalShareholderReturn>5?'#fbbf24':''}">${f.totalShareholderReturn ? f.totalShareholderReturn.toFixed(2)+'%' : '--'}</td>
+                <td class="right">${f.grossMargin ? f.grossMargin.toFixed(2)+'%' : '--'}</td>
+                <td class="right">${f.netMargin ? f.netMargin.toFixed(2)+'%' : '--'}</td>
+                <td class="right">${f.debtRatio ? f.debtRatio.toFixed(2)+'%' : '--'}</td>
+                <td class="health-cell" onclick="event.stopPropagation(); ${isNFD ? '' : `showHealthDetail('${s.code}')`}">${isNFD ? '<span style="color:#9ca3af;font-size:10px">不适用</span>' : renderHealthBadge(s)}</td>
+            </tr>`;
+        }).join('');
+    }
+
+    // =============================================
+    // 详情弹窗 (修复7: K线图链接)
+    // =============================================
+    function showDetail(code) {
+        const s = allStocksData.find(x => x.code === code);
+        if (!s) return;
+        const f = s.fundamental || {};
+        const t = s.technical || {};
+
+        document.getElementById('modal-title').textContent = `${s.name || ''} (${s.code})`;
+        document.getElementById('modal-subtitle').textContent = `评分: ${f.overallScore ? f.overallScore.toFixed(4) : '--'} | 评级: ${f.overallGrade || 'N'}`;
+
+        // 详细财务指标
+        const fmt = (v, dec = 2) => v > 0 ? v.toFixed(dec) : '--';
+        const parsePercent = (v) => { if (!v) return 0; return parseFloat(String(v).replace('%', '')) || 0; };
+        
+        document.getElementById('modal-content').innerHTML = `
+            <div class="detail-grid">
+                <div class="detail-card"><div style="font-size:24px;color:#34d399">${fmt(f.growthScore, 4)}</div><div style="font-size:12px;color:#9ca3af">成长性</div></div>
+                <div class="detail-card"><div style="font-size:24px;color:#60a5fa">${fmt(f.profitScore, 4)}</div><div style="font-size:12px;color:#9ca3af">盈利能力</div></div>
+                <div class="detail-card"><div style="font-size:24px;color:#fbbf24">${fmt(f.valuationScore, 4)}</div><div style="font-size:12px;color:#9ca3af">估值</div></div>
+                <div class="detail-card"><div style="font-size:24px;color:#a78bfa">${fmt(f.dividendScore, 4)}</div><div style="font-size:12px;color:#9ca3af">股息</div></div>
+            </div>
+            <div class="detail-section">
+                <h3>📊 盈利能力</h3>
+                <div class="detail-row"><span>ROE (净资产收益率)</span><span>${f.roe ? f.roe.toFixed(2)+'%' : '--'}</span></div>
+                <div class="detail-row"><span>ROA (资产收益率)</span><span>${f.roa ? f.roa.toFixed(2)+'%' : '--'}</span></div>
+                <div class="detail-row"><span>毛利率</span><span>${f.grossMargin ? f.grossMargin.toFixed(2)+'%' : '--'}</span></div>
+                <div class="detail-row"><span>净利率</span><span>${f.netMargin ? f.netMargin.toFixed(2)+'%' : '--'}</span></div>
+            </div>
+            <div class="detail-section">
+                <h3>💰 估值指标</h3>
+                <div class="detail-row"><span>PE (市盈率)</span><span>${fmt(f.pe)}</span></div>
+                <div class="detail-row"><span>PB (市净率)</span><span>${fmt(f.pb)}</span></div>
+                <div class="detail-row"><span>股息率</span><span>${f.dividendYield ? f.dividendYield.toFixed(2)+'%' : '--'}</span></div>
+                <div class="detail-row"><span>派息率</span><span>${f.payoutRatio ? f.payoutRatio.toFixed(2)+'%' : '--'}</span></div>
+                ${f.totalShareholderReturn ? `<div class="detail-row" style="border-top:1px solid #333;padding-top:8px;margin-top:4px"><span style="color:#fbbf24">📊 股东总回报率</span><span style="color:#fbbf24;font-weight:bold">${f.totalShareholderReturn.toFixed(2)}%</span></div>` : ''}
+                ${f.estimatedBuyback ? `<div class="detail-row"><span style="padding-left:16px;color:#9ca3af">  ↳ 估算回购率</span><span>${f.estimatedBuyback.toFixed(2)}%</span></div>` : ''}
+            </div>
+            <div class="detail-section">
+                <h3>🏥 财务健康</h3>
+                <div class="detail-row"><span>资产负债率</span><span>${f.debtRatio ? f.debtRatio.toFixed(2)+'%' : '--'}</span></div>
+                <div class="detail-row"><span>流动比率</span><span>${f.currentRatio ? f.currentRatio.toFixed(2) : '--'}</span></div>
+                <div class="detail-row"><span>速动比率</span><span>${f.quickRatio ? f.quickRatio.toFixed(2) : '--'}</span></div>
+            </div>
+            <div class="detail-section">
+                <h3>📈 技术信号</h3>
+                <div class="detail-row"><span>信号</span><span>${t.action || 'N/A'}</span></div>
+                <div class="detail-row"><span>买入信号</span><span style="color:#34d399">${t.bullishCount || 0} 个</span></div>
+                <div class="detail-row"><span>卖出信号</span><span style="color:#f87171">${t.bearishCount || 0} 个</span></div>
+            </div>
+            <div class="detail-section">
+                <h3>🏥 长线体检清单</h3>
+                <div id="modal-health-inline">${s.healthCheck ? renderHealthDetailHTML(s.healthCheck) : '<span style="color:#9ca3af">点击表格「🏥 体检」列查看详细体检报告</span>'}</div>
+            </div>
+            <div class="detail-section">
+                <h3>🔗 跳转链接</h3>
+                <div class="detail-links">
+                    <a href="http://localhost:5000/?code=${code}" target="_blank" class="link-chart">📊 K线图/长线分析</a>
+                    <a href="http://localhost:5000/?q=${code}" target="_blank" class="link-fund">🔍 直接搜索</a>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('stock-modal').classList.add('show');
+    }
+
+    function closeModal() { document.getElementById('stock-modal').classList.remove('show'); }
+
+    document.getElementById('stock-modal').addEventListener('click', e => {
+        if (e.target.id === 'stock-modal') closeModal();
+    });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // =============================================
+    // 工具函数
+    // =============================================
+    function updateStats() {
+        const loaded = allStocksData.filter(s => s.fundamental?.overallScore > 0);
+        document.getElementById('stat-total').textContent = loaded.length;
+        document.getElementById('stat-a').textContent = loaded.filter(s => ['A+','A','A-'].includes(s.fundamental.overallGrade)).length;
+        document.getElementById('stat-b').textContent = loaded.filter(s => ['B+','B','B-'].includes(s.fundamental.overallGrade)).length;
+        const avg = loaded.length ? (loaded.reduce((sum, s) => sum + (s.fundamental.overallScore||0), 0) / loaded.length) : 0;
+        document.getElementById('stat-avg').textContent = avg.toFixed(1);
+        document.getElementById('stat-buy').textContent = loaded.filter(s => (s.technical?.bullishCount||0) > (s.technical?.bearishCount||0) + 2).length;
+        document.getElementById('stat-unique').textContent = allStocksData.length;
+        // 体检全通过数
+        const healthAll = allStocksData.filter(s => s.healthCheck && s.healthCheck.score >= s.healthCheck.effective_total);
+        document.getElementById('stat-health').textContent = healthAll.length;
+    }
+
+    function updateProgress(pct, text) {
+        document.getElementById('progress-bar').style.width = pct + '%';
+        document.getElementById('progress-text').textContent = text;
+    }
+
+    // =============================================
+    // 长线投资体检清单
+    // =============================================
+    function renderHealthBadge(stock) {
+        const hc = stock.healthCheck;
+        if (!hc) return '<span style="color:#6b7280">--</span>';
+        const passCount = hc.score;
+        const totalCount = hc.effective_total || hc.total;
+        const failCount = hc.fail_count || 0;
+        let cls = 'health-na';
+        if (passCount === totalCount && failCount === 0) cls = 'health-pass';
+        else if (failCount === 0) cls = 'health-pass';
+        else if (passCount >= totalCount * 0.6) cls = 'health-warn';
+        else cls = 'health-fail';
+        return `<span class="health-badge ${cls}" title="${hc.summary}" onclick="event.stopPropagation(); showHealthDetail('${stock.code}')">${passCount}/${totalCount} ${hc.grade_emoji || ''}</span>`;
+    }
+
+    function renderHealthDetailHTML(hc) {
+        if (!hc || !hc.checks) return '';
+        const statusMap = { pass: '通过', warn: '警告', fail: '不达标', na: '暂无' };
+        const statusCls = { pass: 'health-status-pass', warn: 'health-status-warn', fail: 'health-status-fail', na: 'health-status-na' };
+        const gradeColors = { 'A+': '#34d399', 'A': '#60a5fa', 'B+': '#a78bfa', 'B': '#fbbf24', 'C+': '#fb923c', 'C': '#f87171', 'D': '#dc2626' };
+        return `
+            <div class="health-summary-bar">
+                <div class="health-summary-score" style="color:${gradeColors[hc.grade] || '#9ca3af'}">${hc.score}/${hc.effective_total}</div>
+                <div class="health-summary-grade" style="background:${gradeColors[hc.grade] || '#4b5563'}; color:white">${hc.grade}</div>
+                <div style="color:#9ca3af; font-size:13px">${hc.warn_count} 警告 · ${hc.fail_count} 不达标 · ${hc.na_count} 暂无</div>
+            </div>
+            ${hc.checks.map(c => `
+                <div class="health-check-row">
+                    <div class="health-check-icon">${c.icon}</div>
+                    <div class="health-check-info">
+                        <div class="health-check-name">${c.name}</div>
+                        <div class="health-check-detail">${c.detail}</div>
+                    </div>
+                    <div class="health-check-value" style="color:${c.status==='pass'?'#34d399':c.status==='warn'?'#fbbf24':c.status==='fail'?'#f87171':'#9ca3af'}">${c.value}</div>
+                    <div class="health-check-status ${statusCls[c.status]}">${statusMap[c.status]}</div>
+                </div>
+            `).join('')}
+        `;
+    }
+
+    async function showHealthDetail(code) {
+        const stock = allStocksData.find(x => x.code === code);
+        if (!stock) return;
+
+        // 如果已有缓存数据直接显示
+        if (stock.healthCheck) {
+            showHealthModal(stock);
+            return;
+        }
+
+        // 否则从 API 获取
+        try {
+            const resp = await fetch(`${API_BASE}/health-check/${code}`);
+            const result = await resp.json();
+            if (result.success) {
+                stock.healthCheck = result.data;
+                showHealthModal(stock);
+                renderTable(filteredData.slice(0, parseInt(document.getElementById('display-count').value)));
+                updateStats();
+            } else {
+                alert('获取体检数据失败: ' + (result.error || '未知错误'));
+            }
+        } catch (e) {
+            alert('网络请求失败: ' + e.message);
+        }
+    }
+
+    function showHealthModal(stock) {
+        const hc = stock.healthCheck;
+        if (!hc) return;
+        document.getElementById('modal-title').textContent = `🏥 ${stock.name || ''} (${stock.code})`;
+        document.getElementById('modal-subtitle').textContent = `长线投资体检清单 | ${hc.summary}`;
+        document.getElementById('modal-content').innerHTML = renderHealthDetailHTML(hc);
+        document.getElementById('stock-modal').classList.add('show');
+    }
+
+    // 批量加载体检数据（在 refreshData 后调用）
+    async function loadHealthChecks() {
+        const loaded = allStocksData.filter(s => s.fundamental?.overallScore > 0 && !s.healthCheck);
+        if (loaded.length === 0) return;
+        console.log(`🏥 开始批量加载体检数据: ${loaded.length} 只`);
+        const batchSize = 6; // 降低并发（原20，避免富途过载）
+        let successCount = 0;
+        let failCount = 0;
+        for (let i = 0; i < loaded.length; i += batchSize) {
+            const batch = loaded.slice(i, i + batchSize);
+            await Promise.allSettled(batch.map(async (stock) => {
+                try {
+                    const resp = await fetch(`${API_BASE}/health-check/${stock.code}`, { signal: AbortSignal.timeout(20000) });
+                    if (!resp.ok) { failCount++; return; }
+                    const result = await resp.json();
+                    if (result.success) {
+                        stock.healthCheck = result.data;
+                        successCount++;
+                    } else {
+                        failCount++;
+                        console.warn(`体检数据返回失败: ${stock.code} - ${result.error || '未知'}`);
+                    }
+                } catch (e) {
+                    failCount++;
+                    console.warn(`体检数据请求失败: ${stock.code}`, e);
+                }
+            }));
+            // 每批后更新表格
+            sortAndDisplay();
+            updateStats();
+            // 批次间延时
+            if (i + batchSize < loaded.length) {
+                await sleep(1000);
+            }
+        }
+        console.log(`🏥 体检数据加载完成: 成功=${successCount}, 失败=${failCount}`);
+    }
+
+    function exportCSV() {
+        const hdrs = ['排名','代码','名称','指数','价格','涨跌%','总分','评级','ROE','ROA','PE','PB','股息率','股东总回报率','毛利率','净利率','资产负债率'];
+        const rows = filteredData.map((s, i) => {
+            const f = s.fundamental || {};
+            return [i+1, s.code, s.name||'', s.indices.join('/'), s.price||'', s.changePercent?.toFixed(2)||'', 
+                    f.overallScore||'', f.overallGrade||'', f.roe||'', f.roa||'', f.pe||'', f.pb||'',
+                    f.dividendYield||'', f.totalShareholderReturn||'', f.grossMargin||'', f.netMargin||'', f.debtRatio||''];
+        });
+        const csv = '\ufeff' + [hdrs, ...rows].map(r => r.join(',')).join('\n');
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+        a.download = `stockai_${new Date().toISOString().split('T')[0]}.csv`;
+        a.click();
+    }
+    </script>
+</body>
+</html>
