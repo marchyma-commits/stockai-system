@@ -1,7 +1,9 @@
-# Deployment secrets
+# Deployment
 deployment/jwt-private-key.pem
 deployment/jwt-public-key.pem
 deployment/railway-env-vars.json
+deployment/deploy-token.sh
+deployment/*.sh
 
 # Python
 __pycache__/
@@ -51,3 +53,6 @@ backup/
 # Data
 stockai_data/
 deepseek_mermaid_*.png
+
+# Railway
+.railway/
