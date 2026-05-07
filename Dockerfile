@@ -17,12 +17,13 @@ RUN pip install --no-cache-dir -r backend/requirements.txt
 # Copy the entire project
 COPY . .
 
-# Expose port
+# Railway automatically injects PORT env variable.
+# Use exec form for reliable signal handling.
 EXPOSE 8080
 
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
-    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8080/api/health')" || exit 1
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:${PORT:-8080}/api/health')" || exit 1
 
-# Run with uvicorn
-CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8080", "--workers", "2"]
+# Run with uvicorn — Railway sets PORT, fallback to 8080
+CMD uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8080} --workers 2
