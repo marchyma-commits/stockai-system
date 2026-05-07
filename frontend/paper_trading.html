@@ -18,7 +18,7 @@
             --red: #ef4444;
             --yellow: #f59e0b;
             --text-primary: #e2e8f0;
-            --text-muted: #94a3b8;
+            --text-muted: #99aabc;
         }
         * { box-sizing: border-box; }
         body {
@@ -1223,14 +1223,14 @@
             xaxis: {
                 type: 'datetime',
                 labels: {
-                    style: { colors: '#94a3b8', fontSize: '10px' },
+                    style: { colors: '#99aabc', fontSize: '10px' },
                     datetimeFormatter: { year: 'yyyy', month: 'yyyy-MM', day: 'MM-dd' },
                     datetimeUTC: false,
                 },
             },
             yaxis: {
                 labels: {
-                    style: { colors: '#94a3b8', fontSize: '10px' },
+                    style: { colors: '#99aabc', fontSize: '10px' },
                     formatter: v => (v / 10000).toFixed(0) + '万'
                 }
             },
@@ -1238,7 +1238,7 @@
             fill: { type: 'gradient', gradient: { opacityFrom: 0.3, opacityTo: 0.05 } },
             grid: { borderColor: '#1e293b', strokeDashArray: 3 },
             tooltip: { theme: 'dark', x: { format: 'yyyy-MM-dd' } },
-            legend: { labels: { colors: '#94a3b8' }, position: 'top' },
+            legend: { labels: { colors: '#99aabc' }, position: 'top' },
             dataLabels: { enabled: false },
             theme: { mode: 'dark' },
         });
@@ -1272,7 +1272,7 @@
     <!-- 底部免责声明 -->
     <div style="background:rgba(15,23,42,0.95);border-top:1px solid rgba(255,255,255,0.1);padding:20px 0;margin-top:30px;text-align:center;">
         <div style="max-width:800px;margin:0 auto;padding:0 20px;">
-            <p style="color:rgba(148,163,184,0.6);font-size:11px;line-height:1.6;margin:0;">
+            <p style="color:rgba(153,170,188,0.6);font-size:11px;line-height:1.6;margin:0;">
                 ⚠️ 免责声明：本系统所有分析结果仅供学习研究参考，不构成任何投资建议。股市有风险，投资需谨慎。历史表现不代表未来收益。
                 数据来源：富途 OpenD · 港交所披露易 · akshare。StockAI 智能分析 <span style="background:rgba(139,92,246,0.3);padding:1px 6px;border-radius:10px;">v1.7</span>
             </p>

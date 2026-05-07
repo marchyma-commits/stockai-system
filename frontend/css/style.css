@@ -7,7 +7,7 @@
     --accent-blue: #3b82f6;
     --accent-purple: #8b5cf6;
     --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
+    --text-secondary: #99aabc;
     --border-color: #334155;
     --card-bg: rgba(30, 41, 59, 0.7);
 }
@@ -321,7 +321,7 @@ body {
 }
 
 .badge-neutral {
-    background: rgba(148, 163, 184, 0.2);
+    background: rgba(153, 170, 188, 0.2);
     color: var(--text-secondary);
     border: 1px solid var(--text-secondary);
 }
@@ -758,7 +758,7 @@ body {
 .sentiment-meta-value { font-size: 16px; font-weight: 700; }
 .sentiment-meta-value.positive { color: #10b981; }
 .sentiment-meta-value.negative { color: #ef4444; }
-.sentiment-meta-value.neutral { color: #94a3b8; }
+.sentiment-meta-value.neutral { color: #99aabc; }
 
 /* 新聞列表 */
 .news-list-panel {
@@ -830,7 +830,7 @@ body {
 }
 .news-icon-positive { background: rgba(16, 185, 129, 0.15); color: #10b981; }
 .news-icon-negative { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
-.news-icon-neutral { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+.news-icon-neutral { background: rgba(148, 163, 184, 0.15); color: #99aabc; }
 .news-icon-default { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
 
 .news-item-body { flex: 1; min-width: 0; }
@@ -868,4 +868,4 @@ body {
 }
 .news-tag-positive { background: rgba(16, 185, 129, 0.15); color: #10b981; }
 .news-tag-negative { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
-.news-tag-neutral { background: rgba(148, 163, 184, 0.15); color: #94a3b8; }
+.news-tag-neutral { background: rgba(148, 163, 184, 0.15); color: #99aabc; }

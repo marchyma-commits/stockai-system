@@ -114,3 +114,77 @@ async def get_stock_list(market: str = Query("hk", description="Market: hk or us
         stocks = mdp.get_hk_stock_list()
 
     return {"success": True, "data": stocks, "total": len(stocks)}
+
+
+# ════════════════════════════════════════════════════════════
+# New UI Endpoints
+# ════════════════════════════════════════════════════════════
+
+@router.get("/market/overview")
+async def get_market_overview():
+    """Get market index overview."""
+    data = mdp.get_market_overview()
+    return {"success": True, "data": data}
+
+
+@router.get("/watchlist")
+async def get_watchlist_data():
+    """Get watchlist with prices."""
+    data = mdp.get_watchlist_data()
+    return {"success": True, "data": data}
+
+
+@router.get("/capital-flow/market")
+async def get_capital_flow_market():
+    """Get market-level capital flow."""
+    data = mdp.get_capital_flow_market()
+    return {"success": True, "data": data}
+
+
+@router.get("/capital-flow/stock/{symbol}")
+async def get_stock_capital_flow(symbol: str = "0700.HK"):
+    """Get capital flow for a specific stock."""
+    data = mdp.get_stock_capital_flow(symbol)
+    return {"success": True, "data": data}
+
+
+@router.get("/capital-flow/history")
+async def get_capital_flow_history(days: int = Query(20, description="Days of history")):
+    """Get historical capital flow for trend chart."""
+    data = mdp.get_capital_flow_history(days)
+    return {"success": True, "data": data}
+
+
+@router.get("/capital-flow/top-stocks")
+async def get_capital_flow_top_stocks(limit: int = Query(5, description="Number of top stocks")):
+    """Get top stocks by capital flow."""
+    data = mdp.get_capital_flow_top_stocks(limit)
+    return {"success": True, "data": data}
+
+
+@router.get("/capital-flow/south-north")
+async def get_south_north_flow():
+    """Get South-North bound capital flow."""
+    data = mdp.get_south_north_flow()
+    return {"success": True, "data": data}
+
+
+@router.get("/ai/signals")
+async def get_ai_signals():
+    """Get AI trading signals."""
+    data = mdp.get_ai_signals()
+    return {"success": True, "data": data}
+
+
+@router.get("/news/sentiment-summary")
+async def get_news_sentiment_summary():
+    """Get news sentiment summary."""
+    data = mdp.get_news_sentiment_summary()
+    return {"success": True, "data": data}
+
+
+@router.get("/ai/strategy/{symbol}")
+async def get_ai_strategy(symbol: str = "0700.HK"):
+    """Get AI trading strategy for a stock."""
+    data = mdp.get_ai_strategy(symbol)
+    return {"success": True, "data": data}
