@@ -126,7 +126,16 @@ def get_stock_info(symbol: str) -> dict:
 
 
 def get_stock_history(symbol: str, days: int = 90) -> list[dict]:
-    """Generate realistic OHLCV history."""
+    """Generate realistic OHLCV history, scaled to converge with the cached session price.
+
+    After generating the raw OHLCV sequence, we calculate a scale_factor so that the
+    last candle's close equals the cached price from get_stock_info(). This ensures
+    the K-line chart's last close always matches the watchlist / stock-info price.
+    """
+    # Grab the cached session price first (triggers caching if not yet called)
+    cached_info = get_stock_info(symbol)
+    cached_price = cached_info["price"]
+
     base = _base_price(symbol)
     history = []
     today = datetime.now()
@@ -153,6 +162,17 @@ def get_stock_history(symbol: str, days: int = 90) -> list[dict]:
             "close": round(price, 2),
             "volume": volume,
         })
+
+    # ── Scale entire history so last close matches the cached price ──
+    if history:
+        last_close = history[-1]["close"]
+        if last_close > 0:
+            scale_factor = cached_price / last_close
+            for bar in history:
+                bar["open"] = round(bar["open"] * scale_factor, 2)
+                bar["high"] = round(bar["high"] * scale_factor, 2)
+                bar["low"] = round(bar["low"] * scale_factor, 2)
+                bar["close"] = round(bar["close"] * scale_factor, 2)
 
     return history
 
@@ -245,15 +265,18 @@ def get_prediction(symbol: str) -> dict:
 
 
 def get_realtime(symbol: str) -> dict:
-    """Generate mock real-time data with small random fluctuations."""
+    """Generate mock real-time data.
+
+    Uses the exact cached session price (no artificial micro-change) so that
+    the realtime endpoint always matches the watchlist / stock-info price.
+    """
     base_info = get_stock_info(symbol)
-    micro_change = (_seeded_random(symbol, "realtime") * 0.02) - 0.01
 
     return {
         "symbol": symbol,
-        "price": round(base_info["price"] * (1 + micro_change), 3),
-        "change": round(base_info["change"] + micro_change * base_info["price"], 3),
-        "change_percent": round(base_info["change_percent"] + micro_change * 100, 3),
+        "price": base_info["price"],
+        "change": base_info["change"],
+        "change_percent": base_info["change_percent"],
         "volume": base_info["volume"] + int(_seeded_random(symbol, "rtv") * 100000),
         "bid": round(base_info["price"] * 0.999, 3),
         "ask": round(base_info["price"] * 1.001, 3),
