@@ -221,15 +221,57 @@ def get_hot_stocks(limit: int = 10) -> list[dict]:
 
 
 def search_stocks(query: str) -> list[dict]:
-    """Search stocks by symbol or name."""
-    query = query.upper().strip()
-    results = []
+    """Search stocks by symbol or name with prioritized matching.
 
-    for sym, info in ALL_STOCKS.items():
-        if query in sym.upper() or query in info["name"].upper():
+    Search priority:
+    1. Exact ticker match (e.g., "0700.HK")
+    2. Ticker starts with (e.g., "0700" → matches "0700.HK")
+    3. Name contains (e.g., "tencent" / "騰訊")
+    4. Exchange/suffix contains (e.g., "HK" → matches all .HK stocks)
+
+    Returns max 10 results, case-insensitive.
+    """
+    q = query.strip().lower()
+    if not q:
+        return []
+
+    results = []
+    seen = set()
+
+    def add_result(sym):
+        if sym not in seen:
+            seen.add(sym)
             results.append(get_stock_info(sym))
 
-    return results[:20]
+    # 1. Exact ticker match (highest priority)
+    for sym in ALL_STOCKS:
+        if sym.lower() == q:
+            add_result(sym)
+            break  # at most one exact match
+
+    # 2. Ticker starts with
+    for sym in ALL_STOCKS:
+        if sym.lower() != q and sym.lower().startswith(q):
+            add_result(sym)
+
+    # 3. Name contains
+    for sym, info in ALL_STOCKS.items():
+        name_lower = info["name"].lower()
+        if q in name_lower and sym not in seen:
+            add_result(sym)
+
+    # 4. Exchange/suffix contains (e.g., "hk" → all .HK stocks)
+    #    We interpret q as exchange if it matches a known exchange suffix
+    hk_exchanges = {"hk", "hkex", "hkse", "hong kong", "香港"}
+    us_exchanges = {"us", "usa", "nyse", "nasdaq", "美國"}
+    if q in hk_exchanges:
+        for sym in HONG_KONG_STOCKS:
+            add_result(sym)
+    elif q in us_exchanges:
+        for sym in US_STOCKS:
+            add_result(sym)
+
+    return results[:10]
 
 
 def get_prediction(symbol: str) -> dict:

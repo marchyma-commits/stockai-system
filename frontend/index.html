@@ -517,6 +517,40 @@
             100% { opacity: 0.4; }
         }
 
+        /* ===== SEARCH AUTOCOMPLETE DROPDOWN ===== */
+        .search-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            transition: background 0.15s;
+        }
+        .search-item:last-child { border-bottom: none; }
+        .search-item:hover { background: rgba(59,130,246,0.12); }
+        .search-item-highlighted { background: rgba(59,130,246,0.2) !important; }
+
+        .search-item-left { display: flex; flex-direction: column; gap: 2px; }
+        .search-item-symbol { font-weight: 700; font-size: 14px; color: #e2e8f0; }
+        .search-item-name { font-size: 11px; color: var(--text-dim); }
+
+        .search-item-right { text-align: right; }
+        .search-item-price { font-weight: 600; font-size: 14px; color: #e2e8f0; display: block; }
+        .search-item-change { font-size: 11px; font-weight: 500; }
+        .search-item-change.up { color: var(--accent-green); }
+        .search-item-change.down { color: var(--accent-red); }
+
+        .search-error, .search-empty {
+            color: var(--text-dim);
+            font-size: 13px;
+            justify-content: center;
+            padding: 16px;
+            cursor: default;
+        }
+        .search-empty { color: #94a3b8; }
+        .search-error { color: var(--accent-red); }
+
         /* Responsive */
         @media (max-width: 1200px) {
             .app-grid { grid-template-columns: 200px 1fr 240px; }
@@ -560,6 +594,15 @@
         <button class="nav-tab" data-page="report" onclick="switchTab('report')">
             <i class="bi bi-file-earmark-text"></i> 報告
         </button>
+    </div>
+    <div class="nav-center-search" style="flex:1;max-width:400px;margin:0 20px;">
+        <div style="position:relative;">
+            <i class="bi bi-search" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-dim);font-size:14px;"></i>
+            <input type="text" id="navSearchInput"
+                style="width:100%;background:rgba(255,255,255,0.06);border:1px solid rgba(59,130,246,0.1);border-radius:10px;padding:8px 14px 8px 36px;color:white;font-size:14px;outline:none;transition:all 0.2s;"
+                placeholder="搜尋股票代碼 / 名稱 (e.g. 0700, tencent)"
+                autocomplete="off">
+        </div>
     </div>
     <div class="nav-right">
         <i class="bi bi-gear"></i>
