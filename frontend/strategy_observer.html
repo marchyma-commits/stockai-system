@@ -10,7 +10,7 @@
 :root {
     --bg: #0b1120; --bg2: #111827; --bg3: #1a2332; --border: #1e293b;
     --accent: #3b82f6; --green: #10b981; --red: #ef4444; --yellow: #f59e0b;
-    --text: #e2e8f0; --text2: #cbd5e1; --muted: #64748b;
+    --text: #e2e8f0; --text2: #cbd5e1; --muted: #99aabc;
     --radius: 10px;
 }
 * { box-sizing: border-box; }
@@ -95,7 +95,7 @@ h3 { font-size: 15px; font-weight: 600; color: var(--accent); margin-bottom: 12p
 .badge-strong { background: rgba(16,185,129,0.15); color: #10b981; }
 .badge-moderate { background: rgba(59,130,246,0.15); color: #3b82f6; }
 .badge-weak { background: rgba(245,158,11,0.15); color: #f59e0b; }
-.badge-divergence { background: rgba(100,116,139,0.15); color: #94a3b8; }
+.badge-divergence { background: rgba(100,116,139,0.15); color: #99aabc; }
 
 .strat-tags { display: flex; gap: 3px; flex-wrap: wrap; }
 .strat-tag { font-size: 10px; padding: 1px 5px; border-radius: 4px; background: rgba(255,255,255,0.06); color: var(--text2); }
@@ -450,8 +450,8 @@ function renderTrend(trend) {
     trendChart = new ApexCharts(document.getElementById('trendChart'), {
         chart: { type: 'line', height: 260, toolbar: { show: false }, background: 'transparent' },
         series: [{ name: '勝率 %', data: rates }],
-        xaxis: { categories: weeks, labels: { style: { colors: '#94a3b8', fontSize: '11px' } } },
-        yaxis: { min: 30, max: 80, labels: { style: { colors: '#94a3b8' }, formatter: v => v + '%' } },
+        xaxis: { categories: weeks, labels: { style: { colors: '#99aabc', fontSize: '11px' } } },
+        yaxis: { min: 30, max: 80, labels: { style: { colors: '#99aabc' }, formatter: v => v + '%' } },
         stroke: { width: 3, curve: 'smooth' },
         colors: ['#3b82f6'],
         fill: { type: 'gradient', gradient: { shadeIntensity: 1, opacityFrom: 0.4, opacityTo: 0.05 } },
@@ -498,7 +498,7 @@ function renderConsensus(data) {
     stocks.forEach((s, i) => {
         const dirIcon = s.direction === 'bullish' ? '🟢' : s.direction === 'bearish' ? '🔴' : '⚪';
         const dirText = s.direction === 'bullish' ? '看漲' : s.direction === 'bearish' ? '看跌' : '中性';
-        const dirColor = s.direction === 'bullish' ? '#ef4444' : s.direction === 'bearish' ? '#10b981' : '#94a3b8';
+        const dirColor = s.direction === 'bullish' ? '#ef4444' : s.direction === 'bearish' ? '#10b981' : '#99aabc';
 
         const badgeClass = s.signal_strength === 'strong' ? 'badge-strong' :
                             s.signal_strength === 'moderate' ? 'badge-moderate' :
@@ -519,7 +519,7 @@ function renderConsensus(data) {
             tags += s.hold_strategies.map(n => `<span class="strat-tag">H:${n}</span>`).join('');
         }
 
-        const consColor = s.consensus >= 83 ? '#10b981' : s.consensus >= 67 ? '#3b82f6' : s.consensus >= 50 ? '#f59e0b' : '#94a3b8';
+        const consColor = s.consensus >= 83 ? '#10b981' : s.consensus >= 67 ? '#3b82f6' : s.consensus >= 50 ? '#f59e0b' : '#99aabc';
 
         html += `<tr>
             <td style="font-weight:600;color:var(--accent)">${i+1}</td>

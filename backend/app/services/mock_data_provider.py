@@ -282,3 +282,167 @@ def get_hk_stock_list() -> list[dict]:
     for sym in sorted(HONG_KONG_STOCKS.keys()):
         stocks.append(get_stock_info(sym))
     return stocks
+
+
+def get_market_overview() -> dict:
+    """Get market index overview (HSI, TECH, A50, SHCOMP)."""
+    seed = _seeded_random("market", "overview")
+    return {
+        "indices": [
+            {"name": "HSI", "value": 22148.0, "change": round(seed * 150 - 30, 2), "change_pct": round(seed * 1.5 - 0.3, 2), "direction": "up" if seed > 0.4 else "down"},
+            {"name": "TECH", "value": 5326.0, "change": round(seed * 80 - 20, 2), "change_pct": round(seed * 2.0 - 0.4, 2), "direction": "up" if seed > 0.35 else "down"},
+            {"name": "A50", "value": 12886.0, "change": round(seed * 60 - 50, 2), "change_pct": round(seed * 1.2 - 0.5, 2), "direction": "down" if seed < 0.5 else "up"},
+            {"name": "SHCOMP", "value": 3286.0, "change": round(seed * 40 - 10, 2), "change_pct": round(seed * 0.8 - 0.2, 2), "direction": "up" if seed > 0.45 else "down"},
+        ],
+        "timestamp": datetime.now().isoformat(),
+    }
+
+
+def get_watchlist_data() -> list[dict]:
+    """Get watchlist with real-time prices."""
+    watchlist_symbols = ["0700.HK", "9988.HK", "0941.HK", "1211.HK", "3690.HK"]
+    results = []
+    for sym in watchlist_symbols:
+        info = get_stock_info(sym)
+        results.append({
+            "symbol": sym,
+            "name": HONG_KONG_STOCKS.get(sym, {}).get("name", sym),
+            "price": info["price"],
+            "change": info["change"],
+            "change_percent": info["change_percent"],
+            "direction": "up" if info["change"] >= 0 else "down",
+        })
+    return results
+
+
+def get_capital_flow_market() -> dict:
+    """Get market-level capital flow data."""
+    seed = _seeded_random("capital", "market")
+    return {
+        "total": {
+            "main_force": round(seed * 200 + 28, 0),
+            "retail": round((1 - seed) * 100 - 32, 0),
+        },
+        "sectors": [
+            {"name": "科技", "flow": round(seed * 80 + 10, 0)},
+            {"name": "金融", "flow": round(seed * 40 + 8, 0)},
+            {"name": "醫藥", "flow": round(seed * 20 - 5, 0)},
+            {"name": "消費", "flow": round(seed * 15 - 10, 0)},
+            {"name": "能源", "flow": round(seed * 10 + 2, 0)},
+        ],
+        "timestamp": datetime.now().isoformat(),
+    }
+
+
+def get_stock_capital_flow(symbol: str = "0700.HK") -> dict:
+    """Get capital flow details for a specific stock."""
+    seed = _seeded_random(symbol, "cap_flow")
+    return {
+        "symbol": symbol,
+        "name": HONG_KONG_STOCKS.get(symbol, {}).get("name", symbol),
+        "details": {
+            "超大單": round(seed * 5 + 2, 1),
+            "大單": round(seed * 3 + 1, 1),
+            "中單": round((1 - seed) * 2 - 1, 1),
+            "小單": round((1 - seed) * 3 - 2, 1),
+        },
+        "timestamp": datetime.now().isoformat(),
+    }
+
+
+def get_capital_flow_history(days: int = 20) -> list[dict]:
+    """Get historical capital flow data for trend chart."""
+    history = []
+    today = datetime.now()
+    base = _seeded_random("cap_hist", "base") * 100
+    for i in range(days, 0, -1):
+        date = today - timedelta(days=i)
+        if date.weekday() >= 5:
+            continue
+        drift = _seeded_random(f"cap_{i}", "drift") * 30 - 15
+        history.append({
+            "date": date.strftime("%Y-%m-%d"),
+            "main_force": round(base + drift + _seeded_random(f"cap_{i}", "main") * 20, 0),
+            "retail": round(-base * 0.3 + drift * 0.2 + _seeded_random(f"cap_{i}", "retail") * 10, 0),
+        })
+    return history
+
+
+def get_capital_flow_top_stocks(limit: int = 5) -> list[dict]:
+    """Get top stocks by capital flow."""
+    symbols = list(HONG_KONG_STOCKS.keys())
+    results = []
+    for sym in symbols[:limit]:
+        info = get_stock_info(sym)
+        seed = _seeded_random(sym, "top_flow")
+        results.append({
+            "symbol": sym,
+            "name": HONG_KONG_STOCKS.get(sym, {}).get("name", sym),
+            "net_flow": round(seed * 10 - 2, 1),
+            "price": info["price"],
+            "change_pct": info["change_percent"],
+        })
+    return sorted(results, key=lambda x: x["net_flow"], reverse=True)
+
+
+def get_south_north_flow() -> dict:
+    """Get South-North bound capital flow data."""
+    seed = _seeded_random("south_north", "flow")
+    return {
+        "滬股通": round(seed * 50 - 10, 1),
+        "深股通": round(seed * 40 - 5, 1),
+        "港股通(滬)": round(seed * 30 + 15, 1),
+        "港股通(深)": round(seed * 25 + 10, 1),
+        "timestamp": datetime.now().isoformat(),
+    }
+
+
+def get_ai_signals() -> list[dict]:
+    """Get AI trading signals for watchlist stocks."""
+    signals = [
+        {"symbol": "0700.HK", "name": "騰訊", "signal": "買入", "confidence": 85, "reason": "AI利好", "direction": "up"},
+        {"symbol": "0941.HK", "name": "中移動", "signal": "賣出", "confidence": 72, "reason": "資金流出", "direction": "down"},
+        {"symbol": "9988.HK", "name": "阿里", "signal": "買入", "confidence": 78, "reason": "業績改善", "direction": "up"},
+        {"symbol": "1211.HK", "name": "比亞迪", "signal": "持有", "confidence": 65, "reason": "觀望", "direction": "neutral"},
+    ]
+    return signals
+
+
+def get_news_sentiment_summary() -> list[dict]:
+    """Get news sentiment summary for display in bottom bar."""
+    return [
+        {"symbol": "0700.HK", "title": "騰訊AI業務利好", "sentiment": "positive", "summary": "AI業務增長強勁"},
+        {"symbol": "3690.HK", "title": "美團外賣業務受壓", "sentiment": "negative", "summary": "競爭加劇利淡"},
+        {"symbol": "9988.HK", "title": "阿里雲收入超預期", "sentiment": "positive", "summary": "雲業務復甦"},
+    ]
+
+
+def get_ai_strategy(symbol: str = "0700.HK") -> dict:
+    """Get AI-generated trading strategy for a stock."""
+    info = get_stock_info(symbol)
+    seed = _seeded_random(symbol, "strategy")
+    action = "buy" if seed > 0.6 else ("sell" if seed < 0.3 else "hold")
+    score = round(50 + seed * 40, 0)
+    return {
+        "symbol": symbol,
+        "action": action,
+        "overall_score": score,
+        "confidence": "高" if score > 75 else ("中" if score > 55 else "低"),
+        "recommended_position": f"{round(seed * 30 + 5)}%" if action != "sell" else "0%",
+        "risk_reward": round(1.5 + seed * 2, 1),
+        "entry": {
+            "buy_price": round(info["price"] * 0.98, 2),
+            "stop_loss": round(info["price"] * 0.93, 2),
+        },
+        "exit": {
+            "target_1": round(info["price"] * 1.05, 2),
+            "target_2": round(info["price"] * 1.12, 2),
+        },
+        "signals": {
+            "trend": "bullish" if action == "buy" else ("bearish" if action == "sell" else "neutral"),
+            "rsi": 55 + round(seed * 20, 0),
+            "macd": "golden_cross" if action == "buy" else ("death_cross" if action == "sell" else "neutral"),
+            "kdj": 50 + round(seed * 20, 0),
+            "bollinger": "middle",
+        },
+    }
