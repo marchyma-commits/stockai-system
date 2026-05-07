@@ -1,1 +1,0 @@
-# StockAI Backend — FastAPI Application
