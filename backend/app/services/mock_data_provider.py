@@ -8,6 +8,12 @@ import math
 from datetime import datetime, timedelta
 from typing import Optional
 
+# ── Session-Level Price Cache ──
+# Caches generated stock info per ticker within the same session.
+# First call generates & caches; subsequent calls return cached value.
+# New page refresh (new server request) triggers regeneration.
+_stock_info_cache: dict[str, dict] = {}
+
 # ── Stock Universe ──
 HONG_KONG_STOCKS = {
     "0700.HK": {"name": "Tencent Holdings", "sector": "Technology"},
@@ -100,7 +106,18 @@ def _base_price(symbol: str) -> float:
 
 
 def get_stock_info(symbol: str) -> dict:
-    """Get basic stock info."""
+    """Get basic stock info with session-level caching.
+    
+    First call generates the price deterministically and caches it.
+    Subsequent calls within the same session return the cached value,
+    ensuring consistent prices across all pages (watchlist, detail, etc.).
+    """
+    # Return cached result if available (session-level consistency)
+    if symbol in _stock_info_cache:
+        cached = dict(_stock_info_cache[symbol])
+        cached["timestamp"] = datetime.now().isoformat()
+        return cached
+
     info = ALL_STOCKS.get(symbol, {"name": symbol, "sector": "Unknown"})
     base = _base_price(symbol)
     seed_variation = _seeded_random(symbol, "variation") * 0.2 - 0.1
@@ -108,7 +125,7 @@ def get_stock_info(symbol: str) -> dict:
     change_pct = round((_seeded_random(symbol, "change") * 0.06) - 0.03, 2)
     change = round(price * change_pct, 2)
 
-    return {
+    result = {
         "symbol": symbol,
         "name": info["name"],
         "sector": info["sector"],
@@ -123,6 +140,10 @@ def get_stock_info(symbol: str) -> dict:
         "dividend_yield": round(_seeded_random(symbol, "div") * 8, 2),
         "timestamp": datetime.now().isoformat(),
     }
+
+    # Cache the result for session-level consistency
+    _stock_info_cache[symbol] = result
+    return result
 
 
 def get_stock_history(symbol: str, days: int = 90) -> list[dict]:
