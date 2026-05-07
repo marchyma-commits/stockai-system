@@ -1,5 +1,6 @@
 """StockAI — Stock API Endpoints (FastAPI)"""
 from fastapi import APIRouter, Query, HTTPException
+from fastapi.responses import JSONResponse
 from typing import Optional
 
 from backend.app.services import mock_data_provider as mdp
@@ -32,9 +33,17 @@ async def get_stock(symbol: str):
     """Get stock details."""
     try:
         data = mdp.get_stock_info(symbol)
+        if not data:
+            return JSONResponse(
+                status_code=404,
+                content={"success": False, "error": f"股票代碼 {symbol} 無效", "symbol": symbol}
+            )
         return {"success": True, "data": data}
     except Exception as e:
-        raise HTTPException(status_code=404, detail=f"Stock {symbol} not found")
+        return JSONResponse(
+            status_code=404,
+            content={"success": False, "error": f"股票代碼 {symbol} 無效", "symbol": symbol}
+        )
 
 
 @router.get("/stock/{symbol}/history")
@@ -92,7 +101,10 @@ async def search_stock(q: str = Query("", description="Search query")):
         data = mdp.search_stocks(q)
         return {"success": True, "data": data, "total": len(data)}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        return JSONResponse(
+            status_code=200,  # Return 200 with error flag so frontend can handle gracefully
+            content={"success": False, "error": "搜尋失敗，請重試", "data": [], "total": 0}
+        )
 
 
 @router.get("/realtime/{symbol}")

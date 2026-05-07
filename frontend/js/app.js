@@ -1206,4 +1206,281 @@ function formatMarketCap(value) {
     return '$' + num.toFixed(0);
 }
 
+// ════════════════════════════════════════════════════════════════
+// 15. SEARCH AUTOCOMPLETE SYSTEM
+// ════════════════════════════════════════════════════════════════
+
+// Active autocomplete state
+let autocompleteState = {
+    activeInputId: null,
+    selectedIndex: -1,
+    results: [],
+    dropdownEl: null,
+};
+
+/**
+ * Set up search autocomplete for an input element.
+ * @param {string} inputId - ID of the input element
+ * @param {object} options
+ * @param {function} options.onSelect - Callback when user selects an item (receives symbol)
+ * @param {function} options.onSearch - Callback when user presses Enter without selection
+ * @param {string} options.placeholder - Placeholder text
+ */
+function setupSearchAutocomplete(inputId, options = {}) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+
+    // Create dropdown container
+    const wrapper = document.createElement('div');
+    wrapper.style.position = 'relative';
+    wrapper.style.flex = '1';
+    input.parentNode.insertBefore(wrapper, input);
+    wrapper.appendChild(input);
+
+    const dropdown = document.createElement('div');
+    dropdown.className = 'search-autocomplete-dropdown';
+    dropdown.style.cssText = `
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1a2332;
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 0 0 12px 12px;
+        max-height: 320px;
+        overflow-y: auto;
+        z-index: 9999;
+        display: none;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    `;
+    wrapper.appendChild(dropdown);
+
+    let debounceTimer = null;
+    let lastQuery = '';
+
+    // Input handler with debounce
+    input.addEventListener('input', function () {
+        const q = this.value.trim();
+        if (q === lastQuery) return;
+        lastQuery = q;
+
+        clearTimeout(debounceTimer);
+        autocompleteState.selectedIndex = -1;
+
+        if (q.length < 1) {
+            hideDropdown(inputId);
+            return;
+        }
+
+        debounceTimer = setTimeout(() => performSearch(inputId, q, dropdown, options), 250);
+    });
+
+    // Focus handler
+    input.addEventListener('focus', function () {
+        if (this.value.trim().length >= 1 && autocompleteState.results.length > 0) {
+            dropdown.style.display = 'block';
+            autocompleteState.activeInputId = inputId;
+        }
+    });
+
+    // Keyboard navigation
+    input.addEventListener('keydown', function (e) {
+        const items = dropdown.querySelectorAll('.search-item');
+
+        switch (e.key) {
+            case 'ArrowDown':
+                e.preventDefault();
+                if (items.length === 0) return;
+                autocompleteState.selectedIndex = Math.min(autocompleteState.selectedIndex + 1, items.length - 1);
+                updateHighlight(items, autocompleteState.selectedIndex);
+                scrollToItem(items, autocompleteState.selectedIndex);
+                break;
+
+            case 'ArrowUp':
+                e.preventDefault();
+                if (items.length === 0) return;
+                autocompleteState.selectedIndex = Math.max(autocompleteState.selectedIndex - 1, -1);
+                updateHighlight(items, autocompleteState.selectedIndex);
+                scrollToItem(items, autocompleteState.selectedIndex);
+                break;
+
+            case 'Enter':
+                e.preventDefault();
+                if (autocompleteState.selectedIndex >= 0 && autocompleteState.selectedIndex < items.length) {
+                    // Select highlighted item
+                    const selectedItem = items[autocompleteState.selectedIndex];
+                    const symbol = selectedItem.dataset.symbol;
+                    input.value = symbol;
+                    hideDropdown(inputId);
+                    if (options.onSelect) options.onSelect(symbol);
+                } else {
+                    // No selection — search directly
+                    hideDropdown(inputId);
+                    if (options.onSearch) options.onSearch(input.value.trim());
+                }
+                break;
+
+            case 'Escape':
+                e.preventDefault();
+                hideDropdown(inputId);
+                input.blur();
+                break;
+        }
+    });
+
+    // Click outside to close
+    document.addEventListener('click', function (e) {
+        if (!wrapper.contains(e.target)) {
+            hideDropdown(inputId);
+        }
+    });
+
+    // Store ref for cleanup
+    input.dataset.autocomplete = 'true';
+}
+
+async function performSearch(inputId, query, dropdownEl, options) {
+    try {
+        const res = await fetch(`${API_BASE_URL}/search?q=${encodeURIComponent(query)}`);
+        const json = await res.json();
+
+        if (!json.success || !json.data) {
+            dropdownEl.innerHTML = `<div class="search-item search-error">搜尋失敗，請重試</div>`;
+            dropdownEl.style.display = 'block';
+            autocompleteState.results = [];
+            return;
+        }
+
+        const results = json.data;
+        autocompleteState.results = results;
+        autocompleteState.selectedIndex = -1;
+        autocompleteState.activeInputId = inputId;
+
+        if (results.length === 0) {
+            dropdownEl.innerHTML = `<div class="search-item search-empty">'${query}' — 無匹配結果</div>`;
+            dropdownEl.style.display = 'block';
+            return;
+        }
+
+        // Build dropdown items
+        let html = results.map((item, idx) => {
+            const sym = item.symbol || '';
+            const name = item.name || '';
+            const price = item.price ? '$' + item.price.toFixed(2) : '';
+            const change = item.change_percent != null ? item.change_percent.toFixed(2) + '%' : '';
+            const changeCls = (item.change_percent || 0) >= 0 ? 'up' : 'down';
+            const arrow = (item.change_percent || 0) >= 0 ? '▲' : '▼';
+            return `<div class="search-item" data-symbol="${sym}" data-index="${idx}" onclick="selectSearchItem('${inputId}', '${sym}', this)">
+                <div class="search-item-left">
+                    <span class="search-item-symbol">${sym}</span>
+                    <span class="search-item-name">${name}</span>
+                </div>
+                <div class="search-item-right">
+                    <span class="search-item-price">${price}</span>
+                    <span class="search-item-change ${changeCls}">${arrow} ${change}</span>
+                </div>
+            </div>`;
+        }).join('');
+
+        dropdownEl.innerHTML = html;
+        dropdownEl.style.display = 'block';
+
+    } catch (e) {
+        console.warn('Search error:', e.message);
+        dropdownEl.innerHTML = `<div class="search-item search-error">搜尋失敗，請重試</div>`;
+        dropdownEl.style.display = 'block';
+        autocompleteState.results = [];
+    }
+}
+
+function selectSearchItem(inputId, symbol, el) {
+    const input = document.getElementById(inputId);
+    if (input) {
+        input.value = symbol;
+    }
+    hideDropdown(inputId);
+    // Find the onSelect callback from the input's autocomplete setup
+    // We dispatch a custom event so the setup can listen
+    input.dispatchEvent(new CustomEvent('autocomplete-select', { detail: { symbol } }));
+}
+
+function hideDropdown(inputId) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+    // Find the dropdown sibling
+    const wrapper = input.parentElement;
+    if (!wrapper) return;
+    const dropdown = wrapper.querySelector('.search-autocomplete-dropdown');
+    if (dropdown) {
+        dropdown.style.display = 'none';
+    }
+    autocompleteState.activeInputId = null;
+    autocompleteState.selectedIndex = -1;
+}
+
+function updateHighlight(items, index) {
+    items.forEach((item, i) => {
+        item.classList.toggle('search-item-highlighted', i === index);
+    });
+}
+
+function scrollToItem(items, index) {
+    if (index < 0 || index >= items.length) return;
+    items[index].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+// ── Initialize autocomplete on all stock inputs ──
+document.addEventListener('DOMContentLoaded', function () {
+    // Delay to ensure other inits run first, then setup autocompletes
+    setTimeout(() => {
+        setupSearchAutocomplete('analysisStockInput', {
+            onSelect: (symbol) => analyzeSingleStock(),
+            onSearch: (query) => {
+                const input = document.getElementById('analysisStockInput');
+                if (input) input.value = query;
+                analyzeSingleStock();
+            },
+            placeholder: '輸入股票代碼 (0700.HK, AAPL)'
+        });
+
+        setupSearchAutocomplete('strategyStockInput', {
+            onSelect: (symbol) => loadStrategy(),
+            onSearch: (query) => {
+                const input = document.getElementById('strategyStockInput');
+                if (input) input.value = query;
+                loadStrategy();
+            },
+            placeholder: '股票代碼'
+        });
+
+        setupSearchAutocomplete('reportStockInput', {
+            onSelect: (symbol) => generateReport(),
+            onSearch: (query) => {
+                const input = document.getElementById('reportStockInput');
+                if (input) input.value = query;
+                generateReport();
+            },
+            placeholder: '股票代碼'
+        });
+
+        // Nav search bar — navigates to analysis tab on select
+        setupSearchAutocomplete('navSearchInput', {
+            onSelect: (symbol) => {
+                currentSymbol = symbol;
+                switchTab('dashboard');
+                selectWatchlistItem(symbol);
+            },
+            onSearch: (query) => {
+                // Switch to analysis page with the query
+                const analysisInput = document.getElementById('analysisStockInput');
+                if (analysisInput) analysisInput.value = query;
+                switchTab('analysis');
+                setTimeout(() => analyzeSingleStock(), 300);
+            },
+            placeholder: '搜尋股票代碼 / 名稱 (e.g. 0700, tencent)'
+        });
+    }, 100);
+});
+
 console.log('✅ StockAI v2.0 app.js loaded successfully');
+console.log('🔍 Search autocomplete enabled');
