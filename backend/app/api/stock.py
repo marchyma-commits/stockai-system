@@ -118,10 +118,15 @@ async def get_realtime(symbol: str):
 
 
 @router.get("/stocks")
-async def get_stock_list(market: str = Query("hk", description="Market: hk or us")):
-    """Get list of all available stocks."""
-    if market.lower() == "us":
+async def get_stock_list(market: str = Query("hk", description="Market: hk, us, a, or all")):
+    """Get list of all available stocks by market."""
+    market = market.lower()
+    if market == "us":
         stocks = [mdp.get_stock_info(sym) for sym in sorted(mdp.US_STOCKS.keys())]
+    elif market == "a":
+        stocks = mdp.get_a_stock_list()
+    elif market == "all":
+        stocks = [mdp.get_stock_info(sym) for sym in sorted(mdp.ALL_STOCKS.keys())]
     else:
         stocks = mdp.get_hk_stock_list()
 

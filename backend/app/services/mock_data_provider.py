@@ -16,33 +16,39 @@ _stock_info_cache: dict[str, dict] = {}
 
 # ── Stock Universe ──
 HONG_KONG_STOCKS = {
-    "0700.HK": {"name": "Tencent Holdings", "sector": "Technology"},
-    "9988.HK": {"name": "Alibaba Group", "sector": "E-Commerce"},
-    "0005.HK": {"name": "HSBC Holdings", "sector": "Banking"},
-    "0999.HK": {"name": "Hua Hong Semiconductor", "sector": "Technology"},
-    "1810.HK": {"name": "Xiaomi Corp", "sector": "Technology"},
-    "9989.HK": {"name": "Dongfeng Motor", "sector": "Automotive"},
-    "2318.HK": {"name": "Ping An Insurance", "sector": "Insurance"},
-    "939.HK": {"name": "CCB", "sector": "Banking"},
-    "1299.HK": {"name": "AIA Group", "sector": "Insurance"},
+    # --- 恆指重磅藍籌 ---
     "0001.HK": {"name": "CK Hutchison", "sector": "Conglomerate"},
     "0002.HK": {"name": "CLP Holdings", "sector": "Utilities"},
     "0003.HK": {"name": "HK & China Gas", "sector": "Utilities"},
+    "0005.HK": {"name": "HSBC Holdings", "sector": "Banking"},
+    "0011.HK": {"name": "Bank of East Asia", "sector": "Banking"},
     "0016.HK": {"name": "SHK Properties", "sector": "Property"},
     "0017.HK": {"name": "New World Dev", "sector": "Property"},
     "0019.HK": {"name": "Swire Pacific", "sector": "Conglomerate"},
     "0027.HK": {"name": "Galaxy Entertainment", "sector": "Gaming"},
+    "0066.HK": {"name": "MTR Corporation", "sector": "Transport"},
+    "0386.HK": {"name": "Sinopec Corp", "sector": "Energy"},
     "0388.HK": {"name": "HKEX", "sector": "Finance"},
+    "0669.HK": {"name": "Techtronic Ind", "sector": "Manufacturing"},
+    "0700.HK": {"name": "Tencent Holdings", "sector": "Technology"},
+    "0823.HK": {"name": "Link REIT", "sector": "Real Estate"},
     "0883.HK": {"name": "CNOOC", "sector": "Energy"},
     "0900.HK": {"name": "Aeon Stores", "sector": "Retail"},
+    "0939.HK": {"name": "CCB", "sector": "Banking"},
     "0941.HK": {"name": "China Mobile", "sector": "Telecom"},
     "0968.HK": {"name": "Xinyi Glass", "sector": "Manufacturing"},
     "0981.HK": {"name": "SMIC", "sector": "Semiconductor"},
+    "0999.HK": {"name": "Hua Hong Semiconductor", "sector": "Technology"},
     "1024.HK": {"name": "Kuaishou Tech", "sector": "Technology"},
     "1211.HK": {"name": "BYD Co.", "sector": "Automotive"},
+    "1299.HK": {"name": "AIA Group", "sector": "Insurance"},
     "1398.HK": {"name": "ICBC", "sector": "Banking"},
+    "1810.HK": {"name": "Xiaomi Corp", "sector": "Technology"},
     "1928.HK": {"name": "Sands China", "sector": "Gaming"},
+    "2318.HK": {"name": "Ping An Insurance", "sector": "Insurance"},
     "2382.HK": {"name": "Sunny Optical", "sector": "Technology"},
+    "2388.HK": {"name": "BOC Hong Kong", "sector": "Banking"},
+    "2628.HK": {"name": "China Life", "sector": "Insurance"},
     "2800.HK": {"name": "Tracker Fund", "sector": "ETF"},
     "2823.HK": {"name": "A50 ETF", "sector": "ETF"},
     "3690.HK": {"name": "Meituan", "sector": "E-Commerce"},
@@ -52,25 +58,52 @@ HONG_KONG_STOCKS = {
     "6888.HK": {"name": "Alibaba Health", "sector": "Healthcare"},
     "9618.HK": {"name": "JD.com", "sector": "E-Commerce"},
     "9626.HK": {"name": "Bilibili", "sector": "Technology"},
-    "9888.HK": {"name": "Baido", "sector": "Technology"},
+    "9888.HK": {"name": "Baidu", "sector": "Technology"},
     "9923.HK": {"name": "YES Securit", "sector": "Finance"},
     "9961.HK": {"name": "Trip.com", "sector": "Travel"},
-}
+    "9988.HK": {"name": "Alibaba Group", "sector": "E-Commerce"},
+    "9989.HK": {"name": "Dongfeng Motor", "sector": "Automotive"},
+}  # 46 HK stocks
 
 US_STOCKS = {
     "AAPL": {"name": "Apple Inc.", "sector": "Technology"},
-    "GOOGL": {"name": "Alphabet Inc.", "sector": "Technology"},
-    "MSFT": {"name": "Microsoft Corp", "sector": "Technology"},
+    "AMD": {"name": "Advanced Micro Devices", "sector": "Semiconductor"},
     "AMZN": {"name": "Amazon.com", "sector": "E-Commerce"},
-    "META": {"name": "Meta Platforms", "sector": "Technology"},
-    "TSLA": {"name": "Tesla Inc.", "sector": "Automotive"},
-    "NVDA": {"name": "NVIDIA Corp", "sector": "Semiconductor"},
-    "JPM": {"name": "JPMorgan Chase", "sector": "Banking"},
-    "V": {"name": "Visa Inc.", "sector": "Finance"},
+    "COST": {"name": "Costco Wholesale", "sector": "Retail"},
+    "GOOGL": {"name": "Alphabet Inc.", "sector": "Technology"},
+    "INTC": {"name": "Intel Corp", "sector": "Semiconductor"},
     "JNJ": {"name": "Johnson & Johnson", "sector": "Healthcare"},
-}
+    "JPM": {"name": "JPMorgan Chase", "sector": "Banking"},
+    "META": {"name": "Meta Platforms", "sector": "Technology"},
+    "MSFT": {"name": "Microsoft Corp", "sector": "Technology"},
+    "NFLX": {"name": "Netflix Inc.", "sector": "Entertainment"},
+    "NVDA": {"name": "NVIDIA Corp", "sector": "Semiconductor"},
+    "TSLA": {"name": "Tesla Inc.", "sector": "Automotive"},
+    "V": {"name": "Visa Inc.", "sector": "Finance"},
+}  # 14 US stocks
 
-ALL_STOCKS = {**HONG_KONG_STOCKS, **US_STOCKS}
+A_STOCKS = {
+    "000001.SZ": {"name": "平安銀行", "sector": "Banking"},
+    "000002.SZ": {"name": "万科A", "sector": "Real Estate"},
+    "000333.SZ": {"name": "美的集團", "sector": "Manufacturing"},
+    "000568.SZ": {"name": "瀘州老窖", "sector": "Beverage"},
+    "000651.SZ": {"name": "格力電器", "sector": "Manufacturing"},
+    "000858.SZ": {"name": "五糧液", "sector": "Beverage"},
+    "002415.SZ": {"name": "海康威視", "sector": "Technology"},
+    "002594.SZ": {"name": "比亞迪", "sector": "Automotive"},
+    "300750.SZ": {"name": "寧德時代", "sector": "Manufacturing"},
+    "600036.SH": {"name": "招商銀行", "sector": "Banking"},
+    "600276.SH": {"name": "恆瑞醫藥", "sector": "Healthcare"},
+    "600519.SH": {"name": "貴州茅台", "sector": "Beverage"},
+    "600887.SH": {"name": "伊利股份", "sector": "Beverage"},
+    "600900.SH": {"name": "長江電力", "sector": "Utilities"},
+    "601318.SH": {"name": "中國平安", "sector": "Insurance"},
+    "601398.SH": {"name": "工商銀行", "sector": "Banking"},
+    "601857.SH": {"name": "中國石油", "sector": "Energy"},
+    "603259.SH": {"name": "藥明康德", "sector": "Healthcare"},
+}  # 18 A stocks
+
+ALL_STOCKS = {**HONG_KONG_STOCKS, **US_STOCKS, **A_STOCKS}
 
 
 def _seeded_random(symbol: str, field: str = "price") -> float:
@@ -83,24 +116,35 @@ def _base_price(symbol: str) -> float:
     """Generate a realistic base price for each stock."""
     prices = {
         # HK Stocks
-        "0700.HK": 520.0, "9988.HK": 85.0, "0005.HK": 72.0,
-        "0999.HK": 18.0, "1810.HK": 30.0, "9989.HK": 3.5,
-        "2318.HK": 55.0, "0939.HK": 6.5, "1299.HK": 75.0,
         "0001.HK": 52.0, "0002.HK": 65.0, "0003.HK": 12.0,
-        "0016.HK": 82.0, "0017.HK": 18.0, "0019.HK": 45.0,
-        "0027.HK": 38.0, "0388.HK": 310.0, "0883.HK": 18.0,
-        "0900.HK": 2.0, "0941.HK": 72.0, "0968.HK": 14.0,
-        "0981.HK": 28.0, "1024.HK": 52.0, "1211.HK": 280.0,
-        "1398.HK": 5.0, "1928.HK": 28.0, "2382.HK": 42.0,
-        "2800.HK": 22.0, "2823.HK": 13.0, "3690.HK": 160.0,
-        "3988.HK": 4.0, "6189.HK": 42.0, "6862.HK": 18.0,
-        "6888.HK": 5.0, "9618.HK": 135.0, "9626.HK": 100.0,
-        "9888.HK": 85.0, "9923.HK": 10.0, "9961.HK": 450.0,
+        "0005.HK": 72.0, "0011.HK": 12.0, "0016.HK": 82.0,
+        "0017.HK": 18.0, "0019.HK": 45.0, "0027.HK": 38.0,
+        "0066.HK": 28.0, "0386.HK": 4.5, "0388.HK": 310.0,
+        "0669.HK": 110.0, "0700.HK": 520.0, "0823.HK": 38.0,
+        "0883.HK": 18.0, "0900.HK": 2.0, "0939.HK": 6.5,
+        "0941.HK": 72.0, "0968.HK": 14.0, "0981.HK": 28.0,
+        "0999.HK": 18.0, "1024.HK": 52.0, "1211.HK": 280.0,
+        "1299.HK": 75.0, "1398.HK": 5.0, "1810.HK": 30.0,
+        "1928.HK": 28.0, "2318.HK": 55.0, "2382.HK": 42.0,
+        "2388.HK": 25.0, "2628.HK": 12.0, "2800.HK": 22.0,
+        "2823.HK": 13.0, "3690.HK": 160.0, "3988.HK": 4.0,
+        "6189.HK": 42.0, "6862.HK": 18.0, "6888.HK": 5.0,
+        "9618.HK": 135.0, "9626.HK": 100.0, "9888.HK": 85.0,
+        "9923.HK": 10.0, "9961.HK": 450.0, "9988.HK": 85.0,
+        "9989.HK": 3.5,
         # US Stocks
-        "AAPL": 230.0, "GOOGL": 175.0, "MSFT": 425.0,
-        "AMZN": 200.0, "META": 550.0, "TSLA": 350.0,
-        "NVDA": 125.0, "JPM": 210.0, "V": 280.0,
-        "JNJ": 160.0,
+        "AAPL": 230.0, "AMD": 160.0, "AMZN": 200.0,
+        "COST": 900.0, "GOOGL": 175.0, "INTC": 30.0,
+        "JNJ": 160.0, "JPM": 210.0, "META": 550.0,
+        "MSFT": 425.0, "NFLX": 850.0, "NVDA": 125.0,
+        "TSLA": 350.0, "V": 280.0,
+        # A Stocks (in CNY)
+        "000001.SZ": 12.0, "000002.SZ": 8.0, "000333.SZ": 68.0,
+        "000568.SZ": 180.0, "000651.SZ": 40.0, "000858.SZ": 135.0,
+        "002415.SZ": 32.0, "002594.SZ": 260.0, "300750.SZ": 210.0,
+        "600036.SH": 38.0, "600276.SH": 42.0, "600519.SH": 1680.0,
+        "600887.SH": 28.0, "600900.SH": 25.0, "601318.SH": 48.0,
+        "601398.SH": 6.0, "601857.SH": 8.5, "603259.SH": 55.0,
     }
     return prices.get(symbol, 50.0)
 
@@ -203,8 +247,8 @@ def get_bollinger_bands(symbol: str, days: int = 90) -> list[dict]:
 
 
 def get_hot_stocks(limit: int = 10) -> list[dict]:
-    """Get mock hot/trending stocks."""
-    symbols = list(HONG_KONG_STOCKS.keys())
+    """Get mock hot/trending stocks from all markets."""
+    symbols = list(ALL_STOCKS.keys())
     random.seed(42)  # Fixed seed for consistent ordering
     random.shuffle(symbols)
     random.seed()  # Reset seed
@@ -254,7 +298,7 @@ def search_stocks(query: str) -> list[dict]:
         if sym.lower() != q and sym.lower().startswith(q):
             add_result(sym)
 
-    # 3. Name contains
+    # 3. Name contains (supports Chinese names too)
     for sym, info in ALL_STOCKS.items():
         name_lower = info["name"].lower()
         if q in name_lower and sym not in seen:
@@ -262,13 +306,17 @@ def search_stocks(query: str) -> list[dict]:
 
     # 4. Exchange/suffix contains (e.g., "hk" → all .HK stocks)
     #    We interpret q as exchange if it matches a known exchange suffix
-    hk_exchanges = {"hk", "hkex", "hkse", "hong kong", "香港"}
-    us_exchanges = {"us", "usa", "nyse", "nasdaq", "美國"}
+    hk_exchanges = {"hk", "hkex", "hkse", "hong kong", "香港", "港"}
+    us_exchanges = {"us", "usa", "nyse", "nasdaq", "美國", "美"}
+    a_exchanges = {"a", "ashare", "a股", "a股", "sz", "sh", "shenzhen", "shanghai", "深圳", "上海", "中國", "china"}
     if q in hk_exchanges:
         for sym in HONG_KONG_STOCKS:
             add_result(sym)
     elif q in us_exchanges:
         for sym in US_STOCKS:
+            add_result(sym)
+    elif q in a_exchanges:
+        for sym in A_STOCKS:
             add_result(sym)
 
     return results[:10]
@@ -333,7 +381,10 @@ def get_system_status() -> dict:
         "mode": "cloud",
         "data_source": "mock",
         "api_requests_today": int(_seeded_random("requests", "today") * 10000),
-        "stocks_monitored": len(HONG_KONG_STOCKS),
+        "stocks_monitored": len(ALL_STOCKS),
+        "hk_stocks": len(HONG_KONG_STOCKS),
+        "us_stocks": len(US_STOCKS),
+        "a_stocks": len(A_STOCKS),
         "last_update": datetime.now().isoformat(),
         "memory_usage_mb": round(128 + _seeded_random("mem", "usage") * 64, 1),
     }
@@ -343,6 +394,22 @@ def get_hk_stock_list() -> list[dict]:
     """Get list of all Hong Kong stocks."""
     stocks = []
     for sym in sorted(HONG_KONG_STOCKS.keys()):
+        stocks.append(get_stock_info(sym))
+    return stocks
+
+
+def get_us_stock_list() -> list[dict]:
+    """Get list of all US stocks."""
+    stocks = []
+    for sym in sorted(US_STOCKS.keys()):
+        stocks.append(get_stock_info(sym))
+    return stocks
+
+
+def get_a_stock_list() -> list[dict]:
+    """Get list of all A-share stocks."""
+    stocks = []
+    for sym in sorted(A_STOCKS.keys()):
         stocks.append(get_stock_info(sym))
     return stocks
 
@@ -362,14 +429,14 @@ def get_market_overview() -> dict:
 
 
 def get_watchlist_data() -> list[dict]:
-    """Get watchlist with real-time prices."""
-    watchlist_symbols = ["0700.HK", "9988.HK", "0941.HK", "1211.HK", "3690.HK"]
+    """Get watchlist with real-time prices (cross-market)."""
+    watchlist_symbols = ["0700.HK", "9988.HK", "0941.HK", "1211.HK", "3690.HK", "AAPL", "TSLA", "600519.SH"]
     results = []
     for sym in watchlist_symbols:
         info = get_stock_info(sym)
         results.append({
             "symbol": sym,
-            "name": HONG_KONG_STOCKS.get(sym, {}).get("name", sym),
+            "name": ALL_STOCKS.get(sym, {}).get("name", sym),
             "price": info["price"],
             "change": info["change"],
             "change_percent": info["change_percent"],
@@ -402,7 +469,7 @@ def get_stock_capital_flow(symbol: str = "0700.HK") -> dict:
     seed = _seeded_random(symbol, "cap_flow")
     return {
         "symbol": symbol,
-        "name": HONG_KONG_STOCKS.get(symbol, {}).get("name", symbol),
+        "name": ALL_STOCKS.get(symbol, {}).get("name", symbol),
         "details": {
             "超大單": round(seed * 5 + 2, 1),
             "大單": round(seed * 3 + 1, 1),
@@ -432,15 +499,18 @@ def get_capital_flow_history(days: int = 20) -> list[dict]:
 
 
 def get_capital_flow_top_stocks(limit: int = 5) -> list[dict]:
-    """Get top stocks by capital flow."""
-    symbols = list(HONG_KONG_STOCKS.keys())
+    """Get top stocks by capital flow (cross-market)."""
+    symbols = list(ALL_STOCKS.keys())
+    random.seed(42)
+    random.shuffle(symbols)
+    random.seed()
     results = []
     for sym in symbols[:limit]:
         info = get_stock_info(sym)
         seed = _seeded_random(sym, "top_flow")
         results.append({
             "symbol": sym,
-            "name": HONG_KONG_STOCKS.get(sym, {}).get("name", sym),
+            "name": ALL_STOCKS.get(sym, {}).get("name", sym),
             "net_flow": round(seed * 10 - 2, 1),
             "price": info["price"],
             "change_pct": info["change_percent"],
@@ -461,12 +531,15 @@ def get_south_north_flow() -> dict:
 
 
 def get_ai_signals() -> list[dict]:
-    """Get AI trading signals for watchlist stocks."""
+    """Get AI trading signals for watchlist stocks (cross-market)."""
     signals = [
         {"symbol": "0700.HK", "name": "騰訊", "signal": "買入", "confidence": 85, "reason": "AI利好", "direction": "up"},
         {"symbol": "0941.HK", "name": "中移動", "signal": "賣出", "confidence": 72, "reason": "資金流出", "direction": "down"},
         {"symbol": "9988.HK", "name": "阿里", "signal": "買入", "confidence": 78, "reason": "業績改善", "direction": "up"},
         {"symbol": "1211.HK", "name": "比亞迪", "signal": "持有", "confidence": 65, "reason": "觀望", "direction": "neutral"},
+        {"symbol": "AAPL", "name": "蘋果", "signal": "買入", "confidence": 82, "reason": "新品週期", "direction": "up"},
+        {"symbol": "TSLA", "name": "特斯拉", "signal": "賣出", "confidence": 68, "reason": "競爭加劇", "direction": "down"},
+        {"symbol": "600519.SH", "name": "茅台", "signal": "買入", "confidence": 76, "reason": "消費復甦", "direction": "up"},
     ]
     return signals
 
@@ -477,6 +550,9 @@ def get_news_sentiment_summary() -> list[dict]:
         {"symbol": "0700.HK", "title": "騰訊AI業務利好", "sentiment": "positive", "summary": "AI業務增長強勁"},
         {"symbol": "3690.HK", "title": "美團外賣業務受壓", "sentiment": "negative", "summary": "競爭加劇利淡"},
         {"symbol": "9988.HK", "title": "阿里雲收入超預期", "sentiment": "positive", "summary": "雲業務復甦"},
+        {"symbol": "AAPL", "title": "Apple AI戰略提速", "sentiment": "positive", "summary": "新AI功能推動換機"},
+        {"symbol": "TSLA", "title": "Tesla Q2交付遜預期", "sentiment": "negative", "summary": "市場份額面臨挑戰"},
+        {"symbol": "600519.SH", "title": "茅台提價預期升溫", "sentiment": "positive", "summary": "白酒板塊走強"},
     ]
 
 
