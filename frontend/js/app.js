@@ -201,6 +201,9 @@ function getMockWatchlist() {
         { symbol: '0941.HK', name: '中移動', price: 71.0, change: -0.4, change_percent: -0.56 },
         { symbol: '1211.HK', name: '比亞迪', price: 282.0, change: 4.8, change_percent: 1.73 },
         { symbol: '3690.HK', name: '美團', price: 162.5, change: 2.1, change_percent: 1.31 },
+        { symbol: 'AAPL', name: '蘋果', price: 232.0, change: 1.8, change_percent: 0.78 },
+        { symbol: 'TSLA', name: '特斯拉', price: 348.0, change: -3.2, change_percent: -0.91 },
+        { symbol: '600519.SH', name: '貴州茅台', price: 1685.0, change: 12.5, change_percent: 0.75 },
     ];
 }
 
@@ -433,7 +436,11 @@ function calculateBollinger(data, period = 20, stdDev = 2) {
 function getMockKlineData(symbol) {
     const data = [];
     const now = new Date();
-    let basePrice = { '0700.HK': 520, '9988.HK': 86, '0941.HK': 71, '1211.HK': 282, '3690.HK': 162 }[symbol] || 100;
+    let basePrice = {
+        '0700.HK': 520, '9988.HK': 86, '0941.HK': 71, '1211.HK': 282, '3690.HK': 162,
+        'AAPL': 232, 'TSLA': 348, 'MSFT': 425, 'AMZN': 200, 'META': 550, 'NVDA': 125,
+        '600519.SH': 1685, '000001.SZ': 12, '601318.SH': 48
+    }[symbol] || 100;
     for (let i = 90; i >= 0; i--) {
         const date = new Date(now);
         date.setDate(now.getDate() - i);
@@ -631,6 +638,9 @@ function getMockAISignals() {
         { symbol: '0941.HK', signal: '賣出', confidence: '72%', reason: '資金流出' },
         { symbol: '9988.HK', signal: '買入', confidence: '78%', reason: '業績改善' },
         { symbol: '1211.HK', signal: '持有', confidence: '65%', reason: '觀望' },
+        { symbol: 'AAPL', signal: '買入', confidence: '82%', reason: '新品週期' },
+        { symbol: 'TSLA', signal: '賣出', confidence: '68%', reason: '競爭加劇' },
+        { symbol: '600519.SH', signal: '買入', confidence: '76%', reason: '消費復甦' },
     ];
 }
 
@@ -672,6 +682,9 @@ function getMockNewsSentiment() {
         { symbol: '0700.HK', title: '騰訊AI業務利好', sentiment: 'positive' },
         { symbol: '3690.HK', title: '美團外賣業務受壓', sentiment: 'negative' },
         { symbol: '9988.HK', title: '阿里雲收入超預期', sentiment: 'positive' },
+        { symbol: 'AAPL', title: 'Apple AI戰略提速', sentiment: 'positive' },
+        { symbol: 'TSLA', title: 'Tesla Q2交付遜預期', sentiment: 'negative' },
+        { symbol: '600519.SH', title: '茅台提價預期升溫', sentiment: 'positive' },
     ];
 }
 
@@ -806,8 +819,8 @@ function getMockTopStockFlow() {
         { symbol: '0700.HK', name: '騰訊', net_flow: 8.2, change_pct: 0.68 },
         { symbol: '9988.HK', name: '阿里', net_flow: 5.6, change_pct: 1.41 },
         { symbol: '3690.HK', name: '美團', net_flow: 4.1, change_pct: 1.31 },
-        { symbol: '1211.HK', name: '比亞迪', net_flow: 3.8, change_pct: 1.73 },
-        { symbol: '2318.HK', name: '中國平安', net_flow: 2.5, change_pct: 0.42 },
+        { symbol: 'AAPL', name: '蘋果', net_flow: 12.3, change_pct: 0.78 },
+        { symbol: 'TSLA', name: '特斯拉', net_flow: -3.2, change_pct: -0.91 },
     ];
 }
 
@@ -1051,11 +1064,17 @@ function renderSignalCard(label, value) {
 }
 
 function getMockStrategy(symbol) {
+    const basePrices = {
+        '0700.HK': 520, '9988.HK': 85, '0941.HK': 72, '1211.HK': 280, '3690.HK': 160,
+        'AAPL': 230, 'TSLA': 350, 'MSFT': 425, 'AMZN': 200, 'NVDA': 125,
+        '600519.SH': 1680
+    };
+    const base = basePrices[symbol] || 100;
     return {
         action: 'buy', overall_score: 78, confidence: '高',
         recommended_position: '30%', risk_reward: 3.2,
-        entry: { buy_price: 515.0, stop_loss: 495.0 },
-        exit: { target_1: 545.0, target_2: 570.0 },
+        entry: { buy_price: parseFloat((base * 0.98).toFixed(2)), stop_loss: parseFloat((base * 0.93).toFixed(2)) },
+        exit: { target_1: parseFloat((base * 1.05).toFixed(2)), target_2: parseFloat((base * 1.12).toFixed(2)) },
         signals: { trend: 'bullish', rsi: 58, macd: 'golden_cross', kdj: 62, bollinger: 'middle' }
     };
 }
