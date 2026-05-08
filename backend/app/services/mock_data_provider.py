@@ -105,6 +105,98 @@ A_STOCKS = {
 
 ALL_STOCKS = {**HONG_KONG_STOCKS, **US_STOCKS, **A_STOCKS}
 
+# ── Consolidated STOCK_INFO with full fields ──
+# ticker, name, exchange, base_price, sector, currency
+STOCK_INFO = {
+    # ════════════════════════════════════════════
+    # 港股 (HKEX) — HKD
+    # ════════════════════════════════════════════
+    "0001.HK": {"name": "CK Hutchison", "exchange": "HKEX", "base_price": 52.0, "sector": "Conglomerate", "currency": "HKD"},
+    "0002.HK": {"name": "CLP Holdings", "exchange": "HKEX", "base_price": 65.0, "sector": "Utilities", "currency": "HKD"},
+    "0003.HK": {"name": "HK & China Gas", "exchange": "HKEX", "base_price": 12.0, "sector": "Utilities", "currency": "HKD"},
+    "0005.HK": {"name": "HSBC Holdings", "exchange": "HKEX", "base_price": 72.0, "sector": "Banking", "currency": "HKD"},
+    "0011.HK": {"name": "Bank of East Asia", "exchange": "HKEX", "base_price": 12.0, "sector": "Banking", "currency": "HKD"},
+    "0016.HK": {"name": "SHK Properties", "exchange": "HKEX", "base_price": 82.0, "sector": "Property", "currency": "HKD"},
+    "0017.HK": {"name": "New World Dev", "exchange": "HKEX", "base_price": 18.0, "sector": "Property", "currency": "HKD"},
+    "0019.HK": {"name": "Swire Pacific", "exchange": "HKEX", "base_price": 45.0, "sector": "Conglomerate", "currency": "HKD"},
+    "0027.HK": {"name": "Galaxy Entertainment", "exchange": "HKEX", "base_price": 38.0, "sector": "Gaming", "currency": "HKD"},
+    "0066.HK": {"name": "MTR Corporation", "exchange": "HKEX", "base_price": 28.0, "sector": "Transport", "currency": "HKD"},
+    "0386.HK": {"name": "Sinopec Corp", "exchange": "HKEX", "base_price": 4.5, "sector": "Energy", "currency": "HKD"},
+    "0388.HK": {"name": "HKEX", "exchange": "HKEX", "base_price": 310.0, "sector": "Finance", "currency": "HKD"},
+    "0669.HK": {"name": "Techtronic Ind", "exchange": "HKEX", "base_price": 110.0, "sector": "Manufacturing", "currency": "HKD"},
+    "0700.HK": {"name": "Tencent Holdings", "exchange": "HKEX", "base_price": 520.0, "sector": "Technology", "currency": "HKD"},
+    "0823.HK": {"name": "Link REIT", "exchange": "HKEX", "base_price": 38.0, "sector": "Real Estate", "currency": "HKD"},
+    "0883.HK": {"name": "CNOOC", "exchange": "HKEX", "base_price": 18.0, "sector": "Energy", "currency": "HKD"},
+    "0900.HK": {"name": "Aeon Stores", "exchange": "HKEX", "base_price": 2.0, "sector": "Retail", "currency": "HKD"},
+    "0939.HK": {"name": "CCB", "exchange": "HKEX", "base_price": 6.5, "sector": "Banking", "currency": "HKD"},
+    "0941.HK": {"name": "China Mobile", "exchange": "HKEX", "base_price": 72.0, "sector": "Telecom", "currency": "HKD"},
+    "0968.HK": {"name": "Xinyi Glass", "exchange": "HKEX", "base_price": 14.0, "sector": "Manufacturing", "currency": "HKD"},
+    "0981.HK": {"name": "SMIC", "exchange": "HKEX", "base_price": 28.0, "sector": "Semiconductor", "currency": "HKD"},
+    "0999.HK": {"name": "Hua Hong Semiconductor", "exchange": "HKEX", "base_price": 18.0, "sector": "Technology", "currency": "HKD"},
+    "1024.HK": {"name": "Kuaishou Tech", "exchange": "HKEX", "base_price": 52.0, "sector": "Technology", "currency": "HKD"},
+    "1211.HK": {"name": "BYD Co.", "exchange": "HKEX", "base_price": 280.0, "sector": "Automotive", "currency": "HKD"},
+    "1299.HK": {"name": "AIA Group", "exchange": "HKEX", "base_price": 75.0, "sector": "Insurance", "currency": "HKD"},
+    "1398.HK": {"name": "ICBC", "exchange": "HKEX", "base_price": 5.0, "sector": "Banking", "currency": "HKD"},
+    "1810.HK": {"name": "Xiaomi Corp", "exchange": "HKEX", "base_price": 30.0, "sector": "Technology", "currency": "HKD"},
+    "1928.HK": {"name": "Sands China", "exchange": "HKEX", "base_price": 28.0, "sector": "Gaming", "currency": "HKD"},
+    "2318.HK": {"name": "Ping An Insurance", "exchange": "HKEX", "base_price": 55.0, "sector": "Insurance", "currency": "HKD"},
+    "2382.HK": {"name": "Sunny Optical", "exchange": "HKEX", "base_price": 42.0, "sector": "Technology", "currency": "HKD"},
+    "2388.HK": {"name": "BOC Hong Kong", "exchange": "HKEX", "base_price": 25.0, "sector": "Banking", "currency": "HKD"},
+    "2628.HK": {"name": "China Life", "exchange": "HKEX", "base_price": 12.0, "sector": "Insurance", "currency": "HKD"},
+    "2800.HK": {"name": "Tracker Fund", "exchange": "HKEX", "base_price": 22.0, "sector": "ETF", "currency": "HKD"},
+    "2823.HK": {"name": "A50 ETF", "exchange": "HKEX", "base_price": 13.0, "sector": "ETF", "currency": "HKD"},
+    "3690.HK": {"name": "Meituan", "exchange": "HKEX", "base_price": 160.0, "sector": "E-Commerce", "currency": "HKD"},
+    "3988.HK": {"name": "Bank of China", "exchange": "HKEX", "base_price": 4.0, "sector": "Banking", "currency": "HKD"},
+    "6189.HK": {"name": "Nongfu Spring", "exchange": "HKEX", "base_price": 42.0, "sector": "Beverage", "currency": "HKD"},
+    "6862.HK": {"name": "Haidi Lao", "exchange": "HKEX", "base_price": 18.0, "sector": "Restaurant", "currency": "HKD"},
+    "6888.HK": {"name": "Alibaba Health", "exchange": "HKEX", "base_price": 5.0, "sector": "Healthcare", "currency": "HKD"},
+    "9618.HK": {"name": "JD.com", "exchange": "HKEX", "base_price": 135.0, "sector": "E-Commerce", "currency": "HKD"},
+    "9626.HK": {"name": "Bilibili", "exchange": "HKEX", "base_price": 100.0, "sector": "Technology", "currency": "HKD"},
+    "9888.HK": {"name": "Baidu", "exchange": "HKEX", "base_price": 85.0, "sector": "Technology", "currency": "HKD"},
+    "9923.HK": {"name": "YES Securit", "exchange": "HKEX", "base_price": 10.0, "sector": "Finance", "currency": "HKD"},
+    "9961.HK": {"name": "Trip.com", "exchange": "HKEX", "base_price": 450.0, "sector": "Travel", "currency": "HKD"},
+    "9988.HK": {"name": "Alibaba Group", "exchange": "HKEX", "base_price": 85.0, "sector": "E-Commerce", "currency": "HKD"},
+    "9989.HK": {"name": "Dongfeng Motor", "exchange": "HKEX", "base_price": 3.5, "sector": "Automotive", "currency": "HKD"},
+    # ════════════════════════════════════════════
+    # 美股 (NASDAQ / NYSE) — USD
+    # ════════════════════════════════════════════
+    "AAPL": {"name": "Apple Inc.", "exchange": "NASDAQ", "base_price": 230.0, "sector": "Technology", "currency": "USD"},
+    "AMD": {"name": "Advanced Micro Devices", "exchange": "NASDAQ", "base_price": 160.0, "sector": "Semiconductor", "currency": "USD"},
+    "AMZN": {"name": "Amazon.com", "exchange": "NASDAQ", "base_price": 200.0, "sector": "E-Commerce", "currency": "USD"},
+    "COST": {"name": "Costco Wholesale", "exchange": "NASDAQ", "base_price": 900.0, "sector": "Retail", "currency": "USD"},
+    "GOOGL": {"name": "Alphabet Inc.", "exchange": "NASDAQ", "base_price": 175.0, "sector": "Technology", "currency": "USD"},
+    "INTC": {"name": "Intel Corp", "exchange": "NASDAQ", "base_price": 30.0, "sector": "Semiconductor", "currency": "USD"},
+    "JNJ": {"name": "Johnson & Johnson", "exchange": "NYSE", "base_price": 160.0, "sector": "Healthcare", "currency": "USD"},
+    "JPM": {"name": "JPMorgan Chase", "exchange": "NYSE", "base_price": 210.0, "sector": "Banking", "currency": "USD"},
+    "META": {"name": "Meta Platforms", "exchange": "NASDAQ", "base_price": 550.0, "sector": "Technology", "currency": "USD"},
+    "MSFT": {"name": "Microsoft Corp", "exchange": "NASDAQ", "base_price": 425.0, "sector": "Technology", "currency": "USD"},
+    "NFLX": {"name": "Netflix Inc.", "exchange": "NASDAQ", "base_price": 850.0, "sector": "Entertainment", "currency": "USD"},
+    "NVDA": {"name": "NVIDIA Corp", "exchange": "NASDAQ", "base_price": 125.0, "sector": "Semiconductor", "currency": "USD"},
+    "TSLA": {"name": "Tesla Inc.", "exchange": "NASDAQ", "base_price": 350.0, "sector": "Automotive", "currency": "USD"},
+    "V": {"name": "Visa Inc.", "exchange": "NYSE", "base_price": 280.0, "sector": "Finance", "currency": "USD"},
+    # ════════════════════════════════════════════
+    # A股 (SZSE / SSE) — CNY
+    # ════════════════════════════════════════════
+    "000001.SZ": {"name": "平安銀行", "exchange": "SZSE", "base_price": 12.0, "sector": "Banking", "currency": "CNY"},
+    "000002.SZ": {"name": "万科A", "exchange": "SZSE", "base_price": 8.0, "sector": "Real Estate", "currency": "CNY"},
+    "000333.SZ": {"name": "美的集團", "exchange": "SZSE", "base_price": 68.0, "sector": "Manufacturing", "currency": "CNY"},
+    "000568.SZ": {"name": "瀘州老窖", "exchange": "SZSE", "base_price": 180.0, "sector": "Beverage", "currency": "CNY"},
+    "000651.SZ": {"name": "格力電器", "exchange": "SZSE", "base_price": 40.0, "sector": "Manufacturing", "currency": "CNY"},
+    "000858.SZ": {"name": "五糧液", "exchange": "SZSE", "base_price": 135.0, "sector": "Beverage", "currency": "CNY"},
+    "002415.SZ": {"name": "海康威視", "exchange": "SZSE", "base_price": 32.0, "sector": "Technology", "currency": "CNY"},
+    "002594.SZ": {"name": "比亞迪", "exchange": "SZSE", "base_price": 260.0, "sector": "Automotive", "currency": "CNY"},
+    "300750.SZ": {"name": "寧德時代", "exchange": "SZSE", "base_price": 210.0, "sector": "Manufacturing", "currency": "CNY"},
+    "600036.SH": {"name": "招商銀行", "exchange": "SSE", "base_price": 38.0, "sector": "Banking", "currency": "CNY"},
+    "600276.SH": {"name": "恆瑞醫藥", "exchange": "SSE", "base_price": 42.0, "sector": "Healthcare", "currency": "CNY"},
+    "600519.SH": {"name": "貴州茅台", "exchange": "SSE", "base_price": 1680.0, "sector": "Beverage", "currency": "CNY"},
+    "600887.SH": {"name": "伊利股份", "exchange": "SSE", "base_price": 28.0, "sector": "Beverage", "currency": "CNY"},
+    "600900.SH": {"name": "長江電力", "exchange": "SSE", "base_price": 25.0, "sector": "Utilities", "currency": "CNY"},
+    "601318.SH": {"name": "中國平安", "exchange": "SSE", "base_price": 48.0, "sector": "Insurance", "currency": "CNY"},
+    "601398.SH": {"name": "工商銀行", "exchange": "SSE", "base_price": 6.0, "sector": "Banking", "currency": "CNY"},
+    "601857.SH": {"name": "中國石油", "exchange": "SSE", "base_price": 8.5, "sector": "Energy", "currency": "CNY"},
+    "603259.SH": {"name": "藥明康德", "exchange": "SSE", "base_price": 55.0, "sector": "Healthcare", "currency": "CNY"},
+}
+
 
 def _seeded_random(symbol: str, field: str = "price") -> float:
     """Deterministic pseudo-random based on symbol for consistent mock values."""
@@ -155,6 +247,8 @@ def get_stock_info(symbol: str) -> dict:
     First call generates the price deterministically and caches it.
     Subsequent calls within the same session return the cached value,
     ensuring consistent prices across all pages (watchlist, detail, etc.).
+    
+    Returns fields: symbol, name, exchange, sector, currency, price, change, etc.
     """
     # Return cached result if available (session-level consistency)
     if symbol in _stock_info_cache:
@@ -162,8 +256,11 @@ def get_stock_info(symbol: str) -> dict:
         cached["timestamp"] = datetime.now().isoformat()
         return cached
 
-    info = ALL_STOCKS.get(symbol, {"name": symbol, "sector": "Unknown"})
-    base = _base_price(symbol)
+    # Use STOCK_INFO for structured fields, fallback to ALL_STOCKS
+    info = STOCK_INFO.get(symbol) or ALL_STOCKS.get(symbol, {"name": symbol, "sector": "Unknown"})
+    base = info.get("base_price", _base_price(symbol))
+    exchange = info.get("exchange", "")
+    currency = info.get("currency", "")
     seed_variation = _seeded_random(symbol, "variation") * 0.2 - 0.1
     price = round(base * (1 + seed_variation), 2)
     change_pct = round((_seeded_random(symbol, "change") * 0.06) - 0.03, 2)
@@ -172,7 +269,9 @@ def get_stock_info(symbol: str) -> dict:
     result = {
         "symbol": symbol,
         "name": info["name"],
+        "exchange": exchange,
         "sector": info["sector"],
+        "currency": currency,
         "price": price,
         "change": change,
         "change_percent": change_pct * 100,
