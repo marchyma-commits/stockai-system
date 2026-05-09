@@ -697,7 +697,7 @@ function updateTradePlan() {
     if (rrEl) rrEl.innerHTML = `風險回報比: ${riskRewardRatio !== 'N/A' ? `1:${riskRewardRatio}` : 'N/A'}`;
 
     let action = '觀望';
-    let actionColor = '#99aabc';
+    let actionColor = '#94a3b8';
     let position = '觀望';
     let confidence = '中';
 
@@ -800,24 +800,24 @@ function updateIntradayIndicators(indicators) {
 
     setValue('vwapValue', indicators.vwap ? `$${indicators.vwap.toFixed(2)}` : '--');
     const vwapSignal = indicators.vwap_signal || '中性';
-    setSignal('vwapSignal', vwapSignal, vwapSignal === '上方' ? '#10b981' : vwapSignal === '下方' ? '#ef4444' : '#99aabc');
+    setSignal('vwapSignal', vwapSignal, vwapSignal === '上方' ? '#10b981' : vwapSignal === '下方' ? '#ef4444' : '#94a3b8');
 
     const rsi7 = indicators.rsi7 !== undefined ? indicators.rsi7.toFixed(1) : '50.0';
     setValue('intradayRsi', rsi7);
     const rsi = parseFloat(rsi7);
     let rsiSignal = '中性';
-    let rsiColor = '#99aabc';
+    let rsiColor = '#94a3b8';
     if (rsi > 70) { rsiSignal = '超買'; rsiColor = '#ef4444'; }
     else if (rsi < 30) { rsiSignal = '超賣'; rsiColor = '#10b981'; }
     setSignal('intradayRsiSignal', rsiSignal, rsiColor);
 
     setValue('bbPosition', indicators.bb_position || '中軌附近');
     const bbSignalText = indicators.bb_signal || '正常';
-    setSignal('bbSignal', bbSignalText, bbSignalText === '超買' ? '#ef4444' : bbSignalText === '超賣' ? '#10b981' : '#99aabc');
+    setSignal('bbSignal', bbSignalText, bbSignalText === '超買' ? '#ef4444' : bbSignalText === '超賣' ? '#10b981' : '#94a3b8');
 
     setValue('cumulativeDelta', indicators.delta || '--');
     const deltaSignal = indicators.delta_signal || '中性';
-    setSignal('deltaSignal', deltaSignal, deltaSignal === '正流入' ? '#10b981' : deltaSignal === '負流出' ? '#ef4444' : '#99aabc');
+    setSignal('deltaSignal', deltaSignal, deltaSignal === '正流入' ? '#10b981' : deltaSignal === '負流出' ? '#ef4444' : '#94a3b8');
 
     setValue('atr5', indicators.atr5 ? `$${indicators.atr5.toFixed(2)}` : '--');
     setValue('atrSignal', indicators.atr_signal || '正常波動');
@@ -830,10 +830,10 @@ function updateIntradayIndicators(indicators) {
     setValue('intradayVolumeShort', typeof volume === 'number' ? formatIntradayVolume(volume) : volume);
     const volumeRatio = intradayCurrentStock?.technicals?.volume_ratio || 1;
     setSignal('volumeSignalShort', volumeRatio > 1.2 ? '放量' : volumeRatio < 0.8 ? '縮量' : '正常',
-        volumeRatio > 1.2 ? '#10b981' : volumeRatio < 0.8 ? '#ef4444' : '#99aabc');
+        volumeRatio > 1.2 ? '#10b981' : volumeRatio < 0.8 ? '#ef4444' : '#94a3b8');
 
     setValue('moneyFlow', indicators.delta || '0');
-    setSignal('moneyFlowSignal', deltaSignal, deltaSignal === '正流入' ? '#10b981' : deltaSignal === '負流出' ? '#ef4444' : '#99aabc');
+    setSignal('moneyFlowSignal', deltaSignal, deltaSignal === '正流入' ? '#10b981' : deltaSignal === '負流出' ? '#ef4444' : '#94a3b8');
 }
 
 function updateIntradayAISignals(data) {
@@ -861,12 +861,12 @@ function updateIntradayAISignals(data) {
 
     const rsi14 = tech.rsi14 || 50;
     const rsiSignal = rsi14 > 60 ? '偏強' : (rsi14 < 40 ? '偏弱' : '中性');
-    setSignal('intradayRsiSignal2', rsiSignal, rsiSignal === '偏強' ? '#10b981' : rsiSignal === '偏弱' ? '#ef4444' : '#99aabc');
+    setSignal('intradayRsiSignal2', rsiSignal, rsiSignal === '偏強' ? '#10b981' : rsiSignal === '偏弱' ? '#ef4444' : '#94a3b8');
 
     const vwapSignal = currentPrice > ma20 ? '上方' : (currentPrice < ma20 ? '下方' : '持平');
-    setSignal('intradayVwapSignal2', vwapSignal, vwapSignal === '上方' ? '#10b981' : vwapSignal === '下方' ? '#ef4444' : '#99aabc');
+    setSignal('intradayVwapSignal2', vwapSignal, vwapSignal === '上方' ? '#10b981' : vwapSignal === '下方' ? '#ef4444' : '#94a3b8');
 
-    setSignal('intradayDeltaSignal2', '中性', '#99aabc');
+    setSignal('intradayDeltaSignal2', '中性', '#94a3b8');
 
     // 專業交易員綜合建議
     const session = getTradingSession();

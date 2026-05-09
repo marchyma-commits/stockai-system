@@ -15,7 +15,7 @@
   }
 
   h1 { font-size: 20px; color: #60a5fa; margin-bottom: 4px; }
-  .subtitle { font-size: 13px; color: #99aabc; margin-bottom: 20px; }
+  .subtitle { font-size: 13px; color: #64748b; margin-bottom: 20px; }
 
   /* ── 搜索栏 ── */
   .search-bar {
@@ -34,7 +34,7 @@
   }
   .btn-primary { background: #3b82f6; color: #fff; }
   .btn-primary:hover { background: #2563eb; }
-  .btn-secondary { background: #1e293b; color: #99aabc; border: 1px solid #334155; }
+  .btn-secondary { background: #1e293b; color: #94a3b8; border: 1px solid #334155; }
   .btn-secondary:hover { background: #334155; }
 
   /* ── 数据来源标签 ── */
@@ -68,42 +68,42 @@
     gap: 8px;
   }
   .metric-row:last-child { border-bottom: none; }
-  .metric-label { font-size: 12px; color: #99aabc; flex-shrink: 0; }
+  .metric-label { font-size: 12px; color: #94a3b8; flex-shrink: 0; }
   .metric-right { text-align: right; }
   .metric-value { font-size: 14px; font-weight: 600; color: #e2e8f0; }
-  .metric-source { font-size: 10px; color: #99aabc; margin-top: 2px; }
+  .metric-source { font-size: 10px; color: #64748b; margin-top: 2px; }
   .metric-verify { font-size: 10px; margin-top: 2px; }
   .v-ok   { color: #34d399; }
   .v-warn { color: #fbbf24; }
   .v-err  { color: #f87171; }
-  .v-na   { color: #99aabc; }
+  .v-na   { color: #64748b; }
 
   /* ── 历史表格 ── */
   .hist-table { width: 100%; border-collapse: collapse; font-size: 12px; }
   .hist-table th {
-    background: #0f172a; color: #99aabc; font-weight: 600;
+    background: #0f172a; color: #64748b; font-weight: 600;
     padding: 6px 8px; text-align: right; border-bottom: 1px solid #334155;
   }
   .hist-table th:first-child { text-align: left; }
   .hist-table td { padding: 6px 8px; text-align: right; border-bottom: 1px solid rgba(51,65,85,0.4); }
-  .hist-table td:first-child { text-align: left; color: #99aabc; }
+  .hist-table td:first-child { text-align: left; color: #94a3b8; }
   .hist-table tr:hover td { background: rgba(51,65,85,0.3); }
   .pos { color: #34d399; }
   .neg { color: #f87171; }
-  .neutral { color: #99aabc; }
+  .neutral { color: #94a3b8; }
 
   /* ── 核实摘要 ── */
   .verify-summary {
     background: #0f172a; border: 1px solid #334155;
     border-radius: 12px; padding: 16px; margin-bottom: 16px;
   }
-  .verify-summary h3 { font-size: 14px; color: #99aabc; margin-bottom: 12px; }
+  .verify-summary h3 { font-size: 14px; color: #94a3b8; margin-bottom: 12px; }
   .verify-items { display: flex; flex-wrap: wrap; gap: 8px; }
   .vitem {
     background: #1e293b; border-radius: 8px; padding: 10px 14px;
     min-width: 140px; flex: 1;
   }
-  .vitem-label { font-size: 10px; color: #99aabc; margin-bottom: 4px; }
+  .vitem-label { font-size: 10px; color: #64748b; margin-bottom: 4px; }
   .vitem-value { font-size: 15px; font-weight: 700; }
 
   /* ── 外部链接区 ── */
@@ -111,13 +111,13 @@
   .ext-link {
     display: inline-flex; align-items: center; gap: 5px;
     padding: 7px 13px; background: #1e293b; border: 1px solid #334155;
-    border-radius: 8px; font-size: 12px; color: #99aabc;
+    border-radius: 8px; font-size: 12px; color: #94a3b8;
     text-decoration: none; transition: all 0.2s;
   }
   .ext-link:hover { border-color: #60a5fa; color: #60a5fa; }
 
   /* ── 状态 ── */
-  .loading { text-align: center; color: #99aabc; padding: 40px; }
+  .loading { text-align: center; color: #64748b; padding: 40px; }
   .error-box {
     background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
     border-radius: 8px; padding: 12px 16px; color: #f87171; font-size: 13px;
@@ -175,7 +175,7 @@
       </div>
       <div class="vitem">
         <div class="vitem-label">最新报告期</div>
-        <div class="vitem-value" id="vPeriod" style="color:#99aabc;font-size:13px;">—</div>
+        <div class="vitem-value" id="vPeriod" style="color:#94a3b8;font-size:13px;">—</div>
       </div>
       <div class="vitem">
         <div class="vitem-label">数据新鲜度</div>
@@ -255,7 +255,7 @@
   <!-- 核实指引 -->
   <div class="panel">
     <div class="panel-title">🔎 如何与官方来源核实</div>
-    <div id="verifyGuide" style="font-size:12px;color:#99aabc;line-height:1.8;"></div>
+    <div id="verifyGuide" style="font-size:12px;color:#94a3b8;line-height:1.8;"></div>
   </div>
 
 </div><!-- /#result -->
@@ -311,7 +311,7 @@ function hint(text, cls) { return {text, cls}; }
 
 function buildHistTable(history) {
   if (!history || !history.length) {
-    document.getElementById('histBody').innerHTML = '<tr><td colspan="11" style="color:#99aabc;text-align:center;">无历史数据</td></tr>';
+    document.getElementById('histBody').innerHTML = '<tr><td colspan="11" style="color:#64748b;text-align:center;">无历史数据</td></tr>';
     return;
   }
   let html = '';
@@ -349,7 +349,7 @@ function buildVerifyGuide(symbol, source) {
       <li style="margin-bottom:6px;">📌 <strong>彭博/路透</strong>：
         企业信息页面核实 ROE、ROA、资产负债率。</li>
     </ul>
-    <p style="margin-top:10px;color:#99aabc;">
+    <p style="margin-top:10px;color:#64748b;">
       当前系统数据来源：${srcLabel(source)}。
       ${source === 'local' ? '✅ 本地数据来自 akshare（东方财富），准确度高，通常与官方报告一致，差异在±0.5%内属正常（取整/汇率）。' : ''}
       ${source === 'demo' ? '⚠️ 当前显示的是演示数据，不代表真实财务指标！请重启服务器后重新查询。' : ''}
@@ -407,7 +407,7 @@ async function verifyStock() {
       ageEl.style.color = age <= 7 ? '#34d399' : (age <= 30 ? '#fbbf24' : '#f87171');
     } else {
       document.getElementById('vAge').textContent = source === 'cache' ? '缓存数据' : '实时';
-      document.getElementById('vAge').style.color = '#99aabc';
+      document.getElementById('vAge').style.color = '#94a3b8';
     }
 
     // ── 外部链接 ──
@@ -473,7 +473,7 @@ async function verifyStock() {
           <div style="display:flex;align-items:center;gap:4px;">
             <div style="background:${active ? '#1e3a5f' : '#1e293b'};border:1px solid ${active ? '#3b82f6' : '#334155'};
                         border-radius:8px;padding:8px 12px;font-size:11px;min-width:120px;">
-              <div style="color:${active ? '#60a5fa' : '#99aabc'};font-weight:600;margin-bottom:2px;">
+              <div style="color:${active ? '#60a5fa' : '#64748b'};font-weight:600;margin-bottom:2px;">
                 ${active ? '✅' : '○'} ${step.name}
               </div>
               <div style="color:#475569;font-size:10px;">${step.desc}</div>
@@ -491,7 +491,7 @@ async function verifyStock() {
       if (data.verify.local_file) {
         const lf = data.verify.local_file;
         document.getElementById('dataRecommend').innerHTML +=
-          `<br><span style="color:#99aabc;">📁 本地文件：${lf.path}
+          `<br><span style="color:#64748b;">📁 本地文件：${lf.path}
            ${lf.exists ? ` · ${lf.size_kb} KB · 更新于 ${lf.modified_str}` : ' · ❌ 文件不存在（将使用在线数据源）'}</span>`;
       }
     }

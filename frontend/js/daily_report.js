@@ -84,7 +84,7 @@ function _openScanWindow(html, missingCodes, missingCount) {
         'padding:8px 16px;background:linear-gradient(135deg,#1e293b,#334155);' +
         'display:flex;align-items:center;justify-content:flex-end;gap:8px;' +
         'box-shadow:0 2px 12px rgba(0,0,0,0.3);">' +
-        '<span id="_refreshStatus" style="color:#99aabc;font-size:12px;"></span>' +
+        '<span id="_refreshStatus" style="color:#94a3b8;font-size:12px;"></span>' +
         '<button id="_refreshMissingBtn" style="padding:8px 18px;background:linear-gradient(135deg,#ef4444,#dc2626);' +
         'color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;' +
         'box-shadow:0 2px 8px rgba(239,68,68,0.3);transition:all 0.2s;">' +
@@ -118,7 +118,7 @@ function _openScanWindow(html, missingCodes, missingCount) {
         '    "justify-content:flex-end;gap:8px;box-shadow:0 2px 12px rgba(0,0,0,0.3);";' +
         '  var span = document.createElement("span");' +
         '  span.id = "_refreshStatus";' +
-        '  span.style.cssText = "color:#99aabc;font-size:12px;";' +
+        '  span.style.cssText = "color:#94a3b8;font-size:12px;";' +
         '  div.appendChild(span);' +
         '  var btn = document.createElement("button");' +
         '  btn.id = "_refreshMissingBtn";' +
