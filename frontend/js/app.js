@@ -552,9 +552,9 @@ function updateRecommendation(data) {
 
     const peDescriptionEl = document.getElementById('peDescription');
     if (peDescriptionEl) {
-        peDescriptionEl.innerHTML = `<span style="font-size: 12px; color: #94a3b8;">${peDesc || '估值數據分析中...'}</span>`;
+        peDescriptionEl.innerHTML = `<span style="font-size: 12px; color: #99aabc;">${peDesc || '估值數據分析中...'}</span>`;
         if (historicalCount > 0) {
-            peDescriptionEl.innerHTML += `<span style="font-size: 11px; color: #64748b; display: block; margin-top: 4px;">📊 基於 ${historicalCount} 個歷史數據點</span>`;
+            peDescriptionEl.innerHTML += `<span style="font-size: 11px; color: #99aabc; display: block; margin-top: 4px;">📊 基於 ${historicalCount} 個歷史數據點</span>`;
         }
     }
 
@@ -587,10 +587,10 @@ function updateRecommendation(data) {
         recText.innerHTML = `
             <strong>${data.name || data.symbol} (${data.symbol})</strong> - ${statusText}<br><br>
             <span class="${recColorClass}">${recommendation}</span><br><br>
-            <span style="color: #94a3b8;">• 支撐位：$${tech.ma20 || price} / $${tech.ma50 || price}</span><br>
-            <span style="color: #94a3b8;">• 阻力位：$${Math.round(price * 1.05)} / ${data.week_high || price * 1.1}</span><br>
-            <span style="color: #94a3b8;">• RSI：${rsi} (${rsi > 70 ? '超買' : rsi < 30 ? '超賣' : '正常'})</span><br>
-            <span style="color: #94a3b8;">• MACD：${(tech.macd_dif || 0) > (tech.macd_dea || 0) ? '黃金交叉' : '死亡交叉'}</span>
+            <span style="color: #99aabc;">• 支撐位：$${tech.ma20 || price} / $${tech.ma50 || price}</span><br>
+            <span style="color: #99aabc;">• 阻力位：$${Math.round(price * 1.05)} / ${data.week_high || price * 1.1}</span><br>
+            <span style="color: #99aabc;">• RSI：${rsi} (${rsi > 70 ? '超買' : rsi < 30 ? '超賣' : '正常'})</span><br>
+            <span style="color: #99aabc;">• MACD：${(tech.macd_dif || 0) > (tech.macd_dea || 0) ? '黃金交叉' : '死亡交叉'}</span>
         `;
     }
 }
@@ -687,13 +687,13 @@ function updateAIPredictionUI(prediction) {
             const signalClass = model.signal === '買入' ? 'badge-buy' : model.signal === '賣出' ? 'badge-sell' : 'badge-neutral';
             return `<div style="background:rgba(0,0,0,0.2);border-radius:12px;padding:12px;margin-bottom:8px;">
                 <div style="display:flex;justify-content:space-between;align-items:center;">
-                    <div><span style="font-weight:600;">${model.name}</span><span style="color:#94a3b8;font-size:12px;margin-left:8px;">${model.detail || ''}</span></div>
+                    <div><span style="font-weight:600;">${model.name}</span><span style="color:#99aabc;font-size:12px;margin-left:8px;">${model.detail || ''}</span></div>
                     <div><span class="badge ${signalClass}">${model.signal}</span><span style="margin-left:8px;">${model.score}/100</span></div>
                 </div>
             </div>`;
         }).join('');
     } else {
-        modelsHtml = '<div style="color:#64748b;text-align:center;padding:20px;">AI預測數據載入中...</div>';
+        modelsHtml = '<div style="color:#99aabc;text-align:center;padding:20px;">AI預測數據載入中...</div>';
     }
 
     container.innerHTML = `
@@ -879,7 +879,7 @@ async function fetchFinancialReport(reportType = 'annual') {
 // 渲染财务报告内容
 function renderFinancialReport(data, container) {
     if (!data || data.length === 0) {
-        container.innerHTML = '<div style="padding: 10px; color: #94a3b8;">暂无财务报告数据</div>';
+        container.innerHTML = '<div style="padding: 10px; color: #99aabc;">暂无财务报告数据</div>';
         return;
     }
     
@@ -894,7 +894,7 @@ function renderFinancialReport(data, container) {
                 html += `
                     <div style="background: rgba(255,193,7,0.1); border: 1px solid rgba(255,193,7,0.3); border-radius: 8px; padding: 12px; margin-bottom: 10px;">
                         <div style="color: #ffc107; font-size: 12px;">⚠️ ${item.note || '数据获取提示'}</div>
-                        <div style="color: #94a3b8; font-size: 11px; margin-top: 8px;">${item.suggestion || ''}</div>
+                        <div style="color: #99aabc; font-size: 11px; margin-top: 8px;">${item.suggestion || ''}</div>
                     </div>
                 `;
                 continue;
@@ -908,7 +908,7 @@ function renderFinancialReport(data, container) {
                     html += `
                         <div style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 10px;">
                             <div style="font-size: 12px; color: #e2e8f0; margin-bottom: 4px;">${ann.title || ''}</div>
-                            <div style="font-size: 11px; color: #94a3b8;">
+                            <div style="font-size: 11px; color: #99aabc;">
                                 <span style="color: #a78bfa;">📅 ${ann.date || ''}</span>
                             </div>
                         </div>
@@ -948,10 +948,10 @@ function renderFinancialReport(data, container) {
         
         // 如果没有有效数据
         if (!html || html === '') {
-            html = '<div style="padding: 10px; color: #94a3b8;">暂无可用数据，请稍后重试</div>';
+            html = '<div style="padding: 10px; color: #99aabc;">暂无可用数据，请稍后重试</div>';
         }
     } else {
-        html = '<div style="padding: 10px; color: #94a3b8;">暂无可用数据</div>';
+        html = '<div style="padding: 10px; color: #99aabc;">暂无可用数据</div>';
     }
     
     container.innerHTML = html;
@@ -966,14 +966,14 @@ function createFinItem(label, value, changePercent = null) {
     // 如果有变化百分比，根据变化显示颜色
     let changeHtml = '';
     if (changePercent !== null && !isNaN(changePercent)) {
-        const changeColor = changePercent > 0 ? '#10b981' : (changePercent < 0 ? '#ef4444' : '#94a3b8');
+        const changeColor = changePercent > 0 ? '#10b981' : (changePercent < 0 ? '#ef4444' : '#99aabc');
         const changeIcon = changePercent > 0 ? '↑' : (changePercent < 0 ? '↓' : '-');
         changeHtml = `<div style="font-size: 11px; color: ${changeColor}; margin-top: 4px;">${changeIcon} ${Math.abs(changePercent).toFixed(2)}%</div>`;
     }
     
     return `
         <div style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 10px;">
-            <div style="font-size: 11px; color: #94a3b8;">${label}</div>
+            <div style="font-size: 11px; color: #99aabc;">${label}</div>
             <div style="font-size: 14px; font-weight: 600; color: ${color};">${value}</div>
             ${changeHtml}
         </div>
@@ -1036,7 +1036,7 @@ async function fetchFinancialRatios() {
                     reportContent.insertAdjacentHTML('afterbegin', sourceInfo);
                 }
             } else {
-                reportContent.innerHTML = '<div style="padding: 10px; color: #94a3b8;">暂无财务比率数据</div>';
+                reportContent.innerHTML = '<div style="padding: 10px; color: #99aabc;">暂无财务比率数据</div>';
             }
         } else {
             reportContent.innerHTML = `<div style="padding: 10px; color: #ef4444;">⚠️ ${data.error || '无法获取财务比率'}</div>`;
@@ -1050,7 +1050,7 @@ async function fetchFinancialRatios() {
 // 渲染财务比率 - 增强版
 function renderFinancialRatios(ratios, container, indicatorHistory = null) {
     if (!ratios) {
-        container.innerHTML = '<div style="padding: 10px; color: #94a3b8;">暂无数据</div>';
+        container.innerHTML = '<div style="padding: 10px; color: #99aabc;">暂无数据</div>';
         return;
     }
     
@@ -1254,13 +1254,13 @@ function renderFinancialRatios(ratios, container, indicatorHistory = null) {
                     <div style="display: flex; align-items: center; gap: 10px;">
                         <div style="font-size: 28px;">${healthScore.emoji}</div>
                         <div>
-                            <div style="font-size: 12px; color: #94a3b8; margin-bottom: 2px;">AI 财务健康评分</div>
-                            <div style="font-size: 20px; font-weight: 700; color: ${healthScore.color};">${healthScore.score}<span style="font-size: 12px; color: #64748b;">/100</span></div>
+                            <div style="font-size: 12px; color: #99aabc; margin-bottom: 2px;">AI 财务健康评分</div>
+                            <div style="font-size: 20px; font-weight: 700; color: ${healthScore.color};">${healthScore.score}<span style="font-size: 12px; color: #99aabc;">/100</span></div>
                         </div>
                     </div>
                     <div style="text-align: right;">
                         <div style="font-size: 14px; font-weight: 600; color: ${healthScore.color};">${healthScore.rating}</div>
-                        <div style="font-size: 10px; color: #64748b; max-width: 150px; margin-top: 4px;">${healthScore.comment}</div>
+                        <div style="font-size: 10px; color: #99aabc; max-width: 150px; margin-top: 4px;">${healthScore.comment}</div>
                     </div>
                 </div>
                 <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
@@ -1401,15 +1401,15 @@ function createFinItemV2(label, value, description = '', changePercent = null, u
     let changeHtml = '';
     if (changePercent !== null && !isNaN(changePercent)) {
         const isPositive = changePercent > 0;
-        const changeColor = isPositive ? '#10b981' : (changePercent < 0 ? '#ef4444' : '#94a3b8');
+        const changeColor = isPositive ? '#10b981' : (changePercent < 0 ? '#ef4444' : '#99aabc');
         const changeIcon = isPositive ? '↗' : (changePercent < 0 ? '↘' : '→');
         const sign = isPositive ? '+' : '';
         changeHtml = `<div style="font-size: 10px; color: ${changeColor}; margin-top: 2px; font-weight: 500;">${changeIcon} ${sign}${changePercent.toFixed(1)}%</div>`;
     }
 
     return `
-        <div class="fin-item-v2" style="background: linear-gradient(135deg, rgba(30,41,59,0.8) 0%, rgba(51,65,85,0.6) 100%); border: 1px solid rgba(148,163,184,0.1); border-radius: 10px; padding: 10px; transition: all 0.2s; cursor: help;" title="${description}">
-            <div style="font-size: 10px; color: #94a3b8; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
+        <div class="fin-item-v2" style="background: linear-gradient(135deg, rgba(30,41,59,0.8) 0%, rgba(51,65,85,0.6) 100%); border: 1px solid rgba(153,170,188,0.1); border-radius: 10px; padding: 10px; transition: all 0.2s; cursor: help;" title="${description}">
+            <div style="font-size: 10px; color: #99aabc; margin-bottom: 3px; display: flex; align-items: center; gap: 4px;">
                 ${label}
                 ${description ? '<span style="font-size: 9px; color: #60a5fa; opacity: 0.7;">ⓘ</span>' : ''}
             </div>
@@ -1556,7 +1556,7 @@ function displayStrategy(strategy) {
             strategy.overall_score >= 50 ? '#fbbf24' : '#ef4444';
 
         const actionColor = strategy.action.includes('买') ? '#10b981' :
-            strategy.action.includes('卖') ? '#ef4444' : '#94a3b8';
+            strategy.action.includes('卖') ? '#ef4444' : '#99aabc';
 
         strategyCard.innerHTML = `
             <div class="recommendation-header">
@@ -1597,31 +1597,31 @@ function displayStrategy(strategy) {
             <!-- 指标信号汇总 -->
             <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin: 15px 0;">
                 <div class="indicator-card" style="padding: 12px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8;">趋势</div>
+                    <div style="font-size: 11px; color: #99aabc;">趋势</div>
                     <div style="font-size: 14px; font-weight: 600; margin-top: 5px;">
                         ${strategy.signals?.trend || '--'}
                     </div>
                 </div>
                 <div class="indicator-card" style="padding: 12px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8;">RSI</div>
+                    <div style="font-size: 11px; color: #99aabc;">RSI</div>
                     <div style="font-size: 14px; font-weight: 600; margin-top: 5px;">
                         ${strategy.signals?.rsi || '--'}
                     </div>
                 </div>
                 <div class="indicator-card" style="padding: 12px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8;">MACD</div>
+                    <div style="font-size: 11px; color: #99aabc;">MACD</div>
                     <div style="font-size: 14px; font-weight: 600; margin-top: 5px;">
                         ${strategy.signals?.macd || '--'}
                     </div>
                 </div>
                 <div class="indicator-card" style="padding: 12px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8;">KDJ</div>
+                    <div style="font-size: 11px; color: #99aabc;">KDJ</div>
                     <div style="font-size: 14px; font-weight: 600; margin-top: 5px;">
                         ${strategy.signals?.kdj || '--'}
                     </div>
                 </div>
                 <div class="indicator-card" style="padding: 12px; text-align: center;">
-                    <div style="font-size: 11px; color: #94a3b8;">布林带</div>
+                    <div style="font-size: 11px; color: #99aabc;">布林带</div>
                     <div style="font-size: 14px; font-weight: 600; margin-top: 5px;">
                         ${strategy.signals?.bollinger || '--'}
                     </div>
@@ -1635,14 +1635,14 @@ function displayStrategy(strategy) {
                         <i class="bi bi-arrow-down-circle"></i> 买入计划
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <span style="color: #94a3b8;">买入价:</span>
+                        <span style="color: #99aabc;">买入价:</span>
                         <span style="font-weight: 600; color: #10b981;">$${strategy.entry?.buy_price || '--'}</span>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="color: #94a3b8;">止损价:</span>
+                        <span style="color: #99aabc;">止损价:</span>
                         <span style="font-weight: 600; color: #ef4444;">$${strategy.entry?.stop_loss || '--'}</span>
                     </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">
+                    <div style="font-size: 12px; color: #99aabc; margin-top: 8px;">
                         ${strategy.entry?.rationale || ''}
                     </div>
                 </div>
@@ -1651,14 +1651,14 @@ function displayStrategy(strategy) {
                         <i class="bi bi-arrow-up-circle"></i> 卖出计划
                     </div>
                     <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                        <span style="color: #94a3b8;">目标一:</span>
+                        <span style="color: #99aabc;">目标一:</span>
                         <span style="font-weight: 600; color: #ef4444;">$${strategy.exit?.target_1 || '--'}</span>
                     </div>
                     <div style="display: flex; justify-content: space-between;">
-                        <span style="color: #94a3b8;">目标二:</span>
+                        <span style="color: #99aabc;">目标二:</span>
                         <span style="font-weight: 600; color: #ef4444;">$${strategy.exit?.target_2 || '--'}</span>
                     </div>
-                    <div style="font-size: 12px; color: #64748b; margin-top: 8px;">
+                    <div style="font-size: 12px; color: #99aabc; margin-top: 8px;">
                         ${strategy.exit?.rationale || ''}
                     </div>
                 </div>
@@ -1811,10 +1811,10 @@ function renderSentimentDashboard(sentiment, news, isRelated, stockCode) {
         const markerEl = document.getElementById('sentimentBarMarker');
 
         if (scoreEl) scoreEl.textContent = '--';
-        if (labelEl) { labelEl.textContent = '無數據'; labelEl.style.color = '#94a3b8'; }
+        if (labelEl) { labelEl.textContent = '無數據'; labelEl.style.color = '#99aabc'; }
         if (summaryEl) summaryEl.textContent = '暫無相關新聞，無法進行情緒分析';
         if (ringEl) ringEl.style.strokeDashoffset = 414.69;  // 重置为0%
-        if (markerEl) { markerEl.style.left = '50%'; markerEl.style.borderColor = '#94a3b8'; }
+        if (markerEl) { markerEl.style.left = '50%'; markerEl.style.borderColor = '#99aabc'; }
 
         // 重置计数器
         const positiveCountEl = document.getElementById('positiveCount');
@@ -1861,9 +1861,9 @@ function renderSentimentDashboard(sentiment, news, isRelated, stockCode) {
         '偏利好': '#10b981',
         '利空': '#ef4444',
         '偏利空': '#ef4444',
-        '中性': '#94a3b8',
+        '中性': '#99aabc',
     };
-    const color = colorMap[label] || '#94a3b8';
+    const color = colorMap[label] || '#99aabc';
     if (labelEl) {
         labelEl.textContent = label;
         labelEl.style.color = color;
@@ -1949,7 +1949,7 @@ function renderNewsList(news, newsScores) {
     const html = newsData.map(item => {
         const scoreInfo = scoreMap[item.title] || { score: 0, label: '中性' };
         const sentimentColor = scoreInfo.score > 0.1 ? '#10b981'
-            : scoreInfo.score < -0.1 ? '#ef4444' : '#94a3b8';
+            : scoreInfo.score < -0.1 ? '#ef4444' : '#99aabc';
         const iconClass = scoreInfo.score > 0.1 ? 'news-icon-positive'
             : scoreInfo.score < -0.1 ? 'news-icon-negative' : 'news-icon-neutral';
         const iconEmoji = scoreInfo.score > 0.1 ? '📈'
