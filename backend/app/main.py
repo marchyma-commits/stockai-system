@@ -15,6 +15,7 @@ from pathlib import Path
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, HTMLResponse
+from fastapi.staticfiles import StaticFiles
 
 from backend.app.api.stock import router as stock_router
 
@@ -41,12 +42,26 @@ app.include_router(stock_router)
 
 
 # ════════════════════════════════════════════════════════════
+# Static Files (Frontend)
+# ════════════════════════════════════════════════════════════
+
+FRONTEND_DIR = Path(__file__).parent.parent.parent / "frontend"
+
+# Mount static directories
+app.mount("/js", StaticFiles(directory=str(FRONTEND_DIR / "js")), name="js")
+app.mount("/css", StaticFiles(directory=str(FRONTEND_DIR / "css")), name="css")
+
+
+# ════════════════════════════════════════════════════════════
 # Root & Static Routes
 # ════════════════════════════════════════════════════════════
 
 @app.get("/", tags=["general"])
 async def root():
-    """Root endpoint - serves API info."""
+    """Serve the main frontend page."""
+    index_path = FRONTEND_DIR / "index.html"
+    if index_path.exists():
+        return HTMLResponse(content=index_path.read_text(encoding="utf-8"))
     return {
         "service": "StockAI",
         "version": "1.7.0",
