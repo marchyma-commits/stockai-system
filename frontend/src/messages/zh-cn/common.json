@@ -1,0 +1,68 @@
+{
+  "app": {
+    "title": "StockAI — 智能股票分析",
+    "description": "实时股票分析、资金流向追踪、AI 智能信号"
+  },
+  "nav": {
+    "dashboard": "📊 仪表板",
+    "analysis": "🔍 个股分析",
+    "capitalFlow": "💰 资金流向",
+    "strategy": "📈 策略",
+    "reports": "📋 报告",
+    "settings": "⚙️"
+  },
+  "auth": {
+    "login": "登录",
+    "register": "注册",
+    "email": "电子邮件",
+    "password": "密码",
+    "forgotPassword": "忘记密码？",
+    "loginButton": "一次性登录",
+    "registerButton": "创建账户",
+    "logout": "退出",
+    "welcomeBack": "欢迎回来",
+    "createAccount": "创建新账户",
+    "orContinueWith": "或使用以下方式继续"
+  },
+  "dashboard": {
+    "watchlist": "自选股",
+    "stocks": "只",
+    "addStock": "+ 新增自选股",
+    "capitalFlow": "大市资金流向",
+    "today": "今日",
+    "mainInflow": "主力净流入",
+    "retailInflow": "散户净流入",
+    "northbound": "北向资金",
+    "southbound": "南向资金",
+    "sectorRotation": "板块资金轮动",
+    "days5": "5日",
+    "stockDetail": "个股资金细节",
+    "realtime": "实时",
+    "aiSignals": "AI 信号",
+    "hotNews": "热门新闻",
+    "quickActions": "快速操作",
+    "loading": "加载中...",
+    "mainForce": "主力净额",
+    "mainRatio": "主力占比",
+    "quota": "今日 AI 分析配额",
+    "remaining": "还剩",
+    "times": "次"
+  },
+  "compliance": {
+    "disclaimer": "免责声明：本系统提供的分析数据仅供参考，不构成任何投资建议。投资涉及风险，过去表现并不保证未来回报。",
+    "copyright": "© 2026 StockAI. All rights reserved. 证监会合规框架 v2.0",
+    "dataSource": "数据来源：模拟数据 · 仅供演示用途",
+    "privacy": "隐私政策",
+    "terms": "服务条款",
+    "contact": "联系我们"
+  },
+  "theme": {
+    "light": "☀️ 浅色模式",
+    "dark": "🌙 深色模式"
+  },
+  "language": {
+    "zhHk": "繁體中文",
+    "zhCn": "简体中文",
+    "en": "English"
+  }
+}

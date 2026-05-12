@@ -1,29 +1,11 @@
-# ============================================================
-# 🚄 StockAI — Production Dockerfile for Railway
-# ============================================================
 FROM python:3.12-slim
-
 WORKDIR /app
-
-# Install system dependencies
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc \
-    && rm -rf /var/lib/apt/lists/*
-
-# Copy backend requirements first for layer caching
+RUN apt-get update && apt-get install -y --no-install-recommends gcc && rm -rf /var/lib/apt/lists/*
 COPY backend/requirements.txt ./backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
-
-# Copy the entire project
-COPY . .
-
-# Railway automatically injects PORT env variable.
-# Use exec form for reliable signal handling.
+COPY backend/ ./backend/
+COPY frontend/out/ ./frontend/out/
 EXPOSE 8080
-
-# Healthcheck
-HEALTHCHECK --interval=30s --timeout=5s --start-period=30s --retries=3 \
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:${PORT:-8080}/api/health')" || exit 1
-
-# Run with uvicorn — Railway sets PORT, fallback to 8080
-CMD uvicorn backend.app.main:app --host 0.0.0.0 --port ${PORT:-8080} --workers 2
+CMD ["sh", "-c", "cd backend && uvicorn main:app --host 0.0.0.0 --port ${PORT:-8080} --workers 2"]

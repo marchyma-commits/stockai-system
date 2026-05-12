@@ -1,58 +1,7 @@
-# Deployment
-deployment/jwt-private-key.pem
-deployment/jwt-public-key.pem
-deployment/railway-env-vars.json
-deployment/deploy-token.sh
-deployment/*.sh
-
-# Python
+node_modules/
+.next/
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-*.egg-info/
-dist/
-build/
-*.egg
-
-# Environment
+*.pyc
 .env
-*.env
-venv/
-.venv/
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-server.err
-server.log
-
-# Cache directories
-backend/cache/
-backend/paper_trading_data/
-backend/reports/
-backend/__pycache__/
-
-# Backup
-backup/
-
-# Workbuddy/Codebuddy
-.workbuddy/
-.codebuddy/
-
-# Data
+*.bundle
 stockai_data/
-deepseek_mermaid_*.png
-
-# Railway
-.railway/
