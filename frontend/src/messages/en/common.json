@@ -1,0 +1,68 @@
+{
+  "app": {
+    "title": "StockAI — Intelligent Stock Analysis",
+    "description": "Real-time stock analysis, capital flow tracking, AI-powered signals"
+  },
+  "nav": {
+    "dashboard": "📊 Dashboard",
+    "analysis": "🔍 Analysis",
+    "capitalFlow": "💰 Capital Flow",
+    "strategy": "📈 Strategy",
+    "reports": "📋 Reports",
+    "settings": "⚙️"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "forgotPassword": "Forgot Password?",
+    "loginButton": "Sign In",
+    "registerButton": "Create Account",
+    "logout": "Logout",
+    "welcomeBack": "Welcome Back",
+    "createAccount": "Create New Account",
+    "orContinueWith": "Or continue with"
+  },
+  "dashboard": {
+    "watchlist": "Watchlist",
+    "stocks": "stocks",
+    "addStock": "+ Add Stock",
+    "capitalFlow": "Market Capital Flow",
+    "today": "Today",
+    "mainInflow": "Main Force Inflow",
+    "retailInflow": "Retail Inflow",
+    "northbound": "Northbound Capital",
+    "southbound": "Southbound Capital",
+    "sectorRotation": "Sector Rotation",
+    "days5": "5D",
+    "stockDetail": "Stock Capital Detail",
+    "realtime": "Real-time",
+    "aiSignals": "AI Signals",
+    "hotNews": "Hot News",
+    "quickActions": "Quick Actions",
+    "loading": "Loading...",
+    "mainForce": "Main Force Net",
+    "mainRatio": "Main Force Ratio",
+    "quota": "Daily AI Analysis Quota",
+    "remaining": "Remaining",
+    "times": "times"
+  },
+  "compliance": {
+    "disclaimer": "Disclaimer: Analysis data provided by this system is for reference only and does not constitute investment advice. Investment involves risk. Past performance does not guarantee future returns.",
+    "copyright": "© 2026 StockAI. All rights reserved. SFC Compliance Framework v2.0",
+    "dataSource": "Data Source: Simulated Data · Demo Purposes Only",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us"
+  },
+  "theme": {
+    "light": "☀️ Light Mode",
+    "dark": "🌙 Dark Mode"
+  },
+  "language": {
+    "zhHk": "繁體中文",
+    "zhCn": "简体中文",
+    "en": "English"
+  }
+}
