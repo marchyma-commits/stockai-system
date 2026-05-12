@@ -40,15 +40,15 @@ app.include_router(stock.router)
 
 
 # ── Static Files (Frontend) ──
-FRONTEND_DIR = Path(__file__).parent.parent / "frontend" / "src"
+FRONTEND_OUT = Path(__file__).parent.parent / "frontend" / "out"
 
-if FRONTEND_DIR.exists():
-    # Mount built frontend assets
-    static_dir = FRONTEND_DIR.parent / "out"
-    if static_dir.exists():
-        app.mount("/_next", StaticFiles(directory=str(static_dir / "_next")), name="next")
-        app.mount("/js", StaticFiles(directory=str(static_dir / "js")), name="js")
-        app.mount("/css", StaticFiles(directory=str(static_dir / "css")), name="css")
+if FRONTEND_OUT.exists():
+    # Mount built frontend assets (Next.js static export)
+    next_static = FRONTEND_OUT / "_next" / "static"
+    if next_static.exists():
+        app.mount("/_next/static", StaticFiles(directory=str(next_static)), name="next_static")
+    # Serve all static assets from out directory
+    app.mount("/static", StaticFiles(directory=str(FRONTEND_OUT)), name="frontend_static")
 
 
 # ════════════════════════════════════════════════════════════
@@ -59,7 +59,7 @@ if FRONTEND_DIR.exists():
 @app.get("/", tags=["general"])
 async def root():
     """Root endpoint — serves frontend or API info."""
-    index_path = FRONTEND_DIR.parent / "out" / "index.html"
+    index_path = FRONTEND_OUT / "index.html"
     if index_path.exists():
         return HTMLResponse(content=index_path.read_text(encoding="utf-8"))
     return {
