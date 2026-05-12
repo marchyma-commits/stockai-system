@@ -1,0 +1,10 @@
+node_modules/
+.next/
+out/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+README.md
+stockai_data/
+*.bundle
