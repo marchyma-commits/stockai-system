@@ -1,6 +1,6 @@
 // 定義 API 基礎路徑（避免重複聲明）
 if (typeof API_BASE_URL === 'undefined') {
-    var API_BASE_URL = 'http://localhost:5000/api';
+    var API_BASE_URL = '/api';
 }
 
 let currentStock = null;
