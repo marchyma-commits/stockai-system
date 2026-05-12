@@ -58,17 +58,20 @@ if FRONTEND_OUT.exists():
 
 @app.get("/", tags=["general"])
 async def root():
-    """Root endpoint — serves frontend or API info."""
+    """Root endpoint — serves frontend or redirects to dashboard."""
+    # Try direct index.html
     index_path = FRONTEND_OUT / "index.html"
     if index_path.exists():
         return HTMLResponse(content=index_path.read_text(encoding="utf-8"))
-    return {
-        "service": "StockAI v2",
-        "version": "2.0.0",
-        "status": "running",
-        "docs": "/docs",
-        "frontend": "pending (Phase 2)",
-    }
+    # Try dashboard page (Next.js static export)
+    dashboard_path = FRONTEND_OUT / "dashboard" / "index.html"
+    if dashboard_path.exists():
+        return HTMLResponse(content=dashboard_path.read_text(encoding="utf-8"))
+    dashboard_direct = FRONTEND_OUT / "dashboard.html"
+    if dashboard_direct.exists():
+        return HTMLResponse(content=dashboard_direct.read_text(encoding="utf-8"))
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/dashboard")
 
 
 @app.exception_handler(404)
